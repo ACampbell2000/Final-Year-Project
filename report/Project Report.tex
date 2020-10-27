@@ -1,33 +1,81 @@
-\documentclass[12pt,a4paper,titlepage]{article}
+\documentclass[11pt,a4paper,titlepage]{article}
 \PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
 \usepackage[page]{appendix}
-\title{Final Year Project\\[1em]
-\large An investigation into the mathematical and evolutionary methods of solving the Travelling Salesperson Problem}
+\usepackage[nottoc]{tocbibind}
+
 \author{Alex Campbell}
 \date{}
 
 \begin{document}
-\maketitle
 
-\section*{Introduction}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+
+\section*{Abstract}
+
+\pagebreak
+\tableofcontents
+\pagebreak
+
+\section{Introduction}
 The Travelling Salesperson Problem (TSP) is an NP-Hard problem which is commonly found in combinatorial optimisation, theoretical computer science and operations research. It's a simple problem on the surface which simply states that "Given a list of cities and distances between each pair of them, what is the shortest possile route that visits each city exactly once and returns to the origin city?" \cite{TSPWiki}
 
-This question appears deceptively simple, however with large sets of cities the search space becomes incredibly large, leading to a time complexity of $O(n^2*2^n)$ \cite{li2014new} which is simply infeasible for these large data sets.
+This question appears deceptively simple, however with large sets of cities the search space becomes incredibly large, and as such computation time can be astronomical, since before you even start trying to compute the shortest tour, there are n! different combinations to compute, assuming a complete graph. Clearly this meant another angle had to be taken for this problem.
 
-As such many people decided to go for a more heuristic approach towards solving the TSP problem, by using evolutionary algorithms. As such instead of trying to find the optimal solution with an infeasibly long time span, we would settle for a 'good enough' solution with a much lower time complexity, however since TSP is a combinatorial optimisation problem it is much more difficult than continuous optimisation, with higher chances of falling into local optimum rather than the global optimum.
+As such many people decided to go for a more heuristic approach towards solving the TSP problem. So instead of trying to find the optimal solution with an infeasibly long time span, we would settle for a 'good enough' solution with a much lower time complexity, however since TSP is a combinatorial optimisation problem it is much more difficult than continuous optimisation, with higher chances of falling into local optimum rather than the global optimum.
 
-\begin{appendices}
-\end{appendices}
+And yet even with this said, there exists an algorithm that has been created more than 30 years ago (1976) that has been proven to be at most 50\% worse than the optimal solution for any given TSP problem and is known as Christofides algorithm. This algorithm has remained the best approximation available for over 30 years, and only recently in this year (2020) has another, slightly more efficient algorithm been found \cite{TSP2020}, although it has yet to be verified even if the general consensus is that it seems correct.
+
+However another way of finding approximate solutions is becoming more and more popular over time, and has its roots deeply set in evolution and natural selection, hence the name they are given: Evolutionary algorithms. In essence these algorithms replicate the generational aspect of natural selection, taking the best individuals from a given population and 'breeding' them, these 'children' can then be tested to see if they perform any better than their parents, and if so replace the worst individuals in the population, and this process continues to repeat until a given goal is complete, whether that turns out to be an actual solution being found, until a good enough solution is found or after a certain number of generations have been looped through.
+
+Genetic algorithms have already been used to try and solve the TSP which shall be discussed later, yet the major point of genetic algorithms is that you start with an entirely random population with which to create new solutions with a large degree of randomness in terms of the search operators. If however we were to replace one of the population with a strong approximate solution ($x$), how would that affect the algorithm? Theoretically in the worst case scenario this genetic algorithm would simply return $x$, since if no better one can be found, then $x$ would remain in the population as the best solution, so we are no worse off compared to when we started the algorithm. However in the best case scenario the algorithm would produce a better approximate solution than $x$ and return this instead.
+
+As such, in this thesis I will be investigating the usage of both the mathematical and algorithmic methods of finding a solution to the Travelling Salesman Problem, and thereby seeing if these methods can be combined into a singular algorithm that can find a more optimal solution.
+
+\section{Background}
+
+\subsection{Christofides Algorithm}
+Even with the algorithm having been created over 30 years ago in 1976, there has yet to be another verified algorithm at this time that can produce more optimal approximate solutions to the TSP problem than this. This algorithm has been proven to be at most 50\% worse than the optimal solution whilst having an $O(n^3)$ time complexity where n is the number of cities for which we are trying to solve the problem. \cite{ChrAlg} If we instead look at the best algorithm currently available to solve the TSP (aka the Held-Karp Algorithm) we can see that its complexity is $O(n^2 2^n)$ \cite{HeldKarpAlg} which, whilst astronomically better than the original $O(n!)$, is significantly worse than the approximate solution that Christofides algorithm provides.
+
+This is often the case with such computationally expensive problems, a balance must often be made between finding the optimal solution, and finding a solution in an appropriate amount of time. The Held-Karp algorithm focuses more on finding the optimum answer rather than finding it in a feasible amount of time, whereas Chistofides Algorithm was designed to find as best an approximation as it can whilst still having a relatively feasible computation time which is what can make it so appealing to use. 
+
+One of the strong points about Christofides algorithm is just how simple it is, having only 4 or 5 major steps (many sources combine steps 4 and 5 whilst others do not \cite{ChrAlgSlides, ChrAlgSteps}) even if these steps are more likes processes themselves. 
+
+Nonetheless the steps to this algorithm are as follows:
+
+\begin{enumerate}
+\item Find a minimum spanning tree $T$.
+\item Find a minimum matching $M$ for the odd degree vertices in $T$.
+\item Calculate $M \bigcup T$.
+\item Find an Euler tour of $M \bigcup T$.
+\item Remove any repeated vertices.
+\end{enumerate}
 
 \begin{thebibliography}{1}
 
 \bibitem{TSPWiki}
-Travelling Salesman Problem
-\\\url{https://en.wikipedia.org/wiki/Travelling_salesman_problem}
+Wikipedia: Travelling Salesman Problem
+\\\url{https://en.wikipedia.org/wiki/Travelling_salesman_problem} (Accessed 20 October 2020)
 
-\bibitem{li2014new}
-A New Exact Algorithm for Traveling Salesman Problem with Time Complexity Interval $(O(n^4), O(n^3*2^n))$, Yunpeng Li, 2014
-\\\url{https://arxiv.org/abs/1412.2437}
+\bibitem{HeldKarpAlg}
+Hutchinson, C. et al. (no date) ‘CMU Traveling Salesman Problem’, p. 25. Available at: \url{https://www.math.cmu.edu/~af1p/Teaching/OR2/Projects/P58/OR2_Paper.pdf} (Accessed: 27 October 2020)
+
+\bibitem{TSP2020}
+Klarreich, E. (no date) Computer Scientists Break Traveling Salesperson Record, Quanta Magazine. Available at: \url{https://www.quantamagazine.org/computer-scientists-break-traveling-salesperson-record-20201008/} (Accessed: 22 October 2020).
+
+\bibitem{ChrAlg}
+Christofides, N. (1976) Worst-Case Analysis of a New Heuristic for the Travelling Salesman Problem. CARNEGIE-MELLON UNIV PITTSBURGH PA MANAGEMENT SCIENCES RESEARCH GROUP. Available at: \url{https://apps.dtic.mil/sti/citations/ADA025602} (Accessed: 22 October 2020).
+
+\bibitem{ChrAlgSlides}
+Sitters, R. (no date) Chapter 2: Greedy Algorithms and Local Search. Available at: \url{https://personal.vu.nl/r.a.sitters/AdvancedAlgorithms/2016/SlidesChapter2-2016.pdf} (Accessed: 27 October 2020).
+
+\bibitem{ChrAlgSteps}
+Christofides algorithm (no date). Available at: \url{https://xlinux.nist.gov/dads/HTML/christofides.html} (Accessed: 27 October 2020).
 
 \end{thebibliography}
+
+\begin{appendices}
+\end{appendices}
+
 \end{document}
