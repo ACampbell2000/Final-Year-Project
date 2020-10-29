@@ -3,6 +3,8 @@
 \usepackage[margin=1in]{geometry}
 \usepackage[page]{appendix}
 \usepackage[nottoc]{tocbibind}
+\usepackage{graphicx}
+\graphicspath{{./images/}}
 
 \author{Alex Campbell}
 \date{}
@@ -38,19 +40,72 @@ As such, in this thesis I will be investigating the usage of both the mathematic
 \subsection{Christofides Algorithm}
 Even with the algorithm having been created over 30 years ago in 1976, there has yet to be another verified algorithm at this time that can produce more optimal approximate solutions to the TSP problem than this. This algorithm has been proven to be at most 50\% worse than the optimal solution whilst having an $O(n^3)$ time complexity where n is the number of cities for which we are trying to solve the problem. \cite{ChrAlg} If we instead look at the best algorithm currently available to solve the TSP (aka the Held-Karp Algorithm) we can see that its complexity is $O(n^2 2^n)$ \cite{HeldKarpAlg} which, whilst astronomically better than the original $O(n!)$, is significantly worse than the approximate solution that Christofides algorithm provides.
 
-This is often the case with such computationally expensive problems, a balance must often be made between finding the optimal solution, and finding a solution in an appropriate amount of time. The Held-Karp algorithm focuses more on finding the optimum answer rather than finding it in a feasible amount of time, whereas Chistofides Algorithm was designed to find as best an approximation as it can whilst still having a relatively feasible computation time which is what can make it so appealing to use. 
+This is often the case with such computationally expensive problems, a balance must often be made between finding the optimal solution, and finding a solution in an appropriate amount of time. The Held-Karp algorithm focuses more on finding the optimum answer rather than finding it in a feasible amount of time, whereas Christofides Algorithm was designed to find as best an approximation as it can whilst still having a relatively feasible computation time which is what can make it so appealing to use. 
 
 One of the strong points about Christofides algorithm is just how simple it is, having only 4 or 5 major steps (many sources combine steps 4 and 5 whilst others do not \cite{ChrAlgSlides, ChrAlgSteps}) even if these steps are more likes processes themselves. 
 
 Nonetheless the steps to this algorithm are as follows:
-
 \begin{enumerate}
-\item Find a minimum spanning tree $T$.
-\item Find a minimum matching $M$ for the odd degree vertices in $T$.
-\item Calculate $M \bigcup T$.
-\item Find an Euler tour of $M \bigcup T$.
-\item Remove any repeated vertices.
+	\item Find a minimum spanning tree $T$.
+	\item Find a minimum weight perfect matching $M$ for the odd degree vertices in $T$.
+	\item Calculate $M \bigcup T$.
+	\item Find an Euler tour of $M \bigcup T$.
+	\item Remove any repeated vertices.
 \end{enumerate}
+
+\begin{figure}[ht]
+	\includegraphics[scale=0.75]{WikiCompleteGraph}
+	\centering
+	\caption{Full Graph}
+\end{figure}
+
+\clearpage
+As stated the process is compressed into few steps and is quite simple to understand, and yet creating this algorithm within a programming language is more complex than one would initially assume. Finding a minimum spanning tree (Figure 2) of the full graph (Figure 1) is quite simple, the two most common algorithms known for solving this are Prims and Kruskals, both of which are effective methods with time complexities of $O(n)$ and $O(n^2)$ respectively \cite{PvKTime} though choosing one or the other is mostly affected by the number of edges within the graph we are finding the minimum spanning tree for, with Prims being more suitable if there are a large number of edges, and Kruskals if not.
+
+\begin{figure}[ht]
+	\includegraphics[scale=0.6]{WikiMinSpanTree}
+	\centering
+	\caption{Minimum Spanning Tree}
+\end{figure}
+
+The minimum weight perfect matching of $T$ (Figure 3) is accomplished by finding $\frac{T}{2}$ edges which 'link' together every vertex in $T$ by the shortest edge possible. For this one of the most common algorithm in use appears to be the blossom algorithm and has a time complexity of $O(n^2 m)$ in the worst case where $n$ is the number of vertices and $m$ is the number of edges \cite{BlosAlg}.
+
+\begin{figure}[ht]
+	\includegraphics[scale=0.6]{WikiMinMatch}
+	\centering
+	\caption{Minimum Weight Perfect Matching}
+\end{figure}
+
+From here we simply calculate the union of $M$ and $T$ (Figure 4), including any of the repeated edges that may be present, before moving onto the Euler tour. A Euler tour is simply a tour of the graph which visits each edge exactly once, regardless of starting or ending vertex (Figure 5).
+
+\begin{figure}[ht]
+	\centering
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[scale=0.5]{WikiComb}
+			\caption{$M \bigcup T$}
+		\end{minipage}\hfill
+		\begin{minipage}{0.45\textwidth}
+			\centering
+			\includegraphics[scale=0.5]{WikiEulerTour}
+			\caption{Euler Tour}
+		\end{minipage}\hfill
+\end{figure}
+
+Then need to remove any repeated vertices within our tour and replace them with the direct edge between those vertices, and once this is done we have the algorithms output (Figure 6).
+
+\begin{figure}[ht]
+\includegraphics[scale=0.6]{WikiRemove}
+\centering
+\caption{Christofides Algorithm Output}
+\end{figure}
+
+(Figures 1-6 taken from: Wikipedia: Travelling Saleman Problem \cite{TSPWiki})
+
+With this algorithm output we now have a solution to the TSP for our specific graph, and this solution is guaranteed to be within 50\% of the optimum \cite{ChrAlg}, which is significantly better than trying to calculate the true optimum for a very large graph in an infeasible amount of time. However there is clear room for improvement, hence why other methods have been designed and tested.
+
+\subsection{Genetic Algorithms}
+Genetic algorithms are a subsection of Evolutionary algorithms which take deep inspiration from natural selection and the passing on of strong genes in individuals within a population.
 
 \begin{thebibliography}{1}
 
@@ -72,6 +127,14 @@ Sitters, R. (no date) Chapter 2: Greedy Algorithms and Local Search. Available a
 
 \bibitem{ChrAlgSteps}
 Christofides algorithm (no date). Available at: \url{https://xlinux.nist.gov/dads/HTML/christofides.html} (Accessed: 27 October 2020).
+
+\bibitem{PvKTime}
+Huang, F., Gao, P. and Wang, Y. (2009) ‘Comparison of Prim and Kruskal on Shanghai and Shenzhen 300 Index Hierarchical Structure Tree’, in 2009 International Conference on Web Information Systems and Mining. 2009 International Conference on Web Information Systems and Mining, pp. 237–241. doi: 10.1109/WISM.2009.56.
+
+\bibitem{BlosAlg}
+Kolmogorov, V. (2009) ‘Blossom V: a new implementation of a minimum cost perfect matching algorithm’, Mathematical Programming Computation, 1(1), pp. 43–67. doi: 10.1007/s12532-009-0002-8.
+Available at: \url{http://mpc.zib.de/archive/2009/1Kolmogorov2009_Article_BlossomVANewImplementationOfAM.pdf} (Accessed: 29 October 2020)
+
 
 \end{thebibliography}
 
