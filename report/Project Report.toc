@@ -2,4 +2,7 @@
 \contentsline {section}{\numberline {2}Background}{4}{section.2}
 \contentsline {subsection}{\numberline {2.1}Christofides Algorithm}{4}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Genetic Algorithms}{6}{subsection.2.2}
-\contentsline {section}{References}{6}{section*.3}
+\contentsline {subsubsection}{\numberline {2.2.1}Individuals}{7}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}Objective Function}{7}{subsubsection.2.2.2}
+\contentsline {subsubsection}{\numberline {2.2.3}Fitness Function}{8}{subsubsection.2.2.3}
+\contentsline {section}{References}{8}{section*.3}

@@ -4,6 +4,7 @@
 \usepackage[page]{appendix}
 \usepackage[nottoc]{tocbibind}
 \usepackage{graphicx}
+\usepackage[ruled,vlined, linesnumbered]{algorithm2e}
 \graphicspath{{./images/}}
 
 \author{Alex Campbell}
@@ -105,7 +106,49 @@ Then need to remove any repeated vertices within our tour and replace them with 
 With this algorithm output we now have a solution to the TSP for our specific graph, and this solution is guaranteed to be within 50\% of the optimum \cite{ChrAlg}, which is significantly better than trying to calculate the true optimum for a very large graph in an infeasible amount of time. However there is clear room for improvement, hence why other methods have been designed and tested.
 
 \subsection{Genetic Algorithms}
-Genetic algorithms are a subsection of Evolutionary algorithms which take deep inspiration from natural selection and the passing on of strong genes in individuals within a population.
+Genetic algorithms take deep inspiration from natural selection and evolution in general. The very simplest description of a genetic algorithm is that given a starting population of predetermined size, calculate the fitness of each individual and choose the best of the population to 'reproduce' to create individuals that theoretically have the genes of both of these individuals, potentially giving it a higher fitness than its two parents. This child then has its fitness evaluated and if it is better than the worst individual in the population, it is added in place of it, this repeats for as many generations as we have chosen, and at the end of it we have a population of individuals who may have a better overall fitness than the initial population.
+
+Most genetic algorithms take a very similar form, and though it is often altered for each individual case it is used in, most look very similar to the following pseudocode \cite{GAIntro}.
+\clearpage
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\textbf{Initial Values:} generationNum = 0, generationMax = $N$\footnote{Where $N$ is a predetermined number of generations}\;
+Randomly generate a population of size $P$ individuals to be used initially\;
+Calculate the fitness of all $P$ individuals\;
+Sort the algorithm in descending order of fitness\;
+\While{(generationNum $<$ generationMax)}{
+	Pick the $M$\footnote{$ 2 \leq M \leq P$} best individuals from the start of the population\;
+	\For{(each pair of parents in $M$\footnote{Selected randomly with replacement})}{
+		Apply the crossover and mutation operators to produce two new offspring\;
+		Evaluate their fitness\;
+	}
+	Replace the worst individuals in the population with the offspring assuming said offspring have a higher fitness than them \footnote{If all of the population are used to create new individuals then it will be the case that the entire population is replaced.}\;
+	generationNum += 1\;
+}
+\caption{Pseudocode for a basic Genetic Algorithm}
+\end{algorithm}
+
+From the pseudocode it is most likely very clear that genetic algorithm is very well suited for optimisation problems, either maximising or minimising the fitness of the individuals in the population. This means it is definitely a viable option to solve the TSP, since the entire purpose of that is to minimise the weight of the path through all of the cities. However the pseudo code also shows there are a few operators and functions that need to be defined and explained before anything fruitful can be done.
+
+\subsubsection{Individuals}
+
+More of a clarification point more than anything, we need to decide what the individuals actually are within our problem of the TSP. Simply enough these individuals are solutions to the TSP, that is they are all routes that pass through each city and end back at the starting point, all without visiting a given city twice. The more important part however is how these routes should be stored in a way that the computer can work with, since naturally a picture of the route, whilst technically plausible, would be far more hassle than it would be worth given there exists much simpler encoding methods.
+
+Given that a solution to the TSP requires that all cities within $C$ be used, a solution can simply be seen as an arrangement of these cities, whether this be as an array, list or simply a string. Any one of these formats would be suitable and effective to allow for the crossover and mutation functions to be applied, since regardless of format, all solutions will be of the same size.
+
+\subsubsection{Objective Function}
+
+As stated briefly before, the TSP is an optimisation problem at its core, and genetic algorithms are powerful at solving such problems, and since this is a single objective optimisation problem in this case, the objective function itself is quite simple and can be formed from intuition:
+
+
+$Minimise\; the\; following:$ \[F(\mathbf{x}) = \sum_{i,j \in \mathbf{x}} d_{i,j} \]
+
+The objective function we want to minimise is $F(\mathbf{x})$ where $\mathbf{x} = \{x_1, x_2, ..., x_N\}$ is a given solution of the TSP problem, or in other words a permutation of all $N$ cities in our problem. $d_{i,j}$ represents the distance between cities $i$ and $j$ that are within $\mathbf{x}$, and we want to sum up the distances between them in order to get the cost of the full route.
+
+\subsubsection{Fitness Function}
+
+
 
 \begin{thebibliography}{1}
 
@@ -135,6 +178,8 @@ Huang, F., Gao, P. and Wang, Y. (2009) ‘Comparison of Prim and Kruskal on Shan
 Kolmogorov, V. (2009) ‘Blossom V: a new implementation of a minimum cost perfect matching algorithm’, Mathematical Programming Computation, 1(1), pp. 43–67. doi: 10.1007/s12532-009-0002-8.
 Available at: \url{http://mpc.zib.de/archive/2009/1Kolmogorov2009_Article_BlossomVANewImplementationOfAM.pdf} (Accessed: 29 October 2020)
 
+\bibitem{GAIntro}
+Melanie, M. (no date) ‘An Introduction to Genetic Algorithms’, p. 162. Available at: \url {http://www.boente.eti.br/fuzzy/ebook-fuzzy-mitchell.pdf} (Accessed: 3 November 2020)
 
 \end{thebibliography}
 
