@@ -137,7 +137,7 @@ More of a clarification point more than anything, we need to decide what the ind
 
 Given that a solution to the TSP requires that all cities within $C$ be used, a solution can simply be seen as an arrangement of these cities, whether this be as an array, list or simply a string. Any one of these formats would be suitable and effective to allow for the crossover and mutation functions to be applied, since regardless of format, all solutions will be of the same size.
 
-\subsubsection{Objective Function}
+\subsubsection{Objective Function and Fitness}
 
 As stated briefly before, the TSP is an optimisation problem at its core, and genetic algorithms are powerful at solving such problems, and since this is a single objective optimisation problem in this case, the objective function itself is quite simple and can be formed from intuition:
 
@@ -146,9 +146,37 @@ $Minimise\; the\; following:$ \[F(\mathbf{x}) = \sum_{i,j \in \mathbf{x}} d_{i,j
 
 The objective function we want to minimise is $F(\mathbf{x})$ where $\mathbf{x} = \{x_1, x_2, ..., x_N\}$ is a given solution of the TSP problem, or in other words a permutation of all $N$ cities in our problem. $d_{i,j}$ represents the distance between cities $i$ and $j$ that are within $\mathbf{x}$, and we want to sum up the distances between them in order to get the cost of the full route.
 
-\subsubsection{Fitness Function}
+So with that said it is blatant to see that the fitness function for any given route is simply the function we are trying to minimise, i.e.
 
+\[\sum_{i,j \in \mathbf{x}} d_{i,j}\]
 
+Which, stated simply, is the addition of all of the weights of the edges connecting our route, regardless of their value or type, i.e. distance, time etc.
+
+\subsubsection{Mutation}
+
+Mutation occurs after crossover has occurred, though in general is a much easier process, and this holds true for the genetic algorithm for TSP. There are many ways in which we can do mutations, one of which is to simply swap around two points in the tour (known as twors mutation \cite{GAMutations}), for example given:
+
+\begin{center}\Large
+Solution: 123456
+\end{center}
+
+Lets say we wish to swap towns 2 and 6, the solution would become:
+
+\begin{center}\Large
+Solution: 163452
+\end{center}
+
+This solution should be equally valid since the graph of the towns should be complete, that is every town is connected to every other town, so the route is still valid since an edge still exists.
+
+The other method of mutation is to instead reverse a sub-tour within the tour itself (known as Reverse Sequence Mutation (RSM) \cite{GAMutations}), for example given the same example above, reversing the tour from 2 to 6 would give us:
+ 
+\begin{center}\Large
+Solution: 154326
+\end{center}
+
+Naturally reversing a subtour is more computationally difficult than simply swapping 2 cities at random, however research has suggested that using RSM produces much stronger results compared to the other common methods, whilst simultaneously not being that much more theoretically difficult to understand \cite{GAMutations}. As such using RSM as the mutation operator for my own genetic algorithm would seem to be greatly beneficial.
+
+It is important to note that mutation occurs by random chance, and so is not guaranteed to happen for any given child, otherwise the children might be too far spread across the search space and unable to close in properly to an optimum solution (either local or global).
 
 \begin{thebibliography}{1}
 
@@ -180,6 +208,12 @@ Available at: \url{http://mpc.zib.de/archive/2009/1Kolmogorov2009_Article_Blosso
 
 \bibitem{GAIntro}
 Melanie, M. (no date) ‘An Introduction to Genetic Algorithms’, p. 162. Available at: \url {http://www.boente.eti.br/fuzzy/ebook-fuzzy-mitchell.pdf} (Accessed: 3 November 2020)
+
+\bibitem{TSPGACrMu}
+Penev, M.K.V.S.S., 2005. Genetic operators crossover and mutation in solving the TSP problem. In International Conference on Computer Systems and Technologies. Available at: \url{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.83.7264&rep=rep1&type=pdf} (Accessed: 5 November 2020)
+
+\bibitem{GAMutations}
+Abdoun, O., Abouchabaka, J. and Tajani, C. (no date) ‘Analyzing the Performance of Mutation Operators to Solve the Travelling Salesman Problem’, p. 18. Available at: \url{https://arxiv.org/pdf/1203.3099.pdf} (Accessed: 5 November 2020)
 
 \end{thebibliography}
 
