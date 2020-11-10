@@ -7,6 +7,10 @@
 \usepackage[ruled,vlined, linesnumbered]{algorithm2e}
 \graphicspath{{./images/}}
 
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+
 \author{Alex Campbell}
 \date{}
 
@@ -154,7 +158,7 @@ Which, stated simply, is the addition of all of the weights of the edges connect
 
 \subsubsection{Mutation}
 
-Mutation occurs after crossover has occurred, though in general is a much easier process, and this holds true for the genetic algorithm for TSP. There are many ways in which we can do mutations, one of which is to simply swap around two points in the tour (known as twors mutation \cite{GAMutations}), for example given:
+Mutation occurs after crossover has occurred, though in general is a much easier process, and this holds true for the genetic algorithm for TSP. There are many ways in which we can do mutations (but there are two that are used very commonly), one of which is to simply swap around two points in the tour (known as twors mutation \cite{GAMutations}), for example given:
 
 \begin{center}\Large
 Solution: 123456
@@ -168,16 +172,158 @@ Solution: 163452
 
 This solution should be equally valid since the graph of the towns should be complete, that is every town is connected to every other town, so the route is still valid since an edge still exists.
 
-The other method of mutation is to instead reverse a sub-tour within the tour itself (known as Reverse Sequence Mutation (RSM) \cite{GAMutations}), for example given the same example above, reversing the tour from 2 to 6 would give us:
+Another method of mutation is to instead reverse a sub-tour within the tour itself (known as Reverse Sequence Mutation (RSM) \cite{GAMutations}), for example given the same example above, reversing the tour from 2 to 6 would give us:
  
 \begin{center}\Large
-Solution: 154326
+Solution: 165432
 \end{center}
 
 Naturally reversing a subtour is more computationally difficult than simply swapping 2 cities at random, however research has suggested that using RSM produces much stronger results compared to the other common methods, whilst simultaneously not being that much more theoretically difficult to understand \cite{GAMutations}. As such using RSM as the mutation operator for my own genetic algorithm would seem to be greatly beneficial.
 
 It is important to note that mutation occurs by random chance, and so is not guaranteed to happen for any given child, otherwise the children might be too far spread across the search space and unable to close in properly to an optimum solution (either local or global).
 
+\subsubsection{Crossover}
+
+Crossover is another operator which heavily takes its inspiration from the process in meiosis with the same name. Within meiosis a pair of homologous chromosomes pair up during prophase 1, and form a bivalent, when this happens the chromosomes overlap at a given point known as the chiasma, and the two paired chromosomes exchange genetic material at this point. This given point is identical on both separate chromosomes, so in other words the exact same genes have been swapped between the chromosomes, yet their alleles may well be different after the swap.
+
+To put this in simpler terms, let's say the segment of genetic material being swapped is for eye colour, in each chromosome the same section determines eye colour, and we are swapping those sections during meiosis, so after the 'swap' both chromosomes still have the gene for eye colour, yet the actual eye colour it will determine may differ.
+
+In normal genetic algorithms this process is identical to its biological counterpart, since the assumption is usually made that we are crossing over at identical points along both solutions, and as such no 'genes' are being lost or repeated. However in a solution for TSP, we cannot make this assumption, if we are to cross at a given point between two solutions, it may well be the case that two cities are repeated, and obviously this is not a possibility we can afford to have in a problem which strictly states every city must be visited exactly once. As an example of what I refer to take the following example:
+
+\begin{center}\Large
+Solution 1: 153426\\
+Solution 2: 654321
+\end{center}
+
+Now let us say we wish to perform a crossover between the solutions between positions 4 and 5 like so:
+
+\begin{center}\Large
+Solution 1: 1534$|$26\\
+Solution 2: 6543$|$21
+\end{center}
+
+If we now swap the solutions after this point accordingly we get:
+
+\begin{center}\Large
+Solution 1: \underline{1}5342\underline{1}\\
+Solution 2: \underline{6}5432\underline{6}
+\end{center}
+
+Underlined you can see we now have repeated cities as one error in the solution and another error in the sense that we are no longer visiting each city, so this is certainly not a valid solution to any TSP problem.
+
+As such we must look at a different method of crossover, which takes the same core concept, yet avoids this issue detailed above. As a matter of fact there are a fair amount of different crossover operators that have been designed exactly for this purpose and shall be detailed shortly.
+
+\paragraph{Partially Mapped Crossover}\mbox{}\\
+
+In this crossover operator \cite{GACrossover}, proposed by Goldberg and Lingle, two random cut points are used as its basis, instead of doing a singular crossover point like demonstrated above. After the cuts have been made one of the parents has its subroute mapped onto the other parent's subroute before the other remaining information is exchanged between the two parents. As an example take the following two parents who have the crossover points marked in the same way as before \cite{GACrossover}:
+
+\begin{center}\Large
+Solution 1: (348$|$271$|$65)\\
+Solution 2: (425$|$168$|$37)
+\end{center}
+
+In this scenario the mapping is between 2 and 1, 7 and 6, 1 and 8. So we swap these around and make two new children based off of them:
+
+\begin{center}\Large
+Child 1: (XXX$|$168$|$XX)\\
+Child 2: (XXX$|$271$|$XX)
+\end{center}
+
+The next stage is to fill in the Xs with the appropriate cities from their corresponding parent, checking of course first that a city is not being repeated. (So Child 1 will receive Parent 1's cities and vice versa):
+
+\begin{center}\Large
+Child 1: (34X$|$168$|$X5)\\
+Child 2: (4X5$|$271$|$3X)
+\end{center}
+
+From here we need to fill in the remaining Xs that have conflicts with other cities, the first X in child one would have originally been 8 from parent 1, though since there is already an 8 in child 1, we check the mapping which shows 8 is mapped to 1, so we then check is 1 is in the child, which turns out to be true, so once again we check the mapping and see 1 maps to 2, we check if 2 is in the child and it is not, hence the first X becomes a 2. We do the same for the second X in child 1, which should have been a 6 yet it cannot be, the mapping shows 6 is mapped to 7 so we test 7 and it does not conflict, therefore we have Child 1 being equal to:
+
+\begin{center}\Large
+Child 1: (342$|$168$|$75)
+\end{center}
+
+We compute child 2 in exactly the same way which then gives us:
+
+\begin{center}\Large
+Child 2: (485$|$271$|$36)
+\end{center}
+
+And therefore we get two output children to test the fitness with and add to the population if necessary.
+
+\paragraph{Order Crossover}\mbox{}\\
+
+Another crossover operator is the order crossover proposed by Davis \cite{GACrossover}, and it builds offspring by choosing a subtour from the parents and preserving the relative order of cities in the other parent. As an example:
+
+\begin{center}\Large
+Solution 1: (348$|$271$|$65)\\
+Solution 2: (425$|$168$|$37)
+\end{center}
+
+The offspring are created first by the subtour of their respective parents:
+
+\begin{center}\Large
+Child 1: (XXX$|$271$|$XX)\\
+Child 2: (XXX$|$168$|$XX)
+\end{center}
+
+Then from the opposite parent of each solution, we take the list of cities starting from the second cut point, and removing any already present in the 1st child, e.g. in this case we take the tour 3,7,4,2,5,1,6,8 then remove 2,7 and 1 to give 3,4,5,6,8 which is then placed in the 1st child starting from the 2nd cut point to give:
+
+\begin{center}\Large
+Child 1: (568$|$271$|$34)
+\end{center}
+
+And child 2 is made in the same way:
+
+\begin{center}\Large
+Child 2: (427$|$168$|$53)
+\end{center}
+
+\paragraph{Cycle Crossover}
+
+Cycle crossover is an operator which takes a different approach compared to the other two detailed above. It works by splitting the parents into 'cycles' and then alternating adding each one to their children. It is an algorithm which is best described through an example, however we must use a different example from the one used previously for reasons that shall be discussed afterwards \cite{GACrossover}:
+
+\begin{center}\Large
+Solution 1: (12345678)\\
+Solution 2: (85213647)
+\end{center}
+
+We start by picking one of the starting cities, in this case 1 or 8. In this case we will pick 1, and this is added to the first child:
+
+\begin{center}\Large
+Child 1: (1XXXXXXX)\\
+\end{center}
+
+We then look at the city in the corresponding position of parent 2 and go to that appropriate position in parent 1, so that we can add it to child 2, in this case the parent 2 city is 8, so we go to position 8 whilst also adding it to child 1:
+
+\begin{center}\Large
+Child 1: (1XXXXXX8)\\
+\end{center}
+
+We continue this, next getting a 7:
+
+\begin{center}\Large
+Child 1: (1XXXXX78)\\
+\end{center}
+
+And then a 4:
+
+\begin{center}\Large
+Child 1: (1XX4XX78)\\
+\end{center}
+
+From here the corresponding point is 1, however since we already have used 1 a the very beginning, it is already in the list and so that is the end of this 'cycle'. At this point we fill in the remaining missing cities with the ones from the second parent to give:
+
+ \begin{center}\Large
+Child 1: (15243678)\\
+\end{center}
+
+We can then do the same for child 2 which would give us:
+
+\begin{center}\Large
+Child 2: (82315647)\\
+\end{center}
+
+As I mentioned earlier we had to use a separate example from the one we used for the other crossover operators in this case, this was because of the drawback of this technique. If you used this operator on our other examples, you would find that both children would end up exactly the same as their parents, which is clearly a very large waste of computation.
 \begin{thebibliography}{1}
 
 \bibitem{TSPWiki}
@@ -214,6 +360,9 @@ Penev, M.K.V.S.S., 2005. Genetic operators crossover and mutation in solving the
 
 \bibitem{GAMutations}
 Abdoun, O., Abouchabaka, J. and Tajani, C. (no date) ‘Analyzing the Performance of Mutation Operators to Solve the Travelling Salesman Problem’, p. 18. Available at: \url{https://arxiv.org/pdf/1203.3099.pdf} (Accessed: 5 November 2020)
+
+\bibitem{GACrossover}
+Hussain, A. et al. (2017) ‘Genetic Algorithm for Traveling Salesman Problem with Modified Cycle Crossover Operator’, Computational Intelligence and Neuroscience, 2017, pp. 1–7. doi: 10.1155/2017/7430125. Available at: \url{http://downloads.hindawi.com/journals/cin/2017/7430125.pdf} (Accessed: 10 November 2020)
 
 \end{thebibliography}
 

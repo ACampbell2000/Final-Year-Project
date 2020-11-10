@@ -5,4 +5,8 @@
 \BOOKMARK [3][-]{subsubsection.2.2.1}{Individuals}{subsection.2.2}% 5
 \BOOKMARK [3][-]{subsubsection.2.2.2}{Objective Function and Fitness}{subsection.2.2}% 6
 \BOOKMARK [3][-]{subsubsection.2.2.3}{Mutation}{subsection.2.2}% 7
-\BOOKMARK [1][-]{section*.3}{References}{}% 8
+\BOOKMARK [3][-]{subsubsection.2.2.4}{Crossover}{subsection.2.2}% 8
+\BOOKMARK [4][-]{paragraph.2.2.4.1}{Partially Mapped Crossover}{subsubsection.2.2.4}% 9
+\BOOKMARK [4][-]{paragraph.2.2.4.2}{Order Crossover}{subsubsection.2.2.4}% 10
+\BOOKMARK [4][-]{paragraph.2.2.4.3}{Cycle Crossover}{subsubsection.2.2.4}% 11
+\BOOKMARK [1][-]{section*.3}{References}{}% 12

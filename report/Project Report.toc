@@ -5,4 +5,8 @@
 \contentsline {subsubsection}{\numberline {2.2.1}Individuals}{7}{subsubsection.2.2.1}
 \contentsline {subsubsection}{\numberline {2.2.2}Objective Function and Fitness}{7}{subsubsection.2.2.2}
 \contentsline {subsubsection}{\numberline {2.2.3}Mutation}{8}{subsubsection.2.2.3}
-\contentsline {section}{References}{8}{section*.3}
+\contentsline {subsubsection}{\numberline {2.2.4}Crossover}{9}{subsubsection.2.2.4}
+\contentsline {paragraph}{\numberline {2.2.4.1}Partially Mapped Crossover}{10}{paragraph.2.2.4.1}
+\contentsline {paragraph}{\numberline {2.2.4.2}Order Crossover}{11}{paragraph.2.2.4.2}
+\contentsline {paragraph}{\numberline {2.2.4.3}Cycle Crossover}{11}{paragraph.2.2.4.3}
+\contentsline {section}{References}{12}{section*.3}
