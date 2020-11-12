@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.2.26)  10 NOV 2020 17:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.2.26)  12 NOV 2020 16:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -188,18 +188,76 @@ File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 \Gin@req@height=\dimen115
 \Gin@req@width=\dimen116
 )
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2017/09/02 v2.17a AMS math features
+\@mathmargin=\skip44
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks16
+\ex@=\dimen117
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen118
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count103
+LaTeX Info: Redefining \frac on input line 213.
+\uproot@=\count104
+\leftroot@=\count105
+LaTeX Info: Redefining \overline on input line 375.
+\classnum@=\count106
+\DOTSCASE@=\count107
+LaTeX Info: Redefining \ldots on input line 472.
+LaTeX Info: Redefining \dots on input line 475.
+LaTeX Info: Redefining \cdots on input line 596.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen119
+LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
+\macc@depth=\count108
+\c@MaxMatrixCols=\count109
+\dotsspace@=\muskip11
+\c@parentequation=\count110
+\dspbrk@lvl=\count111
+\tag@help=\toks17
+\row@=\count112
+\column@=\count113
+\maxfields@=\count114
+\andhelp@=\toks18
+\eqnshift@=\dimen120
+\alignsep@=\dimen121
+\tagshift@=\dimen122
+\tagwidth@=\dimen123
+\totwidth@=\dimen124
+\lineht@=\dimen125
+\@envbody=\toks19
+\multlinegap=\skip45
+\multlinetaggap=\skip46
+\mathdisplay@stack=\toks20
+LaTeX Info: Redefining \[ on input line 2817.
+LaTeX Info: Redefining \] on input line 2818.
+)
 (/usr/share/texlive/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Package: algorithm2e 2017/07/18 v5.2 algorithms environments
-\c@AlgoLine=\count103
+\c@AlgoLine=\count115
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-\algocf@hangindent=\skip44
+\algocf@hangindent=\skip47
 
 (/usr/share/texlive/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
-\c@checkoddpage=\count104
+\c@checkoddpage=\count116
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
@@ -207,61 +265,61 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 (/usr/share/texlive/texmf-dist/tex/latex/relsize/relsize.sty
 Package: relsize 2013/03/29 ver 4.1
 )
-\skiptotal=\skip45
-\skiplinenumber=\skip46
-\skiprule=\skip47
-\skiphlne=\skip48
-\skiptext=\skip49
-\skiplength=\skip50
-\algomargin=\skip51
-\skipalgocfslide=\skip52
-\algowidth=\dimen117
-\inoutsize=\dimen118
-\inoutindent=\dimen119
-\interspacetitleruled=\dimen120
-\interspacealgoruled=\dimen121
-\interspacetitleboxruled=\dimen122
-\algocf@ruledwidth=\skip53
-\algocf@inoutbox=\box26
-\algocf@inputbox=\box27
-\AlCapSkip=\skip54
-\AlCapHSkip=\skip55
-\algoskipindent=\skip56
-\algocf@nlbox=\box28
-\algocf@hangingbox=\box29
-\algocf@untilbox=\box30
-\algocf@skipuntil=\skip57
-\algocf@capbox=\box31
-\algocf@lcaptionbox=\skip58
-\algoheightruledefault=\skip59
-\algoheightrule=\skip60
-\algotitleheightruledefault=\skip61
-\algotitleheightrule=\skip62
-\c@algocfline=\count105
-\c@algocfproc=\count106
-\c@algocf=\count107
-\algocf@algoframe=\box32
-\algocf@algobox=\box33
+\skiptotal=\skip48
+\skiplinenumber=\skip49
+\skiprule=\skip50
+\skiphlne=\skip51
+\skiptext=\skip52
+\skiplength=\skip53
+\algomargin=\skip54
+\skipalgocfslide=\skip55
+\algowidth=\dimen126
+\inoutsize=\dimen127
+\inoutindent=\dimen128
+\interspacetitleruled=\dimen129
+\interspacealgoruled=\dimen130
+\interspacetitleboxruled=\dimen131
+\algocf@ruledwidth=\skip56
+\algocf@inoutbox=\box28
+\algocf@inputbox=\box29
+\AlCapSkip=\skip57
+\AlCapHSkip=\skip58
+\algoskipindent=\skip59
+\algocf@nlbox=\box30
+\algocf@hangingbox=\box31
+\algocf@untilbox=\box32
+\algocf@skipuntil=\skip60
+\algocf@capbox=\box33
+\algocf@lcaptionbox=\skip61
+\algoheightruledefault=\skip62
+\algoheightrule=\skip63
+\algotitleheightruledefault=\skip64
+\algotitleheightrule=\skip65
+\c@algocfline=\count117
+\c@algocfproc=\count118
+\c@algocf=\count119
+\algocf@algoframe=\box34
+\algocf@algobox=\box35
 )
 (./Project Report.aux)
 \openout1 = `"Project Report.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-\AtBeginShipoutBox=\box34
-Package hyperref Info: Link coloring OFF on input line 17.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+\AtBeginShipoutBox=\box36
+Package hyperref Info: Link coloring OFF on input line 18.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -269,11 +327,11 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count108
+\c@section@level=\count120
 )
-LaTeX Info: Redefining \ref on input line 17.
-LaTeX Info: Redefining \pageref on input line 17.
-LaTeX Info: Redefining \nameref on input line 17.
+LaTeX Info: Redefining \ref on input line 18.
+LaTeX Info: Redefining \pageref on input line 18.
+LaTeX Info: Redefining \nameref on input line 18.
 
 (./Project Report.out) (./Project Report.out)
 \@outlinefile=\write3
@@ -316,17 +374,17 @@ LaTeX Info: Redefining \nameref on input line 17.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count109
-\scratchdimen=\dimen123
-\scratchbox=\box35
-\nofMPsegments=\count110
-\nofMParguments=\count111
-\everyMPshowfont=\toks16
-\MPscratchCnt=\count112
-\MPscratchDim=\dimen124
-\MPnumerator=\count113
-\makeMPintoPDFobject=\count114
-\everyMPtoPDFconversion=\toks17
+\scratchcounter=\count121
+\scratchdimen=\dimen132
+\scratchbox=\box37
+\nofMPsegments=\count122
+\nofMParguments=\count123
+\everyMPshowfont=\toks21
+\MPscratchCnt=\count124
+\MPscratchDim=\dimen133
+\MPnumerator=\count125
+\makeMPintoPDFobject=\count126
+\everyMPtoPDFconversion=\toks22
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -346,78 +404,58 @@ e
 ))
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./Project Report.toc
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 3.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 3.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 3.
-)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./Project Report.toc)
 \tf@toc=\write4
 \openout4 = `"Project Report.toc"'.
 
 
-[2] [3]
-<./images/WikiCompleteGraph.png, id=91, 200.75pt x 174.6525pt>
+[2] [3] [4] [5
+
+] [6] [7] [8] [9] [10]
+<./images/LocalGlobalOptima.png, id=206, 1027.84pt x 602.25pt>
+File: ./images/LocalGlobalOptima.png Graphic file (type png)
+<use ./images/LocalGlobalOptima.png>
+Package pdftex.def Info: ./images/LocalGlobalOptima.png  used on input line 290
+.
+(pdftex.def)             Requested size: 308.35437pt x 180.67639pt.
+ [11 <./images/LocalGlobalOptima.png>]
+[12]
+<./images/WikiCompleteGraph.png, id=235, 200.75pt x 174.6525pt>
 File: ./images/WikiCompleteGraph.png Graphic file (type png)
 <use ./images/WikiCompleteGraph.png>
-Package pdftex.def Info: ./images/WikiCompleteGraph.png  used on input line 62.
-
+Package pdftex.def Info: ./images/WikiCompleteGraph.png  used on input line 347
+.
 (pdftex.def)             Requested size: 150.56212pt x 130.98904pt.
- [4 <./images/WikiCompleteGraph.png>]
-<./images/WikiMinSpanTree.png, id=112, 200.75pt x 184.69pt>
+ [13 <./images/WikiCompleteGraph.png>]
+<./images/WikiMinSpanTree.png, id=252, 200.75pt x 184.69pt>
 File: ./images/WikiMinSpanTree.png Graphic file (type png)
 <use ./images/WikiMinSpanTree.png>
-Package pdftex.def Info: ./images/WikiMinSpanTree.png  used on input line 71.
+Package pdftex.def Info: ./images/WikiMinSpanTree.png  used on input line 356.
 (pdftex.def)             Requested size: 120.45091pt x 110.81483pt.
-<./images/WikiMinMatch.png, id=114, 200.75pt x 200.75pt>
+<./images/WikiMinMatch.png, id=254, 200.75pt x 200.75pt>
 File: ./images/WikiMinMatch.png Graphic file (type png)
 <use ./images/WikiMinMatch.png>
-Package pdftex.def Info: ./images/WikiMinMatch.png  used on input line 79.
+Package pdftex.def Info: ./images/WikiMinMatch.png  used on input line 364.
 (pdftex.def)             Requested size: 120.45091pt x 120.45091pt.
-<./images/WikiComb.png, id=115, 200.75pt x 200.75pt>
+<./images/WikiComb.png, id=255, 200.75pt x 200.75pt>
 File: ./images/WikiComb.png Graphic file (type png)
 <use ./images/WikiComb.png>
-Package pdftex.def Info: ./images/WikiComb.png  used on input line 90.
+Package pdftex.def Info: ./images/WikiComb.png  used on input line 375.
 (pdftex.def)             Requested size: 100.37474pt x 100.37474pt.
-<./images/WikiEulerTour.png, id=116, 200.75pt x 218.8175pt>
+<./images/WikiEulerTour.png, id=256, 200.75pt x 218.8175pt>
 File: ./images/WikiEulerTour.png Graphic file (type png)
 <use ./images/WikiEulerTour.png>
-Package pdftex.def Info: ./images/WikiEulerTour.png  used on input line 95.
+Package pdftex.def Info: ./images/WikiEulerTour.png  used on input line 380.
 (pdftex.def)             Requested size: 100.37474pt x 109.40848pt.
- [5
+ [14
 
  <./images/WikiMinSpanTree.png> <./images/WikiMinMatch.png> <./images/WikiComb.
 png> <./images/WikiEulerTour.png>]
-<./images/WikiRemove.png, id=131, 200.75pt x 215.80624pt>
+<./images/WikiRemove.png, id=271, 200.75pt x 215.80624pt>
 File: ./images/WikiRemove.png Graphic file (type png)
 <use ./images/WikiRemove.png>
-Package pdftex.def Info: ./images/WikiRemove.png  used on input line 103.
+Package pdftex.def Info: ./images/WikiRemove.png  used on input line 388.
 (pdftex.def)             Requested size: 120.45091pt x 129.48474pt.
- [6 <./images/WikiRemove.png>]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 120.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 120.
- [7
-
-] [8]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 201.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 201.
-
-Underfull \hbox (badness 10000) in paragraph at lines 216--217
-
- []
-
-[9]
-Underfull \hbox (badness 10000) in paragraph at lines 253--254
-
- []
-
-[10] [11]
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ˜ in font cmr10!
@@ -425,24 +463,29 @@ Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
 
-Underfull \hbox (badness 1281) in paragraph at lines 334--335
+Underfull \hbox (badness 1281) in paragraph at lines 407--408
 []\OT1/cmr/m/n/10.95 Hutchinson, C. et al. (no date) CMU Trav-el-ing Sales-man 
 Prob-lem, p. 25. Avail-
  []
 
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ˜ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
 
-Underfull \hbox (badness 3568) in paragraph at lines 337--338
+Underfull \hbox (badness 3568) in paragraph at lines 413--414
 \OT1/cmr/m/n/10.95 Mag-a-zine. Avail-able at: []$\OT1/cmtt/m/n/10.95 https : / 
 / www . quantamagazine . org / computer -[] scientists -[]
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 343--344
+[15 <./images/WikiRemove.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 419--420
 []$\OT1/cmtt/m/n/10.95 https : / / personal . vu . nl / r . a . sitters / Advan
 cedAlgorithms / 2016 / SlidesChapter2 -[]
  []
 
-[12]
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ˜ in font cmr10!
@@ -462,13 +505,13 @@ Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no “ in font cmr10!
 
-Underfull \hbox (badness 1215) in paragraph at lines 352--354
+Underfull \hbox (badness 1215) in paragraph at lines 428--430
 \OT1/cmr/m/n/10.95 fect match-ing al-go-rithm, Math-e-mat-i-cal Pro-gram-ming C
 om-pu-ta-tion, 1(1), pp. 4367.
  []
 
 
-Underfull \hbox (badness 3260) in paragraph at lines 352--354
+Underfull \hbox (badness 3260) in paragraph at lines 428--430
 \OT1/cmr/m/n/10.95 doi: 10.1007/s12532-009-0002-8. Avail-able at: []$\OT1/cmtt/
 m/n/10.95 http : / / mpc . zib . de / archive / 2009 /
  []
@@ -494,45 +537,79 @@ Missing character: There is no ™ in font cmr10!
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no “ in font cmr10!
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 372.
-[13]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 372.
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ˜ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+
+Overfull \hbox (7.38774pt too wide) in paragraph at lines 448--449
+[]\OT1/cmr/m/n/10.95 TSP Test Data (no date). Avail-able at: http://www.math.uw
+aterloo.ca/tsp/data/index.html
+ []
+
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ˜ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no “ in font cmr10!
+
+Underfull \hbox (badness 3884) in paragraph at lines 454--455
+\OT1/cmr/m/n/10.95 proach, In-ter-na-tional Jour-nal of Com-puter Ap-pli-ca-tio
+ns, 152(8), pp. 1319. doi:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 454--455
+\OT1/cmtt/m/n/10.95 Baidoo2 / publication / 309224559 _ Solving _ the _ TSP _ u
+sing _ Traditional _ Computing _
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 463.
+[16] [17]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 463.
  (./Project Report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 372.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 372.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 463.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 463.
 Package rerunfilecheck Info: File `"Project Report".out' has not changed.
-(rerunfilecheck)             Checksum: 7DBEFBCF0EE6154BD2782C5B8FF37CB9;815.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 372.
+(rerunfilecheck)             Checksum: 1B07666154A294C0FABE876A8C26461A;1339.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 463.
  ) 
 Here is how much of TeX's memory you used:
- 6771 strings out of 492982
- 101731 string characters out of 6134896
- 200790 words of memory out of 5000000
- 10210 multiletter control sequences out of 15000+600000
- 12484 words of font info for 43 fonts, out of 8000000 for 9000
+ 7404 strings out of 492982
+ 109106 string characters out of 6134896
+ 213456 words of memory out of 5000000
+ 10799 multiletter control sequences out of 15000+600000
+ 14061 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 31i,17n,32p,830b,500s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 31i,17n,32p,957b,519s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on "Project Report.pdf" (13 pages, 275054 bytes).
+t/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmtt10.pfb>
+Output written on "Project Report.pdf" (17 pages, 365669 bytes).
 PDF statistics:
- 312 PDF objects out of 1000 (max. 8388607)
- 264 compressed objects within 3 object streams
- 70 named destinations out of 1000 (max. 500000)
- 127 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 400 PDF objects out of 1000 (max. 8388607)
+ 344 compressed objects within 4 object streams
+ 94 named destinations out of 1000 (max. 500000)
+ 188 words of extra memory for PDF output out of 10000 (max. 10000000)
 

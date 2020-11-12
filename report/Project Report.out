@@ -1,12 +1,19 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{Background}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{Christofides Algorithm}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.1}{Travelling Salesman Problem}{section.2}% 3
 \BOOKMARK [2][-]{subsection.2.2}{Genetic Algorithms}{section.2}% 4
 \BOOKMARK [3][-]{subsubsection.2.2.1}{Individuals}{subsection.2.2}% 5
 \BOOKMARK [3][-]{subsubsection.2.2.2}{Objective Function and Fitness}{subsection.2.2}% 6
 \BOOKMARK [3][-]{subsubsection.2.2.3}{Mutation}{subsection.2.2}% 7
 \BOOKMARK [3][-]{subsubsection.2.2.4}{Crossover}{subsection.2.2}% 8
-\BOOKMARK [4][-]{paragraph.2.2.4.1}{Partially Mapped Crossover}{subsubsection.2.2.4}% 9
-\BOOKMARK [4][-]{paragraph.2.2.4.2}{Order Crossover}{subsubsection.2.2.4}% 10
-\BOOKMARK [4][-]{paragraph.2.2.4.3}{Cycle Crossover}{subsubsection.2.2.4}% 11
-\BOOKMARK [1][-]{section*.3}{References}{}% 12
+\BOOKMARK [1][-]{section.3}{Literature Review}{}% 9
+\BOOKMARK [2][-]{subsection.3.1}{Different Crossover Operators}{section.3}% 10
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Partially Mapped Crossover}{subsection.3.1}% 11
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Order Crossover}{subsection.3.1}% 12
+\BOOKMARK [3][-]{subsubsection.3.1.3}{Cycle Crossover}{subsection.3.1}% 13
+\BOOKMARK [2][-]{subsection.3.2}{Different Algorithms for TSP}{section.3}% 14
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Brute Force Algorithm}{subsection.3.2}% 15
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Greedy Algorithm}{subsection.3.2}% 16
+\BOOKMARK [3][-]{subsubsection.3.2.3}{Held-Karp Algorithm}{subsection.3.2}% 17
+\BOOKMARK [3][-]{subsubsection.3.2.4}{Christofides Algorithm}{subsection.3.2}% 18
+\BOOKMARK [1][-]{section*.3}{References}{}% 19
