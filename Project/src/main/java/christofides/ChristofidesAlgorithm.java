@@ -59,10 +59,10 @@ public class ChristofidesAlgorithm {
 
     public MinSpanTree calculateSubGraph(List<Node> oddNodes, Graph fullGraph) {
         List<Edge> oddEdges = new ArrayList<>();
-        List<Node> leftToUse;
-        leftToUse = oddNodes;
+        List<Node> leftToUse = new ArrayList<>();
+        leftToUse.addAll(oddNodes);
         for(int i = 0; i < oddNodes.size(); i++) {
-            leftToUse.remove(i);
+            leftToUse.remove(0);
             for (Node node : leftToUse) {
                 oddEdges.add(new Edge(oddNodes.get(i).getIdentifier(), node.getIdentifier(), fullGraph.getEdges()[oddNodes.get(i).getIdentifier()][node.getIdentifier()]));
             }
