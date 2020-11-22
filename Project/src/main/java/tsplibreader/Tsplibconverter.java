@@ -26,7 +26,6 @@ public class Tsplibconverter {
             while(!(nextLine = reader.nextLine()).contains("EOF")) {
                 String[] sections = nextLine.split(" ");
                 Node node = new Node(Integer.parseInt(sections[0])-1, Double.parseDouble(sections[1]), Double.parseDouble(sections[2]));
-                System.out.println(node.toString());
                 nodes.add(node);
             }
 

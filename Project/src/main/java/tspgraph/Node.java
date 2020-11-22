@@ -1,10 +1,14 @@
 package main.java.tspgraph;
 
+import java.util.Comparator;
+
 public class Node {
 
     int identifier;
     double x_coord;
     double y_coord;
+
+    public Node() {}
 
     public Node(int identifier, double x_coord, double y_coord) {
         this.identifier = identifier;
@@ -22,5 +26,10 @@ public class Node {
 
     public double getY_coord() {
         return y_coord;
+    }
+
+    @Override
+    public String toString() {
+        return "City Number: " + identifier + " X: " + x_coord + " Y: " + y_coord;
     }
 }
