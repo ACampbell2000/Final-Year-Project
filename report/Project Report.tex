@@ -350,7 +350,7 @@ Nonetheless the steps to this algorithm are as follows:
 \end{figure}
 
 \clearpage
-As stated the process is compressed into few steps and is quite simple to understand, and yet creating this algorithm within a programming language is more complex than one would initially assume. Finding a minimum spanning tree (Figure 2) of the full graph (Figure 1) is quite simple, the two most common algorithms known for solving this are Prims and Kruskals, both of which are effective methods with time complexities of $O(n)$ and $O(n^2)$ respectively \cite{PvKTime} though choosing one or the other is mostly affected by the number of edges within the graph we are finding the minimum spanning tree for, with Prims being more suitable if there are a large number of edges, and Kruskals if not.
+As stated the process is compressed into few steps and is quite simple to understand, and yet creating this algorithm within a programming language is more complex than one would initially assume. Finding a minimum spanning tree (Figure 3) of the full graph (Figure 2) is quite simple, the two most common algorithms known for solving this are Prims and Kruskals, both of which are effective methods with time complexities of $O(n)$ and $O(n^2)$ respectively \cite{PvKTime} though choosing one or the other is mostly affected by the number of edges within the graph we are finding the minimum spanning tree for, with Prims being more suitable if there are a large number of edges, and Kruskals if not.
 
 \begin{figure}[ht]
 	\includegraphics[scale=0.6]{WikiMinSpanTree}
@@ -358,7 +358,7 @@ As stated the process is compressed into few steps and is quite simple to unders
 	\caption{Minimum Spanning Tree}
 \end{figure}
 
-The minimum weight perfect matching of $T$ (Figure 3) is accomplished by finding $\frac{T}{2}$ edges which 'link' together every vertex in $T$ by the shortest edge possible. For this one of the most common algorithm in use appears to be the blossom algorithm and has a time complexity of $O(n^2 m)$ in the worst case where $n$ is the number of vertices and $m$ is the number of edges \cite{BlosAlg}.
+The minimum weight perfect matching of $T$ (Figure 4) is accomplished by finding $\frac{T}{2}$ edges which 'link' together every vertex in $T$ by the shortest edge possible. For this one of the most common algorithm in use appears to be the blossom algorithm and has a time complexity of $O(n^2 m)$ in the worst case where $n$ is the number of vertices and $m$ is the number of edges \cite{BlosAlg}.
 
 \begin{figure}[ht]
 	\includegraphics[scale=0.6]{WikiMinMatch}
@@ -366,7 +366,7 @@ The minimum weight perfect matching of $T$ (Figure 3) is accomplished by finding
 	\caption{Minimum Weight Perfect Matching}
 \end{figure}
 
-From here we simply calculate the union of $M$ and $T$ (Figure 4), including any of the repeated edges that may be present, before moving onto the Euler tour. A Euler tour is simply a tour of the graph which visits each edge exactly once, regardless of starting or ending vertex (Figure 5).
+From here we simply calculate the union of $M$ and $T$ (Figure 5), including any of the repeated edges that may be present, before moving onto the Euler tour. A Euler tour is simply a tour of the graph which visits each edge exactly once, regardless of starting or ending vertex (Figure 6).
 
 \begin{figure}[ht]
 	\centering

@@ -47,7 +47,7 @@ public class Tsplibconverter {
         }
     }
 
-    private double euclidianDistance(Node a, Node b) {
+    public static double euclidianDistance(Node a, Node b) {
         double x1 = a.getX_coord();
         double x2 = b.getX_coord();
         double y1 = a.getY_coord();

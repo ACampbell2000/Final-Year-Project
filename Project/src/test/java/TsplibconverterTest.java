@@ -10,7 +10,7 @@ public class TsplibconverterTest {
     public static void main(String[] args) {
         Tsplibconverter test = new Tsplibconverter();
 
-        Graph testGraph = test.buildGraph("dataset/test.tsp");
+        Graph testGraph = test.buildGraph("dataset/wi29.tsp");
         System.out.println(testGraph.getNodes().toString());
         System.out.println(Arrays.deepToString(testGraph.getEdges()));
     }

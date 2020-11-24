@@ -1,5 +1,7 @@
 package main.java.tspgraph;
 
+import org.jgrapht.GraphType;
+
 import java.util.List;
 
 public class Graph {

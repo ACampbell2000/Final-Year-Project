@@ -1,6 +1,5 @@
 package main.java.tspgraph;
 
-import java.util.Comparator;
 
 public class Node {
 
@@ -8,7 +7,11 @@ public class Node {
     double x_coord;
     double y_coord;
 
-    public Node() {}
+    public Node() {
+        this.identifier = 0;
+        x_coord = 0;
+        y_coord = 0;
+    }
 
     public Node(int identifier, double x_coord, double y_coord) {
         this.identifier = identifier;
