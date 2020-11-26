@@ -25,7 +25,8 @@ public class ChristofidesAlgorithm {
         MinSpanTree minMatching = calculateMinimumMatch(subGraph);
         MinSpanTree unionGraph = union(minSpanTree, minMatching);
         List<Node> withRepeats = calculateEulerCycleWithRepeats(unionGraph);
-        return removeRepeatsFromCycle(withRepeats);
+        List<Node> withoutRepeats = removeRepeatsFromCycle(withRepeats);
+        return withoutRepeats;
     }
 
     public MinSpanTree calculateMinimumSpanningTree(Graph fullGraph) {
@@ -97,8 +98,7 @@ public class ChristofidesAlgorithm {
 
     public MinSpanTree union(MinSpanTree minSpanTree, MinSpanTree minMatching) {
         minSpanTree.getEdges().addAll(minMatching.getEdges());
-        MinSpanTree unionGraph = new MinSpanTree(minSpanTree.getNodes(), minSpanTree.getEdges());
-        return unionGraph;
+        return new MinSpanTree(minSpanTree.getNodes(), minSpanTree.getEdges());
     }
 
     public List<Node> calculateEulerCycleWithRepeats(MinSpanTree union) {
@@ -108,8 +108,11 @@ public class ChristofidesAlgorithm {
         GraphPath<Node, Edge> path = eulerianCycle.getEulerianCycle(kolGraph);
         for (Edge edge : path.getEdgeList()) {
             if(pathList.isEmpty()) {
-                pathList.add(edge.getFrom());
-                pathList.add(edge.getTo());
+                pathList.add(path.getStartVertex());
+                if(pathList.get(0).equals(path.getEdgeList().get(0).getFrom()))
+                    pathList.add(edge.getTo());
+                else
+                    pathList.add(edge.getFrom());
             } else if(pathList.get(pathList.size()-1).equals(edge.getFrom()))
                 pathList.add(edge.getTo());
             else if(pathList.get(pathList.size()-1).equals(edge.getTo()))

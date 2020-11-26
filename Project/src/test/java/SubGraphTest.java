@@ -15,14 +15,14 @@ public class SubGraphTest {
     public static void main(String[] args) {
         Tsplibconverter test = new Tsplibconverter();
 
-        Graph testGraph = test.buildGraph("dataset/test.tsp");
+        Graph testGraph = test.buildGraph("dataset/wi29.tsp");
         ChristofidesAlgorithm chrAlg = new ChristofidesAlgorithm();
         MinSpanTree minSpanTree = chrAlg.calculateMinimumSpanningTree(testGraph);
         List<Node> oddNodes = chrAlg.calculateOddNodes(minSpanTree);
         MinSpanTree subGraph = chrAlg.calculateSubGraph(oddNodes,testGraph);
         //System.out.println(subGraph.getNodes().toString());
         for (Edge edge: subGraph.getEdges()) {
-            System.out.println("From: " + edge.getFrom() +  " To: " + edge.getTo() + " Cost: " + edge.getCost());
+            System.out.println("From: " + edge.getFrom().getIdentifier() +  " To: " + edge.getTo().getIdentifier() + " Cost: " + edge.getCost());
         }
     }
 }

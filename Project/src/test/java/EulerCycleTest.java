@@ -14,7 +14,7 @@ public class EulerCycleTest {
     public static void main(String[] args) {
         Tsplibconverter test = new Tsplibconverter();
 
-        Graph testGraph = test.buildGraph("dataset/test.tsp");
+        Graph testGraph = test.buildGraph("dataset/wi29.tsp");
         ChristofidesAlgorithm chrAlg = new ChristofidesAlgorithm();
         MinSpanTree minSpanTree = chrAlg.calculateMinimumSpanningTree(testGraph);
         List<Node> oddNodes = chrAlg.calculateOddNodes(minSpanTree);
