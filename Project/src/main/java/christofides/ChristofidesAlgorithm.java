@@ -12,11 +12,9 @@ import org.jgrapht.alg.cycle.HierholzerEulerianCycle;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 
 public class ChristofidesAlgorithm {
 
-    private Object Queue;
 
     public List<Node> calculateChristofides(Graph fullGraph) {
         MinSpanTree minSpanTree = calculateMinimumSpanningTree(fullGraph);
@@ -25,8 +23,7 @@ public class ChristofidesAlgorithm {
         MinSpanTree minMatching = calculateMinimumMatch(subGraph);
         MinSpanTree unionGraph = union(minSpanTree, minMatching);
         List<Node> withRepeats = calculateEulerCycleWithRepeats(unionGraph);
-        List<Node> withoutRepeats = removeRepeatsFromCycle(withRepeats);
-        return withoutRepeats;
+        return removeRepeatsFromCycle(withRepeats);
     }
 
     public MinSpanTree calculateMinimumSpanningTree(Graph fullGraph) {

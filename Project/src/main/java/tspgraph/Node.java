@@ -31,8 +31,10 @@ public class Node {
         return y_coord;
     }
 
+    public String getData() { return "City Number: " + identifier + " X: " + x_coord + " Y: " + y_coord; }
+
     @Override
     public String toString() {
-        return "City Number: " + identifier + " X: " + x_coord + " Y: " + y_coord;
+        return String.valueOf(identifier);
     }
 }
