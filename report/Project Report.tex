@@ -63,7 +63,7 @@ Most genetic algorithms take a very similar form, and though it is often altered
 \textbf{Initial Values:} generationNum = 0, generationMax = $N$\footnote{Where $N$ is a predetermined number of generations}\;
 Randomly generate a population of size $P$ individuals to be used initially\;
 Calculate the fitness of all $P$ individuals\;
-Sort the algorithm in descending order of fitness\;
+Sort the population in descending order of fitness\;
 \While{(generationNum $<$ generationMax)}{
 	Pick the $M$\footnote{$ 2 \leq M \leq P$} best individuals from the start of the population\;
 	\For{(each pair of parents in $M$\footnote{Selected randomly with replacement})}{

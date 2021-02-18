@@ -33,4 +33,9 @@ public class Individual {
         tourLength += partOf.getEdges()[tour.get(tour.size()-1).getIdentifier()][tour.get(0).getIdentifier()];
         fitness = tourLength;
     }
+
+    @Override
+    public String toString() {
+        return "Tour: " + getTour() + " Length: " + getFitness();
+    }
 }
