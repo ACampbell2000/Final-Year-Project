@@ -12,8 +12,9 @@ public class GeneticAlgorithm {
 
     private static final int  MAX_GENERATIONS = 10000;
     private static final int NUM_OF_INDIVIDUALS = 1000;
-    private static final double MUTATION_CHANCE = 0.01;
-    private static final double CROSSOVER_CHANCE = 0.8;
+    private static final double PARENT_PERCENTAGE = 0.2;
+    private static final double MUTATION_CHANCE = 0.4;
+    private static final double CROSSOVER_CHANCE = 0.9;
 
     private List<Individual> individuals = new ArrayList<Individual>();
     private Graph graph;
@@ -21,6 +22,16 @@ public class GeneticAlgorithm {
     public GeneticAlgorithm(Graph graph) {
         this.graph = graph;
         generateIndividuals();
+        individuals.sort(Comparator.comparingDouble(Individual::getFitness)); //a lower fitness is better
+        for (int i = 0; i < MAX_GENERATIONS; i++)
+            generationLoop();
+    }
+
+    public GeneticAlgorithm(Graph graph, Individual individual) {
+        this.graph = graph;
+        generateIndividuals();
+        individuals.set(0,individual);
+        individuals.sort(Comparator.comparingDouble(Individual::getFitness)); //a lower fitness is better
         for (int i = 0; i < MAX_GENERATIONS; i++)
             generationLoop();
     }
@@ -36,14 +47,13 @@ public class GeneticAlgorithm {
             }
             individuals.add(new Individual(randTour,graph));
         }
-        individuals.sort(Comparator.comparingDouble(Individual::getFitness)); //a lower fitness is better
 
     }
 
     private void generationLoop() {
-        List<Individual> parents = new ArrayList<>(individuals.subList(0,NUM_OF_INDIVIDUALS));
+        List<Individual> parents = new ArrayList<>(individuals.subList(0,(int)(NUM_OF_INDIVIDUALS*PARENT_PERCENTAGE)));
         List<Individual> children = new ArrayList<>();
-        for(int i = 0; i<parents.size()/2; i++) {
+        for(int i = 0; i<parents.size(); i++) {
             List<Individual> temp = orderCrossover(individuals.get(ThreadLocalRandom.current().nextInt(parents.size())),individuals.get(ThreadLocalRandom.current().nextInt(parents.size())));
             for(int j=0; j<temp.size();j++) {
                 temp.set(j,RSM_Mutation(temp.get(j)));

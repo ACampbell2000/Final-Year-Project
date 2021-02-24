@@ -1,17 +1,13 @@
 package test.java;
 
 import main.java.christofides.ChristofidesAlgorithm;
+import main.java.geneticalgorithm.GeneticAlgorithm;
 import main.java.geneticalgorithm.Individual;
 import main.java.tspgraph.Graph;
-import main.java.tspgraph.Node;
 import main.java.tsplibreader.Tsplibconverter;
 
-import javax.xml.crypto.Data;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 
-public class ChristofidesTest {
+public class ChristofidesAndGeneticTest {
 
     public static void main(String[] args) {
         long startTime = System.nanoTime();
@@ -19,15 +15,11 @@ public class ChristofidesTest {
 
         Graph testGraph = test.buildGraph("dataset/zi929.tsp");
         ChristofidesAlgorithm chrAlg = new ChristofidesAlgorithm();
-        List<Node> tour = chrAlg.calculateChristofides(testGraph);
-        Individual individual = new Individual(tour, testGraph);
-        /*for (Node node : tour) {
-            System.out.print(node.getIdentifier() + ", ");
-        }*/
+        Individual individual = new Individual(chrAlg.calculateChristofides(testGraph), testGraph);
         System.out.println(individual.toString());
+        GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(testGraph, individual);
         long endTime = System.nanoTime();
         long totalTime = endTime-startTime;
         System.out.println(totalTime + " nanoseconds");
     }
 }
-
