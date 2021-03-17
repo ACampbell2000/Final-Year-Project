@@ -1,4 +1,4 @@
-package test.java;
+package test.java.genetic;
 
 import main.java.christofides.ChristofidesAlgorithm;
 import main.java.geneticalgorithm.Individual;

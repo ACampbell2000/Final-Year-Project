@@ -14,10 +14,10 @@ import java.util.List;
 public class ChristofidesTest {
 
     public static void main(String[] args) {
-        long startTime = System.nanoTime();
         Tsplibconverter test = new Tsplibconverter();
 
-        Graph testGraph = test.buildGraph("dataset/zi929.tsp");
+        Graph testGraph = test.buildGraph("dataset/qa194.tsp");
+        long startTime = System.nanoTime();
         ChristofidesAlgorithm chrAlg = new ChristofidesAlgorithm();
         List<Node> tour = chrAlg.calculateChristofides(testGraph);
         Individual individual = new Individual(tour, testGraph);

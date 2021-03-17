@@ -8,11 +8,13 @@ public class Graph {
 
     private List<Node> nodes;
     private double[][] edges;
+    private String name;
 
 
-    public Graph(List<Node> nodes, double[][] edges) {
+    public Graph(List<Node> nodes, double[][] edges, String name) {
         this.nodes = nodes;
         this.edges = edges;
+        this.name = name;
     }
 
     public List<Node> getNodes() {
@@ -21,5 +23,9 @@ public class Graph {
 
     public double[][] getEdges() {
         return edges;
+    }
+
+    public String getName() {
+        return name;
     }
 }

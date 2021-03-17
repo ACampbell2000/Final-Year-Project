@@ -89,8 +89,7 @@ public class ChristofidesAlgorithm {
             nodes.add(edge.getTo());
             edges.add(edge);
         }
-        MinSpanTree minMatchGraph = new MinSpanTree(nodes, edges);
-        return minMatchGraph;
+        return new MinSpanTree(nodes, edges);
     }
 
     public MinSpanTree union(MinSpanTree minSpanTree, MinSpanTree minMatching) {

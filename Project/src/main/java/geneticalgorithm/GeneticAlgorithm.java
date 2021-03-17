@@ -3,6 +3,9 @@ package main.java.geneticalgorithm;
 import main.java.tspgraph.Graph;
 import main.java.tspgraph.Node;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -10,7 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class GeneticAlgorithm {
 
-    private static final int  MAX_GENERATIONS = 10000;
+    private static final int  MAX_GENERATIONS = 5000;
     private static final int NUM_OF_INDIVIDUALS = 1000;
     private static final double PARENT_PERCENTAGE = 0.2;
     private static final double MUTATION_CHANCE = 0.4;
@@ -36,6 +39,43 @@ public class GeneticAlgorithm {
             generationLoop();
     }
 
+    public GeneticAlgorithm(Graph graph, int trajectoryFrequency) {
+        try (PrintWriter writer = new PrintWriter(new File(graph.getName()+ "_Gen_Trajectory.csv"))) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("Generation,Best Individual\n");
+            this.graph = graph;
+            generateIndividuals();
+            individuals.sort(Comparator.comparingDouble(Individual::getFitness)); //a lower fitness is better
+            for (int i = 0; i < MAX_GENERATIONS; ) {
+                for (int j = 0; j < trajectoryFrequency; j++, i++)
+                    generationLoop();
+                stringBuilder.append(i).append(",").append(individuals.get(0).getFitness()).append("\n");
+            }
+            writer.write(stringBuilder.toString());
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public GeneticAlgorithm(Graph graph, Individual individual, int trajectoryFrequency) {
+        try (PrintWriter writer = new PrintWriter(new File(graph.getName()+ "_GenChr_Trajectory.csv"))) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("Generation,Best Individual\n");
+            this.graph = graph;
+            generateIndividuals();
+            individuals.set(0, individual);
+            individuals.sort(Comparator.comparingDouble(Individual::getFitness)); //a lower fitness is better
+            for (int i = 0; i < MAX_GENERATIONS;) {
+                for(int j = 0; j < trajectoryFrequency; j++,i++)
+                    generationLoop();
+                stringBuilder.append(i).append(",").append(individuals.get(0).getFitness()).append("\n");
+            }
+            writer.write(stringBuilder.toString());
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     private void generateIndividuals() {
         for (int i = 0; i < NUM_OF_INDIVIDUALS; i++) {
             List<Node> cities = new ArrayList<>(graph.getNodes());
@@ -53,7 +93,7 @@ public class GeneticAlgorithm {
     private void generationLoop() {
         List<Individual> parents = new ArrayList<>(individuals.subList(0,(int)(NUM_OF_INDIVIDUALS*PARENT_PERCENTAGE)));
         List<Individual> children = new ArrayList<>();
-        for(int i = 0; i<parents.size(); i++) {
+        for(int i = 0; i<(individuals.size()-parents.size())/2; i++) {
             List<Individual> temp = orderCrossover(individuals.get(ThreadLocalRandom.current().nextInt(parents.size())),individuals.get(ThreadLocalRandom.current().nextInt(parents.size())));
             for(int j=0; j<temp.size();j++) {
                 temp.set(j,RSM_Mutation(temp.get(j)));
@@ -73,7 +113,6 @@ public class GeneticAlgorithm {
             }
         }
         individuals.sort(Comparator.comparingDouble(Individual::getFitness));
-        System.out.println("Best Individual in generation: " + individuals.get(0).toString());
     }
 
     public List<Individual> orderCrossover(Individual parent1, Individual parent2) {
@@ -126,7 +165,7 @@ public class GeneticAlgorithm {
 
     public Individual RSM_Mutation(Individual individual) {
         if(MUTATION_CHANCE >= ThreadLocalRandom.current().nextDouble()) {
-            List<Node> tour = individual.getTour();
+            List<Node> tour = new ArrayList<>(individual.getTour());
             int startMutation = ThreadLocalRandom.current().nextInt(tour.size());
             int endMutation = ThreadLocalRandom.current().nextInt(tour.size());
             if (startMutation == endMutation)
@@ -152,5 +191,9 @@ public class GeneticAlgorithm {
 
     public List<Individual> getIndividuals() {
         return individuals;
+    }
+
+    public Individual getBest() {
+        return individuals.get(0);
     }
 }

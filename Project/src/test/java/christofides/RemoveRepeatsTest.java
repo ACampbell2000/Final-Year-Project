@@ -1,4 +1,4 @@
-package test.java;
+package test.java.christofides;
 
 import main.java.christofides.ChristofidesAlgorithm;
 import main.java.christofides.MinSpanTree;
@@ -9,12 +9,12 @@ import main.java.tsplibreader.Tsplibconverter;
 
 import java.util.List;
 
-public class EulerCycleTest {
+public class RemoveRepeatsTest {
 
     public static void main(String[] args) {
         Tsplibconverter test = new Tsplibconverter();
 
-        Graph testGraph = test.buildGraph("dataset/wi29.tsp");
+        Graph testGraph = test.buildGraph("dataset/test.tsp");
         ChristofidesAlgorithm chrAlg = new ChristofidesAlgorithm();
         MinSpanTree minSpanTree = chrAlg.calculateMinimumSpanningTree(testGraph);
         List<Node> oddNodes = chrAlg.calculateOddNodes(minSpanTree);
@@ -22,7 +22,8 @@ public class EulerCycleTest {
         MinSpanTree minMatchGraph = chrAlg.calculateMinimumMatch(subGraph);
         MinSpanTree unionGraph = chrAlg.union(minSpanTree,minMatchGraph);
         List<Node> pathRepeats = chrAlg.calculateEulerCycleWithRepeats(unionGraph);
-        for (Node node: pathRepeats) {
+        List<Node> completePath = chrAlg.removeRepeatsFromCycle(pathRepeats);
+        for (Node node : completePath) {
             System.out.println(node.getIdentifier());
         }
     }

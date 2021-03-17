@@ -1,4 +1,4 @@
-package test.java;
+package test.java.genetic;
 
 import main.java.geneticalgorithm.GeneticAlgorithm;
 import main.java.geneticalgorithm.Individual;
@@ -7,18 +7,17 @@ import main.java.tsplibreader.Tsplibconverter;
 
 import java.util.List;
 
-public class CrossoverTest {
+public class MutationTest {
 
     public static void main(String[] args) {
         Tsplibconverter test = new Tsplibconverter();
 
         Graph testGraph = test.buildGraph("dataset/test.tsp");
         GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(testGraph);
-        Individual parent1 = geneticAlgorithm.getIndividuals().get(0);
-        Individual parent2 = geneticAlgorithm.getIndividuals().get(1);
-        System.out.println("Original: " + parent1.getTour());
-        System.out.println("Original: " + parent2.getTour());
-        List<Individual> children = geneticAlgorithm.orderCrossover(parent1,parent2);
-
+        Individual individual = geneticAlgorithm.getIndividuals().get(0);
+        System.out.println("Original: " + individual.getTour());
+        for(int i = 0; i < 10; i++) {
+            Individual mutatedInvidual = geneticAlgorithm.RSM_Mutation(individual);
+        }
     }
 }

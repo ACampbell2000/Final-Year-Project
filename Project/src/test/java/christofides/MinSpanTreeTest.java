@@ -1,4 +1,4 @@
-package test.java;
+package test.java.christofides;
 
 import main.java.christofides.ChristofidesAlgorithm;
 import main.java.christofides.MinSpanTree;

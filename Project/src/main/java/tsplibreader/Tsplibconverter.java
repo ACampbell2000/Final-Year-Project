@@ -13,8 +13,10 @@ public class Tsplibconverter {
 
     private List<Node> nodes = new ArrayList<>();
     private double[][] edges;
+    private String name;
 
     public Graph buildGraph(String pathToFile) {
+        name = pathToFile.substring(pathToFile.indexOf("/")+1,pathToFile.indexOf("."));
         try {
             File tspLibFile = new File(pathToFile);
             Scanner reader = new Scanner(tspLibFile);
@@ -34,7 +36,7 @@ public class Tsplibconverter {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return new Graph(nodes, edges);
+        return new Graph(nodes, edges, name);
     }
 
     private void calculateEdges() {

@@ -1,4 +1,4 @@
-package test.java;
+package test.java.christofides;
 
 import main.java.christofides.ChristofidesAlgorithm;
 import main.java.christofides.MinSpanTree;
@@ -9,7 +9,7 @@ import main.java.tsplibreader.Tsplibconverter;
 
 import java.util.List;
 
-public class OddNodesTest {
+public class EulerCycleTest {
 
     public static void main(String[] args) {
         Tsplibconverter test = new Tsplibconverter();
@@ -18,8 +18,12 @@ public class OddNodesTest {
         ChristofidesAlgorithm chrAlg = new ChristofidesAlgorithm();
         MinSpanTree minSpanTree = chrAlg.calculateMinimumSpanningTree(testGraph);
         List<Node> oddNodes = chrAlg.calculateOddNodes(minSpanTree);
-        for (Node node : oddNodes) {
-            System.out.println(node.toString());
+        MinSpanTree subGraph = chrAlg.calculateSubGraph(oddNodes,testGraph);
+        MinSpanTree minMatchGraph = chrAlg.calculateMinimumMatch(subGraph);
+        MinSpanTree unionGraph = chrAlg.union(minSpanTree,minMatchGraph);
+        List<Node> pathRepeats = chrAlg.calculateEulerCycleWithRepeats(unionGraph);
+        for (Node node: pathRepeats) {
+            System.out.println(node.getIdentifier());
         }
     }
 }

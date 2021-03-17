@@ -1,23 +1,25 @@
-package test.java;
+package test.java.genetic;
 
+import main.java.christofides.ChristofidesAlgorithm;
 import main.java.geneticalgorithm.GeneticAlgorithm;
 import main.java.geneticalgorithm.Individual;
 import main.java.tspgraph.Graph;
+import main.java.tspgraph.Node;
 import main.java.tsplibreader.Tsplibconverter;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MutationTest {
+public class PopulationTest {
 
     public static void main(String[] args) {
         Tsplibconverter test = new Tsplibconverter();
 
         Graph testGraph = test.buildGraph("dataset/test.tsp");
         GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(testGraph);
-        Individual individual = geneticAlgorithm.getIndividuals().get(0);
-        System.out.println("Original: " + individual.getTour());
-        for(int i = 0; i < 10; i++) {
-            Individual mutatedInvidual = geneticAlgorithm.RSM_Mutation(individual);
+        List<Individual> individuals = geneticAlgorithm.getIndividuals();
+        for (Individual individual : individuals) {
+            System.out.println(individual.getTour());
         }
     }
 }

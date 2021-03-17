@@ -1,4 +1,4 @@
-package test.java;
+package test.java.christofides;
 
 import main.java.christofides.ChristofidesAlgorithm;
 import main.java.christofides.MinSpanTree;
@@ -9,7 +9,7 @@ import main.java.tsplibreader.Tsplibconverter;
 
 import java.util.List;
 
-public class UnionTest {
+public class MinMatchTest {
 
     public static void main(String[] args) {
         Tsplibconverter test = new Tsplibconverter();
@@ -20,9 +20,8 @@ public class UnionTest {
         List<Node> oddNodes = chrAlg.calculateOddNodes(minSpanTree);
         MinSpanTree subGraph = chrAlg.calculateSubGraph(oddNodes,testGraph);
         MinSpanTree minMatchGraph = chrAlg.calculateMinimumMatch(subGraph);
-        MinSpanTree unionGraph = chrAlg.union(minSpanTree,minMatchGraph);
-        for (Edge edge : unionGraph.getEdges()) {
-            System.out.println(edge);
+        for (Edge edge : minMatchGraph.getEdges()) {
+            System.out.println(edge.toString());
         }
     }
 }

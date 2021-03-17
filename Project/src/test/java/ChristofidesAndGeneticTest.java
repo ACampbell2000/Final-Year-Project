@@ -10,16 +10,18 @@ import main.java.tsplibreader.Tsplibconverter;
 public class ChristofidesAndGeneticTest {
 
     public static void main(String[] args) {
-        long startTime = System.nanoTime();
         Tsplibconverter test = new Tsplibconverter();
 
         Graph testGraph = test.buildGraph("dataset/zi929.tsp");
+        long startTime = System.nanoTime();
         ChristofidesAlgorithm chrAlg = new ChristofidesAlgorithm();
         Individual individual = new Individual(chrAlg.calculateChristofides(testGraph), testGraph);
         System.out.println(individual.toString());
         GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(testGraph, individual);
+        System.out.println(geneticAlgorithm.getBest().toString());
         long endTime = System.nanoTime();
         long totalTime = endTime-startTime;
+
         System.out.println(totalTime + " nanoseconds");
     }
 }

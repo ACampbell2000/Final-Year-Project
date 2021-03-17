@@ -22,7 +22,6 @@ public class Individual {
     }
 
     public double getFitness() {
-        calculateFitness();
         return fitness;
     }
 
