@@ -13,8 +13,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class GeneticAlgorithm {
 
+    public static final int NUM_OF_INDIVIDUALS = 1000;
     private static final int  MAX_GENERATIONS = 5000;
-    private static final int NUM_OF_INDIVIDUALS = 1000;
     private static final double PARENT_PERCENTAGE = 0.2;
     private static final double MUTATION_CHANCE = 0.4;
     private static final double CROSSOVER_CHANCE = 0.9;

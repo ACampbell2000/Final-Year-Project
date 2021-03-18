@@ -1,5 +1,6 @@
 package main.java.christofides;
 
+import main.java.geneticalgorithm.GeneticAlgorithm;
 import main.java.tspgraph.Edge;
 import main.java.tspgraph.Graph;
 import main.java.tspgraph.Node;
@@ -10,8 +11,7 @@ import org.jgrapht.alg.matching.blossom.v5.KolmogorovWeightedPerfectMatching;
 import org.jgrapht.alg.matching.blossom.v5.ObjectiveSense;
 import org.jgrapht.alg.cycle.HierholzerEulerianCycle;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ChristofidesAlgorithm {
 
@@ -19,7 +19,7 @@ public class ChristofidesAlgorithm {
     public List<Node> calculateChristofides(Graph fullGraph) {
         MinSpanTree minSpanTree = calculateMinimumSpanningTree(fullGraph);
         List<Node> oddNodes = calculateOddNodes(minSpanTree);
-        MinSpanTree subGraph = calculateSubGraph(oddNodes,fullGraph);
+        MinSpanTree subGraph = calculateSubGraph(oddNodes, fullGraph);
         MinSpanTree minMatching = calculateMinimumMatch(subGraph);
         MinSpanTree unionGraph = union(minSpanTree, minMatching);
         List<Node> withRepeats = calculateEulerCycleWithRepeats(unionGraph);
@@ -31,7 +31,7 @@ public class ChristofidesAlgorithm {
         List<Edge> edges = new ArrayList<>();
         nodesReached.add(fullGraph.getNodes().get(0));
         while (nodesReached.size() != fullGraph.getNodes().size()) {
-            Edge minLength = new Edge(new Node(),new Node(),Double.MAX_VALUE);
+            Edge minLength = new Edge(new Node(), new Node(), Double.MAX_VALUE);
             for (Node node_i : nodesReached) {
                 for (Node node_j : fullGraph.getNodes()) {
                     if (fullGraph.getEdges()[node_i.getIdentifier()][node_j.getIdentifier()] < minLength.getCost() && !nodesReached.contains(node_j)) {
@@ -49,7 +49,7 @@ public class ChristofidesAlgorithm {
         List<Node> oddNodes = new ArrayList<>();
         for (Node node : minSpanTree.getNodes()) {
             int numOfEdges = 0;
-            for(int i = 0; i < minSpanTree.getEdges().size(); i++) {
+            for (int i = 0; i < minSpanTree.getEdges().size(); i++) {
                 if (minSpanTree.getEdges().get(i).getFrom() == node || minSpanTree.getEdges().get(i).getTo() == node)
                     numOfEdges++;
             }
@@ -75,13 +75,13 @@ public class ChristofidesAlgorithm {
                 oddEdges.add(new Edge(oddNode, node, fullGraph.getEdges()[oddNode.getIdentifier()][node.getIdentifier()]));
             }
         }
-        return new MinSpanTree(oddNodes,oddEdges);
+        return new MinSpanTree(oddNodes, oddEdges);
     }
 
     public MinSpanTree calculateMinimumMatch(MinSpanTree subGraph) {
         List<Edge> edges = new ArrayList<>();
         List<Node> nodes = new ArrayList<>();
-        KolmogorovGraph kolGraph = new KolmogorovGraph(subGraph.getNodes(),subGraph.getEdges());
+        KolmogorovGraph kolGraph = new KolmogorovGraph(subGraph.getNodes(), subGraph.getEdges());
         KolmogorovWeightedPerfectMatching<Node, Edge> minMatch = new KolmogorovWeightedPerfectMatching<Node, Edge>(kolGraph, ObjectiveSense.MINIMIZE);
         MatchingAlgorithm.Matching<Node, Edge> matching = minMatch.getMatching();
         for (Edge edge : matching.getEdges()) {
@@ -99,19 +99,19 @@ public class ChristofidesAlgorithm {
 
     public List<Node> calculateEulerCycleWithRepeats(MinSpanTree union) {
         List<Node> pathList = new ArrayList<>();
-        KolmogorovGraph kolGraph = new KolmogorovGraph(union.getNodes(),union.getEdges());
+        KolmogorovGraph kolGraph = new KolmogorovGraph(union.getNodes(), union.getEdges());
         HierholzerEulerianCycle<Node, Edge> eulerianCycle = new HierholzerEulerianCycle<Node, Edge>();
         GraphPath<Node, Edge> path = eulerianCycle.getEulerianCycle(kolGraph);
         for (Edge edge : path.getEdgeList()) {
-            if(pathList.isEmpty()) {
+            if (pathList.isEmpty()) {
                 pathList.add(path.getStartVertex());
-                if(pathList.get(0).equals(path.getEdgeList().get(0).getFrom()))
+                if (pathList.get(0).equals(path.getEdgeList().get(0).getFrom()))
                     pathList.add(edge.getTo());
                 else
                     pathList.add(edge.getFrom());
-            } else if(pathList.get(pathList.size()-1).equals(edge.getFrom()))
+            } else if (pathList.get(pathList.size() - 1).equals(edge.getFrom()))
                 pathList.add(edge.getTo());
-            else if(pathList.get(pathList.size()-1).equals(edge.getTo()))
+            else if (pathList.get(pathList.size() - 1).equals(edge.getTo()))
                 pathList.add(edge.getFrom());
         }
         return pathList;
@@ -119,8 +119,8 @@ public class ChristofidesAlgorithm {
 
     public List<Node> removeRepeatsFromCycle(List<Node> cycle) {
         List<Node> cleanedCycle = new ArrayList<>();
-        for(int i = 0; i < cycle.size(); i++) {
-            if(i != 0 && i != cycle.size()-1) {
+        for (int i = 0; i < cycle.size(); i++) {
+            if (i != 0 && i != cycle.size() - 1) {
                 if (!cleanedCycle.contains(cycle.get(i)))
                     cleanedCycle.add(cycle.get(i));
             } else {
@@ -129,4 +129,58 @@ public class ChristofidesAlgorithm {
         }
         return cleanedCycle;
     }
+
+    /*
+        public List<List<Node>> findAllPossibleCycles(List<Node> cycle) {
+            List<List<Node>> allCycles = new ArrayList<>();
+            List<Node> cleanedCycle = new ArrayList<>(); //cycle without repeats
+            for(int i = 0; i < cycle.size(); i++) {
+                if(i != 0 && i != cycle.size()-1) { //the first and last node have to be repeats by definition of hamiltonian cycle
+                    if (!cleanedCycle.contains(cycle.get(i))) {
+                        cleanedCycle.add(cycle.get(i));
+                    } else {
+                        List<Node> cleanedCycle2 = new ArrayList<>(cleanedCycle); //we want to make a new cycle in which the first repeat was removed instead of always the second.
+                        cleanedCycle2.remove(cycle.get(i)); //remove the repeat we had initially
+                        cleanedCycle2.add(cycle.get(i));
+                        cleanedCycle2.addAll(cycle.subList(i+1,cycle.size()));
+                        allCycles.addAll(findAllPossibleCycles(cleanedCycle2)); //we then need to recurse on this new cycle for all of the other repeats
+                    }
+                } else {
+                    cleanedCycle.add(cycle.get(i));
+                }
+            }
+            allCycles.add(cleanedCycle);
+            return allCycles;
+        }
+    */
+
+        public List<List<Node>> findAllPossibleCycles(List<Node> initialCycle) {
+            List<List<Node>> allCycles = new ArrayList<>();
+            List<List<Node>> cyclesStack = new ArrayList<>();
+            cyclesStack.add(initialCycle);
+            while (!cyclesStack.isEmpty() && allCycles.size() < GeneticAlgorithm.NUM_OF_INDIVIDUALS) {
+                List<Node> cycle = cyclesStack.get(cyclesStack.size()-1);
+                cyclesStack.remove(cycle);
+                List<Node> cleanedCycle = new ArrayList<>(); //cycle without repeats
+                for (int i = 0; i < cycle.size(); i++) {
+                    if (i != 0 && i != cycle.size() - 1) { //the first and last node have to be repeats by definition of hamiltonian cycle
+                        if (!cleanedCycle.contains(cycle.get(i))) {
+                            cleanedCycle.add(cycle.get(i));
+                        } else {
+                            List<Node> cleanedCycle2 = new ArrayList<>(cleanedCycle); //we want to make a new cycle in which the first repeat was removed instead of always the second.
+                            cleanedCycle2.remove(cycle.get(i)); //remove the repeat we had initially
+                            cleanedCycle2.add(cycle.get(i));
+                            cleanedCycle2.addAll(cycle.subList(i + 1, cycle.size()));
+                            cyclesStack.add(cleanedCycle2); //we then need to recurse on this new cycle for all of the other repeats
+                        }
+                    } else {
+                        cleanedCycle.add(cycle.get(i));
+                    }
+                }
+                if(!allCycles.contains(cleanedCycle))
+                    allCycles.add(cleanedCycle);
+            }
+            return allCycles;
+        }
+
 }
