@@ -12,6 +12,7 @@ import org.jgrapht.alg.matching.blossom.v5.ObjectiveSense;
 import org.jgrapht.alg.cycle.HierholzerEulerianCycle;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ChristofidesAlgorithm {
 
@@ -24,6 +25,16 @@ public class ChristofidesAlgorithm {
         MinSpanTree unionGraph = union(minSpanTree, minMatching);
         List<Node> withRepeats = calculateEulerCycleWithRepeats(unionGraph);
         return removeRepeatsFromCycle(withRepeats);
+    }
+
+    public List<List<Node>> calculateMultChristofides(Graph fullGraph) {
+        MinSpanTree minSpanTree = calculateMinimumSpanningTree(fullGraph);
+        List<Node> oddNodes = calculateOddNodes(minSpanTree);
+        MinSpanTree subGraph = calculateSubGraph(oddNodes, fullGraph);
+        MinSpanTree minMatching = calculateMinimumMatch(subGraph);
+        MinSpanTree unionGraph = union(minSpanTree, minMatching);
+        List<Node> withRepeats = calculateEulerCycleWithRepeats(unionGraph);
+        return findAllPossibleCycles(withRepeats);
     }
 
     public MinSpanTree calculateMinimumSpanningTree(Graph fullGraph) {
@@ -154,7 +165,7 @@ public class ChristofidesAlgorithm {
         }
     */
 
-        public List<List<Node>> findAllPossibleCycles(List<Node> initialCycle) {
+/*        public List<List<Node>> findAllPossibleCycles(List<Node> initialCycle) {
             List<List<Node>> allCycles = new ArrayList<>();
             List<List<Node>> cyclesStack = new ArrayList<>();
             cyclesStack.add(initialCycle);
@@ -181,6 +192,43 @@ public class ChristofidesAlgorithm {
                     allCycles.add(cleanedCycle);
             }
             return allCycles;
+        }*/
+
+    public List<List<Node>> findAllPossibleCycles(List<Node> initialCycle) {
+        final int FREQUENCY_LIMIT = initialCycle.size()/12;
+        List<List<Node>> allCycles = new ArrayList<>();
+        List<List<Node>> cyclesStack = new ArrayList<>();
+        int frequency = FREQUENCY_LIMIT; //the growth of cycles is incredibly large, only taking every nth one of this allows for a much shorter running time
+        cyclesStack.add(initialCycle);
+        List<Node> reverseCycle = new ArrayList<Node>(initialCycle);
+        Collections.reverse(reverseCycle);
+        cyclesStack.add(reverseCycle);
+        while (!cyclesStack.isEmpty() && allCycles.size() < 10) {
+            List<Node> cycle = cyclesStack.get(cyclesStack.size()-1);
+            cyclesStack.remove(cycle);
+            List<Node> cleanedCycle = new ArrayList<>(); //cycle without repeats
+            for (int i = 0; i < cycle.size(); i++) {
+                if (i != 0 && i != cycle.size() - 1) { //the first and last node have to be repeats by definition of hamiltonian cycle
+                    if (!cleanedCycle.contains(cycle.get(i))) {
+                        cleanedCycle.add(cycle.get(i));
+
+                    } else {
+                        if(frequency++ >= FREQUENCY_LIMIT) {
+                            List<Node> cleanedCycle2 = new ArrayList<>(cleanedCycle);
+                            Collections.reverse(cleanedCycle2.subList(cleanedCycle2.indexOf(cycle.get(i)) + 1, cleanedCycle2.size()));
+                            cleanedCycle2.addAll(cycle.subList(i + 1, cycle.size()));
+                            cyclesStack.add(cleanedCycle2);
+                            frequency = 0;
+                        }
+                    }
+                } else {
+                    cleanedCycle.add(cycle.get(i));
+                }
+            }
+            if(!allCycles.contains(cleanedCycle))
+                allCycles.add(cleanedCycle);
         }
+        return allCycles;
+    }
 
 }

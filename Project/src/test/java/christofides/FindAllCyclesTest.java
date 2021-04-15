@@ -13,7 +13,7 @@ public class FindAllCyclesTest {
     public static void main(String[] args) {
         Tsplibconverter test = new Tsplibconverter();
 
-        Graph testGraph = test.buildGraph("dataset/mu1979.tsp");
+        Graph testGraph = test.buildGraph("dataset/qa194.tsp");
         ChristofidesAlgorithm chrAlg = new ChristofidesAlgorithm();
         MinSpanTree minSpanTree = chrAlg.calculateMinimumSpanningTree(testGraph);
         List<Node> oddNodes = chrAlg.calculateOddNodes(minSpanTree);

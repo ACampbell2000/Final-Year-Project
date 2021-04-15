@@ -9,6 +9,6 @@ public class GeneticAlgorithmTrajectoryTest {
         Tsplibconverter test = new Tsplibconverter();
 
         Graph testGraph = test.buildGraph("dataset/qa194.tsp");
-        GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(testGraph,200);
+        GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(testGraph,400);
     }
 }

@@ -50,7 +50,7 @@ As such, in this thesis I will be investigating the usage of both the mathematic
 \subsection{Travelling Salesman Problem}
 As explained briefly earlier, the TSP problem is a simple concept, a route that travels to every city in a given set exactly once and then returns to the starting position. This can be done either as an optimisation problem or decision, though the differences between them theoretically remain minimal, in decision we ask if given a length L, there exists a tour through the cities which is less than L, and in optimisation we try to find the shortest possible route around the cities.
 
-TSP has been thoroughly worked on already, and as such plenty of data sets are available for TSP to be used on \cite{TSPRep1, TSPRep2}, some of which have yet to be solved for the true optimum, no matter how close some solutions are. However since the sites do contain the optimum solutions, or at very least the closest optimal solution, it makes evaluating our solution very easy since we can simply check the difference between our optimal solution for a given dataset and their optimal.
+TSP has been thoroughly worked on already, and as such plenty of data sets are available for TSP to be used on \cite{TSPRep1, TSPRep2}, some of which have yet to be solved for the true optimum, no matter how close some solutions are. However since the sites do contain the optimum solutions, or at very least the closest optimal solution, it makes evaluating our solution very easy since we can simply check the difference between our optimal solution for a given data set and their optimal.
 
 \subsection{Genetic Algorithms}
 Genetic algorithms take deep inspiration from natural selection and evolution in general. The very simplest description of a genetic algorithm is that given a starting population of predetermined size, calculate the fitness of each individual and choose the best of the population to 'reproduce' to create individuals that theoretically have the genes of both of these individuals, potentially giving it a higher fitness than its two parents. This child then has its fitness evaluated and if it is better than the worst individual in the population, it is added in place of it, this repeats for as many generations as we have chosen, and at the end of it we have a population of individuals who may have a better overall fitness than the initial population.
@@ -295,7 +295,7 @@ Greedy algorithms are a step above brute force algorithms, they have a much smal
 When the greedy algorithm travels down the line,it will continue to do so until it reaches an optima, be that local or global, it does not travel across the whole search space so it easily gets stuck in one of these 'dips' and will not reach the global optimum. In other words by taking the shortest route every time, we may miss a better route which is shorter overall but takes a longer path between some cities. This is much more of an issue for larger search spaces than smaller ones, but since we will be using larger search spaces, it makes this algorithm unsuitable for this experiment.
 
 \subsubsection{Held-Karp Algorithm}
-The Held-Karp algorithm is currently the best available for finding the optimum solution with a time complexity of $O(n^2 2^n)$, which whilst not great from a practical stand point, is leagues ahead of its brute force counterpart. This being said with its complexity still being quite high, it is unsuitable for very large datasets as it suffers greatly at these levels, especially so with its inefficient space complexity of $O(n*2^n)$ which is not useful for solving the very large TSP problems without a very high-tech machine on which to run the algorithm, otherwise memory issues can occur as early as 30 city problems \cite{HeldKarpAlg}.
+The Held-Karp algorithm is currently the best available for finding the optimum solution with a time complexity of $O(n^2 2^n)$, which whilst not great from a practical stand point, is leagues ahead of its brute force counterpart. This being said with its complexity still being quite high, it is unsuitable for very large data sets as it suffers greatly at these levels, especially so with its inefficient space complexity of $O(n*2^n)$ which is not useful for solving the very large TSP problems without a very high-tech machine on which to run the algorithm, otherwise memory issues can occur as early as 30 city problems \cite{HeldKarpAlg}.
 
 To try and explain the Held-Karp algorithm as simply as possible, it calculates suboptimal shortest paths that satisfy:
 
@@ -396,6 +396,34 @@ With this algorithm output we now have a solution to the TSP for our specific gr
 
 This point is either a positive or negative depending on which angle you look at it from. If you look at it from the view that, for a monumental time complexity decrease of $O(n!)$ to $O(n^3)$ you are guaranteed to only be 50\% worse, it looks at it in a positive light, though if you look at it in terms of it being 50\% worse compared to the optimum for very large sets of cities which can have incredibly high distances, it looks quite disadvantageous. I am of the viewpoint that this is a positive thing, as having a solution that is already very good in such a short amount of relative time gives a good basis point for other work to be done with it, exactly as I plan to do within this project.
 
+\section{Implementation}
+
+\subsection{Data Sets}
+
+For an investigative project such as this, it makes sense to use a variety of different data sets which will appropriately represent the different possible situations this algorithm could be used in, as such I have used three data sets of varying sizes to analyse my algorithm with. These data sets have all been taken from the same source \cite{TSPRep1} which also contain the optimum lengths of the tours for each data set available on the site, however there are no units for said distances yet this point is negligible for the purposes of this project. I have chosen three data sets of varying sizes to see how the algorithm will fair in each of them, these data sets are the cities of Qatar, Zimbabwe and Oman which have 194, 929 and 1979 cities respectively. Each of these data sets are encoded as qa194 (Qatar), zi929 (Zimbabwe) and mu1979 (Oman) and shall be referred to as such from now on for simplicities sake.
+\pagebreak
+
+The optimum lengths for the datasets are as follows:
+
+\begin{center}
+\begin{tabular}{c | c}
+Dataset & Optimum Length \\ [0.5ex]
+\hline
+	qa194 & 9352 \\
+	zi929 & 95345 \\
+	mu1979 & 86891
+\end{tabular}
+\end{center}
+
+Each of these data sets is stored in a file format known as tsplib which gives some basic details on the data set along with the points of said data set. An example is shown below from the qa194 data set.
+
+\begin{figure}[ht]
+	\includegraphics[scale=0.6]{tsplib_Example}
+	\centering
+	\caption{qa194 tsplib File}
+\end{figure}
+
+The important parts here are the "EDGE\_WEIGHT\_TYPE" and the "NODE\_COORD\_SECTION", the edge weight type shows the unit of measurement being used to show distances, and in this case it is euclidean distance for all three datasets, which therefore means it can be ignored by my code, otherwise different units of distance would have to be programmed in, which wouldn't be a large issue but is something to keep in mind. The "NODE\_COORD\_SECTION" is where the coordinates of each of the cities is described. On any given line the first number is the identifier of the city, or simply put "city 1, city 2 etc", and the following numbers are the x and y coordinates accordingly. This way given each of the points we are able to generate the graph of cities ourselves using the euclidean distance, and this is exactly the first part of my algorithm that needed to be completed.
 
 \begin{thebibliography}{1}
 

@@ -12,10 +12,10 @@ public class ChristofidesAndGeneticTrajectoryTest {
     public static void main(String[] args) {
         Tsplibconverter test = new Tsplibconverter();
 
-        Graph testGraph = test.buildGraph("dataset/qa194.tsp");
+        Graph testGraph = test.buildGraph("dataset/mu1979.tsp");
         ChristofidesAlgorithm chrAlg = new ChristofidesAlgorithm();
         Individual individual = new Individual(chrAlg.calculateChristofides(testGraph), testGraph);
-        GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(testGraph, individual,200);
+        GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(testGraph, individual,400);
 
     }
 }

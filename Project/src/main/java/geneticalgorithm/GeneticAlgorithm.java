@@ -13,8 +13,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class GeneticAlgorithm {
 
-    public static final int NUM_OF_INDIVIDUALS = 1000;
-    private static final int  MAX_GENERATIONS = 5000;
+    public static final int NUM_OF_CALCULATIONS = 5000000; //this is the number of individuals * the number of generations
+    public static final int NUM_OF_INDIVIDUALS = 200;
+    private static final int  MAX_GENERATIONS = NUM_OF_CALCULATIONS/NUM_OF_INDIVIDUALS;
     private static final double PARENT_PERCENTAGE = 0.2;
     private static final double MUTATION_CHANCE = 0.4;
     private static final double CROSSOVER_CHANCE = 0.9;
@@ -40,7 +41,7 @@ public class GeneticAlgorithm {
     }
 
     public GeneticAlgorithm(Graph graph, int trajectoryFrequency) {
-        try (PrintWriter writer = new PrintWriter(new File(graph.getName()+ "_Gen_Trajectory.csv"))) {
+        try (PrintWriter writer = new PrintWriter(new File(graph.getName()+ "_Gen_Trajectory_"+MAX_GENERATIONS+".csv"))) {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("Generation,Best Individual\n");
             this.graph = graph;
@@ -57,13 +58,43 @@ public class GeneticAlgorithm {
         }
     }
 
+    public GeneticAlgorithm(Graph graph, List<Individual> individuals) {
+        this.graph = graph;
+        generateIndividuals();
+        for (int i = 0; i < individuals.size(); i++)
+            individuals.set(i,individuals.get(i));
+        individuals.sort(Comparator.comparingDouble(Individual::getFitness)); //a lower fitness is better
+        for (int i = 0; i < MAX_GENERATIONS; i++)
+            generationLoop();
+    }
+
     public GeneticAlgorithm(Graph graph, Individual individual, int trajectoryFrequency) {
-        try (PrintWriter writer = new PrintWriter(new File(graph.getName()+ "_GenChr_Trajectory.csv"))) {
+        try (PrintWriter writer = new PrintWriter(new File(graph.getName()+ "_GenChr_Trajectory_"+MAX_GENERATIONS+".csv"))) {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("Generation,Best Individual\n");
             this.graph = graph;
             generateIndividuals();
             individuals.set(0, individual);
+            individuals.sort(Comparator.comparingDouble(Individual::getFitness)); //a lower fitness is better
+            for (int i = 0; i < MAX_GENERATIONS;) {
+                for(int j = 0; j < trajectoryFrequency; j++,i++)
+                    generationLoop();
+                stringBuilder.append(i).append(",").append(individuals.get(0).getFitness()).append("\n");
+            }
+            writer.write(stringBuilder.toString());
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public GeneticAlgorithm(Graph graph, List<Individual> individuals, int trajectoryFrequency) {
+        try (PrintWriter writer = new PrintWriter(new File(graph.getName()+ "_GenChr_Trajectory.csv"))) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("Generation,Best Individual\n");
+            this.graph = graph;
+            generateIndividuals();
+            for (int i = 0; i < individuals.size(); i++)
+                individuals.set(i, individuals.get(i));
             individuals.sort(Comparator.comparingDouble(Individual::getFitness)); //a lower fitness is better
             for (int i = 0; i < MAX_GENERATIONS;) {
                 for(int j = 0; j < trajectoryFrequency; j++,i++)
