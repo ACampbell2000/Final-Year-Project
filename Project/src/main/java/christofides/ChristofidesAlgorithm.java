@@ -141,11 +141,13 @@ public class ChristofidesAlgorithm {
         return cleanedCycle;
     }
 
-    public List<List<Node>> findAllPossibleCycles(List<Node> initialCycle) { //from any given repeat we can create 4 different tours, this subroutine can calculate all of them given enough time
+    public List<List<Node>> findAllPossibleCycles(List<Node> initialCycle) { 
+        //from any given repeat we can create 4 different tours, this subroutine can calculate all of them given enough time
         final int FREQUENCY_LIMIT = initialCycle.size()/12;
         List<List<Node>> allCycles = new ArrayList<>();
         List<List<Node>> cyclesStack = new ArrayList<>();
-        int frequency = FREQUENCY_LIMIT; //the growth of cycles is incredibly large, only taking every nth one of this allows for a much shorter running time
+        int frequency = FREQUENCY_LIMIT; //the growth of cycles is incredibly large, only taking every nth one of this 
+                                         //allows for a much shorter running time
         cyclesStack.add(initialCycle);
         List<Node> reverseCycle = new ArrayList<Node>(initialCycle);
         Collections.reverse(reverseCycle);
