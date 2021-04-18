@@ -23,7 +23,7 @@ public class GeneticAlgorithm {
     private List<Individual> individuals = new ArrayList<Individual>();
     private Graph graph;
 
-    public GeneticAlgorithm(Graph graph) {
+    public GeneticAlgorithm(Graph graph) { //creates a basic genetic algorithm
         this.graph = graph;
         generateIndividuals();
         individuals.sort(Comparator.comparingDouble(Individual::getFitness)); //a lower fitness is better
@@ -31,7 +31,7 @@ public class GeneticAlgorithm {
             generationLoop();
     }
 
-    public GeneticAlgorithm(Graph graph, Individual individual) {
+    public GeneticAlgorithm(Graph graph, Individual individual) { //creates a genetic algorithm with a singular individual added
         this.graph = graph;
         generateIndividuals();
         individuals.set(0,individual);
@@ -40,7 +40,8 @@ public class GeneticAlgorithm {
             generationLoop();
     }
 
-    public GeneticAlgorithm(Graph graph, int trajectoryFrequency) {
+    public GeneticAlgorithm(Graph graph, int trajectoryFrequency) { //a genetic algorithm which outputs the best individual every n generations
+        //used to check how the evolution of the algorithm is going, if its gets stuck etc.
         try (PrintWriter writer = new PrintWriter(new File(graph.getName()+ "_Gen_Trajectory_"+MAX_GENERATIONS+".csv"))) {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("Generation,Best Individual\n");
@@ -58,7 +59,7 @@ public class GeneticAlgorithm {
         }
     }
 
-    public GeneticAlgorithm(Graph graph, List<Individual> individuals) {
+    public GeneticAlgorithm(Graph graph, List<Individual> individuals) { //genetic algorithm adding multiple individuals
         this.graph = graph;
         generateIndividuals();
         for (int i = 0; i < individuals.size(); i++)
@@ -68,7 +69,7 @@ public class GeneticAlgorithm {
             generationLoop();
     }
 
-    public GeneticAlgorithm(Graph graph, Individual individual, int trajectoryFrequency) {
+    public GeneticAlgorithm(Graph graph, Individual individual, int trajectoryFrequency) { //genetic algorithm with trajectory and added individual
         try (PrintWriter writer = new PrintWriter(new File(graph.getName()+ "_GenChr_Trajectory_"+MAX_GENERATIONS+".csv"))) {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("Generation,Best Individual\n");
@@ -87,7 +88,7 @@ public class GeneticAlgorithm {
         }
     }
 
-    public GeneticAlgorithm(Graph graph, List<Individual> individuals, int trajectoryFrequency) {
+    public GeneticAlgorithm(Graph graph, List<Individual> individuals, int trajectoryFrequency) { //genetic algorithm with trajectory and multiple individuals
         try (PrintWriter writer = new PrintWriter(new File(graph.getName()+ "_GenChr_Trajectory.csv"))) {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("Generation,Best Individual\n");
@@ -107,7 +108,7 @@ public class GeneticAlgorithm {
         }
     }
 
-    private void generateIndividuals() {
+    private void generateIndividuals() { //generate random individuals
         for (int i = 0; i < NUM_OF_INDIVIDUALS; i++) {
             List<Node> cities = new ArrayList<>(graph.getNodes());
             List<Node> randTour = new ArrayList<Node>();
@@ -194,12 +195,12 @@ public class GeneticAlgorithm {
         }
     }
 
-    public Individual RSM_Mutation(Individual individual) {
+    public Individual RSM_Mutation(Individual individual) { //reverses a random subtour within the tour
         if(MUTATION_CHANCE >= ThreadLocalRandom.current().nextDouble()) {
             List<Node> tour = new ArrayList<>(individual.getTour());
             int startMutation = ThreadLocalRandom.current().nextInt(tour.size());
             int endMutation = ThreadLocalRandom.current().nextInt(tour.size());
-            if (startMutation == endMutation)
+            while (startMutation == endMutation)
                 endMutation = ThreadLocalRandom.current().nextInt(tour.size());
 
             if (startMutation > endMutation) {
