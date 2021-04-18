@@ -14,7 +14,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class GeneticAlgorithm {
 
     public static final int NUM_OF_CALCULATIONS = 5000000; //this is the number of individuals * the number of generations
-    public static final int NUM_OF_INDIVIDUALS = 200;
+    public static final int NUM_OF_INDIVIDUALS = 1000;
     private static final int  MAX_GENERATIONS = NUM_OF_CALCULATIONS/NUM_OF_INDIVIDUALS;
     private static final double PARENT_PERCENTAGE = 0.2;
     private static final double MUTATION_CHANCE = 0.4;
