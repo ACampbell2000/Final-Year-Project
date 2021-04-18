@@ -89,7 +89,7 @@ public class GeneticAlgorithm {
     }
 
     public GeneticAlgorithm(Graph graph, List<Individual> individuals, int trajectoryFrequency) { //genetic algorithm with trajectory and multiple individuals
-        try (PrintWriter writer = new PrintWriter(new File(graph.getName()+ "_GenChr_Trajectory.csv"))) {
+        try (PrintWriter writer = new PrintWriter(new File(graph.getName()+ "_MultGenChr_Trajectory_"+MAX_GENERATIONS+".csv"))) {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("Generation,Best Individual\n");
             this.graph = graph;
@@ -125,16 +125,19 @@ public class GeneticAlgorithm {
     private void generationLoop() {
         List<Individual> parents = new ArrayList<>(individuals.subList(0,(int)(NUM_OF_INDIVIDUALS*PARENT_PERCENTAGE)));
         List<Individual> children = new ArrayList<>();
-        for(int i = 0; i<(individuals.size()-parents.size())/2; i++) {
-            List<Individual> temp = orderCrossover(individuals.get(ThreadLocalRandom.current().nextInt(parents.size())),individuals.get(ThreadLocalRandom.current().nextInt(parents.size())));
-            for(int j=0; j<temp.size();j++) {
+        for(int i = 0; i<(individuals.size()-parents.size())/2; i++) { //loops through all of the non-parent invidivuals so that they are replaced
+            //uses two random individuals from parents for crossover
+            List<Individual> temp = orderCrossover(individuals.get(ThreadLocalRandom.current().nextInt(parents.size())),
+                    individuals.get(ThreadLocalRandom.current().nextInt(parents.size())));
+            for(int j=0; j<temp.size();j++) { //each child has the mutation operator applied by random chance
                 temp.set(j,RSM_Mutation(temp.get(j)));
             }
             children.addAll(temp);
         }
         children.sort(Comparator.comparingDouble(Individual::getFitness));
 
-        for(int i = individuals.size()-1; i>=0; i--) {
+        for(int i = individuals.size()-1; i>=0; i--) {//goes through and ensures individuals are only replaced in the
+                                                      // population if they are worse than the generated children
             boolean added = false;
             while (!children.isEmpty() && !added) {
                 if (individuals.get(i).getFitness() > children.get(children.size() - 1).getFitness()) {
@@ -149,6 +152,7 @@ public class GeneticAlgorithm {
 
     public List<Individual> orderCrossover(Individual parent1, Individual parent2) {
         if(CROSSOVER_CHANCE >= ThreadLocalRandom.current().nextDouble()) {
+            //the indexes are chosen to not be the first or last city in any given tour
             int startCrossover = ThreadLocalRandom.current().nextInt(1, parent1.getTour().size() - 1);
             int endCrossover = ThreadLocalRandom.current().nextInt(1, parent1.getTour().size() - 1) + 1;
             while (endCrossover == startCrossover)
@@ -160,19 +164,20 @@ public class GeneticAlgorithm {
                 endCrossover = temp;
             }
 
-            List<Node> parent1SubTour = new ArrayList<>(parent1.getTour().subList(startCrossover, endCrossover)); //getting the inclusive subtour randomly chosen
+            //getting the inclusive subtour (randomly chosen)
+            List<Node> parent1SubTour = new ArrayList<>(parent1.getTour().subList(startCrossover, endCrossover));
             List<Node> parent2SubTour = new ArrayList<>(parent2.getTour().subList(startCrossover, endCrossover));
 
-
-            List<Node> parent1TransposedTour = new ArrayList<>(parent1.getTour().subList(endCrossover, parent1.getTour().size())); //getting the looped back tour
+            //getting the looped back tour for each parent
+            List<Node> parent1TransposedTour = new ArrayList<>(parent1.getTour().subList(endCrossover, parent1.getTour().size()));
             parent1TransposedTour.addAll(parent1.getTour().subList(0, endCrossover));
             parent1TransposedTour.removeAll(parent2SubTour);
-
 
             List<Node> parent2TransposedTour = new ArrayList<>(parent2.getTour().subList(endCrossover, parent2.getTour().size()));
             parent2TransposedTour.addAll(parent2.getTour().subList(0, endCrossover));
             parent2TransposedTour.removeAll(parent1SubTour);
 
+            //creating the new children from these transposed tours
             List<Node> child1 = new ArrayList<>(parent2TransposedTour.subList(parent2.getTour().size() - endCrossover, parent2TransposedTour.size()));
             child1.addAll(parent2TransposedTour.subList(0, parent2.getTour().size() - endCrossover));
             child1.addAll(startCrossover, parent1SubTour);
@@ -198,9 +203,9 @@ public class GeneticAlgorithm {
     public Individual RSM_Mutation(Individual individual) { //reverses a random subtour within the tour
         if(MUTATION_CHANCE >= ThreadLocalRandom.current().nextDouble()) {
             List<Node> tour = new ArrayList<>(individual.getTour());
-            int startMutation = ThreadLocalRandom.current().nextInt(tour.size());
+            int startMutation = ThreadLocalRandom.current().nextInt(tour.size()); //random positions in tour chosen
             int endMutation = ThreadLocalRandom.current().nextInt(tour.size());
-            while (startMutation == endMutation)
+            while (startMutation == endMutation) //ensures positions are not the same
                 endMutation = ThreadLocalRandom.current().nextInt(tour.size());
 
             if (startMutation > endMutation) {
@@ -209,7 +214,8 @@ public class GeneticAlgorithm {
                 endMutation = temp;
             }
 
-            while (!(startMutation >= endMutation)) {
+            while (!(startMutation >= endMutation)) { //works from the outside in, swapping elements on each index as we
+                                                      //go until the indexes meet
                 Node temp = tour.get(startMutation);
                 tour.set(startMutation, tour.get(endMutation));
                 tour.set(endMutation, temp);
