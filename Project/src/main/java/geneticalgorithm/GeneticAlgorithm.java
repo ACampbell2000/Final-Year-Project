@@ -14,8 +14,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class GeneticAlgorithm {
 
     public static final int NUM_OF_CALCULATIONS = 5000000; //this is the number of individuals * the number of generations
-    public static final int NUM_OF_INDIVIDUALS = 1000;
-    private static final int  MAX_GENERATIONS = NUM_OF_CALCULATIONS/NUM_OF_INDIVIDUALS;
+    public static final int POPULATION_SIZE = 1000;
+    private static final int  MAX_GENERATIONS = NUM_OF_CALCULATIONS/ POPULATION_SIZE;
     private static final double PARENT_PERCENTAGE = 0.2;
     private static final double MUTATION_CHANCE = 0.4;
     private static final double CROSSOVER_CHANCE = 0.9;
@@ -109,7 +109,7 @@ public class GeneticAlgorithm {
     }
 
     private void generateIndividuals() { //generate random individuals
-        for (int i = 0; i < NUM_OF_INDIVIDUALS; i++) {
+        for (int i = 0; i < POPULATION_SIZE; i++) {
             List<Node> cities = new ArrayList<>(graph.getNodes());
             List<Node> randTour = new ArrayList<Node>();
             while(!cities.isEmpty()) {
@@ -123,7 +123,7 @@ public class GeneticAlgorithm {
     }
 
     private void generationLoop() {
-        List<Individual> parents = new ArrayList<>(individuals.subList(0,(int)(NUM_OF_INDIVIDUALS*PARENT_PERCENTAGE)));
+        List<Individual> parents = new ArrayList<>(individuals.subList(0,(int)(POPULATION_SIZE *PARENT_PERCENTAGE)));
         List<Individual> children = new ArrayList<>();
         for(int i = 0; i<(individuals.size()-parents.size())/2; i++) { //loops through all of the non-parent invidivuals so that they are replaced
             //uses two random individuals from parents for crossover

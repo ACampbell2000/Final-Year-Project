@@ -18,4 +18,8 @@
 \BOOKMARK [3][-]{subsubsection.3.2.4}{Christofides Algorithm}{subsection.3.2}% 18
 \BOOKMARK [1][-]{section.4}{Implementation}{}% 19
 \BOOKMARK [2][-]{subsection.4.1}{Data Sets}{section.4}% 20
-\BOOKMARK [1][-]{section*.3}{References}{}% 21
+\BOOKMARK [2][-]{subsection.4.2}{Data Structures}{section.4}% 21
+\BOOKMARK [2][-]{subsection.4.3}{Parameters}{section.4}% 22
+\BOOKMARK [3][-]{subsubsection.4.3.1}{Generations and Population}{subsection.4.3}% 23
+\BOOKMARK [3][-]{subsubsection.4.3.2}{Mutation and Crossover}{subsection.4.3}% 24
+\BOOKMARK [1][-]{section*.3}{References}{}% 25

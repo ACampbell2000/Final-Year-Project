@@ -202,27 +202,27 @@ And therefore we get two output children to test the fitness with and add to the
 Another crossover operator is the order crossover proposed by Davis \cite{GACrossover}, and it builds offspring by choosing a subtour from the parents and preserving the relative order of cities in the other parent. As an example:
 
 \begin{center}\Large
-Solution 1: (348$|$271$|$65)\\
-Solution 2: (425$|$168$|$37)
+Solution 1: (147$|$258$|$36)\\
+Solution 2: (482$|$653$|$71)
 \end{center}
 
 The offspring are created first by the subtour of their respective parents:
 
 \begin{center}\Large
-Child 1: (XXX$|$271$|$XX)\\
-Child 2: (XXX$|$168$|$XX)
+Child 1: (XXX$|$258$|$XX)\\
+Child 2: (XXX$|$653$|$XX)
 \end{center}
 
-Then from the opposite parent of each solution, we take the list of cities starting from the second cut point, and removing any already present in the 1st child, e.g. in this case we take the tour 3,7,4,2,5,1,6,8 then remove 2,7 and 1 to give 3,4,5,6,8 which is then placed in the 1st child starting from the 2nd cut point to give:
+Then from the opposite parent of each solution, we take the list of cities starting from the second cut point, and removing any already present in the 1st child, e.g. in this case we take the tour 7,1,4,8,2,6,5,3 then remove 2,5 and 8 to give 7,1,4,6,3 which is then placed in the 1st child starting from the 2nd cut point to give:
 
 \begin{center}\Large
-Child 1: (568$|$271$|$34)
+Child 1: (463$|$271$|$71)
 \end{center}
 
 And child 2 is made in the same way:
 
 \begin{center}\Large
-Child 2: (427$|$168$|$53)
+Child 2: (728$|$653$|$14)
 \end{center}
 
 \subsubsection{Cycle Crossover}
@@ -424,6 +424,38 @@ Each of these data sets is stored in a file format known as tsplib which gives s
 \end{figure}
 
 The important parts here are the "EDGE\_WEIGHT\_TYPE" and the "NODE\_COORD\_SECTION", the edge weight type shows the unit of measurement being used to show distances, and in this case it is euclidean distance for all three datasets, which therefore means it can be ignored by my code, otherwise different units of distance would have to be programmed in, which wouldn't be a large issue but is something to keep in mind. The "NODE\_COORD\_SECTION" is where the coordinates of each of the cities is described. On any given line the first number is the identifier of the city, or simply put "city 1, city 2 etc", and the following numbers are the x and y coordinates accordingly. This way given each of the points we are able to generate the graph of cities ourselves using the euclidean distance, and this is exactly the first part of my algorithm that needed to be completed.
+
+\subsection{Data Structures}
+
+The travelling salesman problem involves dealing with multiple graphs of cities and the roads connecting them, as well as keeping track of multiple individuals which each represent a given tour around said graph. As such it made perfect sense to use some specific data structures for these to allow the usage of them to be as intuitive as possible. The graph itself was stored as a list of nodes, a 2D array of the edges and a string representing its name. This is nothing particularly outlandish but allows for the graph to be accessed easily enough. The edges were best stored as a 2D array since each pair of cities had an edge between them, as such the entirety of the array would be filled (bar the diagonals, which would represent the edge of a given city to itself). It would be possible to calculate the distance between each city as needed instead of storing them all at the beginning, however this would be less efficient in my opinion due to the number of times a given edge would have to be calculated, whereas storing them outright would sacrifice some space in order to reduce execution time. The nodes were simply small data structures which contained the x and y coordinates of each city along with its identifier (number in this case), exactly as shown in the screenshot above.
+
+The other major data structure would be the "Individual" class, which is what a given solution to the travelling salesman problem would be stored as. The individual contains a list of the nodes in the order of which they would be visited, along with the 'fitness' of the individual (aka the length of the tour) which is calculated upon an instance of an individual being created. The data structure does not store the edges of the individual as these can be found out very quickly from the tour itself, simply searching the 2D array with the indexes being two consecutive nodes in the tour, this was to prevent any more space being used than necessary.
+
+\subsection{Parameters}
+
+Genetic algorithms come with a fair few parameters to tweak with, all of which can make quite the significant difference upon the results obtained. In my case said parameters were: "NUM\_OF\_CALCULATIONS", "POPULATION\_SIZE", "PARENT\_PERCENTAGE", "MUTATION\_CHANCE" and "CROSSOVER\_CHANCE". Going through them individually, "NUM \_OF\_CALCULATIONS" is simply the value of the number of generations * the number of individuals, this was to keep the overall amount of 'calculations' done in a single genetic algorithm about the same, and allowed me to adjust the number of individuals and generations accordingly without changing this overall value. "POPULATION\_SIZE" is simply the number of individuals in the population. "PARENT\_PERCENTAGE" is used to calculate how many parents will be in the population, as an example with a population size of 1000, parents, we would take 0.2 of this (20\%) to get 200 parents. "MUTATION\_CHANCE" represents the chance that a given individual will undergo mutation and similarly "CROSSOVER\_CHANCE" is the chance that a pair of individuals will have the crossover operator applied to them.
+
+\subsubsection{Generations and Population}
+In regards to optimising these parameters, the main example will be with the population size and the max number of generations (which is calculated by the number of calculations / population size).
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c | c | c}
+Dataset & Population: 200 Generations: 25000  & Population: 1000 Generations: 5000 & Population: 2000 Generations: 2500 \\ [0.5ex]
+\hline
+	qa194 & 10540.6556793449 & 10543.3664673219 & 10109.16049177478 \\
+	zi929 & 138258.542848618 & 124442.958821215 & 222572.64170034693 \\
+	mu1979 & 634606.350605636 & 351729.696875395 & 2703446.74385851
+
+\end{tabular}
+\caption{The results in the table are for the pure genetic algorithm, not the hybrid algorithm}
+\end{table}
+
+Before discussing the results above, it is important to note that usually for genetic algorithms, smaller population sizes with larger generation numbers usually do better than larger population sizes. With that being said we can see here that the datasets actually react in the opposite way, the qa194 data set gives incredibly similar results for both, so they can be disregarded in this instance, however for the zi929 and mu1979 datasets we can see that the smaller population does worse on both accounts, and extremely so in the case of the mu1979 data set where is it around 300000 worse. For a population size of 2000 it was once again very similar for the qa194 data set, but interestingly for the zi929 data set it was significantly worse than both whilst the mu1979 was a significant amount better instead. However since a larger population leads to a larger number of parents, it means the execution time of the program is significantly greater, and as such for this reason I have decided to stick with the 1000 population size as to balance out the results for all 3 datasets as well as decrease the running time of the program.
+
+\subsubsection{Mutation and Crossover}
+
+The other important parameters are the mutation and crossover chance, the mutation operator is applied after the crossover and applies to the children when they are generated, the crossover chance is basically the chance of two of the parents 'mating' to create two new children, if the crossover chance is not met then the two parents are simply carried forward as the children, essentially copying them.
 
 \begin{thebibliography}{1}
 

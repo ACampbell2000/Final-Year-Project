@@ -12,11 +12,12 @@ public class ChristofidesAndGeneticTest {
     public static void main(String[] args) {
         Tsplibconverter test = new Tsplibconverter();
 
-        Graph testGraph = test.buildGraph("dataset/qa194.tsp");
+        Graph testGraph = test.buildGraph("dataset/zi929.tsp");
         long startTime = System.nanoTime();
         ChristofidesAlgorithm chrAlg = new ChristofidesAlgorithm();
         Individual individual = new Individual(chrAlg.calculateChristofides(testGraph), testGraph);
         System.out.println(individual.toString());
+        System.out.println("------------------------------------------------------------");
         GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(testGraph, individual);
         System.out.println(geneticAlgorithm.getBest().toString());
         long endTime = System.nanoTime();
