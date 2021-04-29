@@ -6,6 +6,8 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage[ruled,vlined, linesnumbered]{algorithm2e}
+\usepackage{makecell}
+\usepackage{xcolor}
 \graphicspath{{./images/}}
 
 \setcounter{tocdepth}{4}
@@ -440,22 +442,96 @@ In regards to optimising these parameters, the main example will be with the pop
 
 \begin{table}[h]
 \centering
-\begin{tabular}{c | c | c}
-Dataset & Population: 200 Generations: 25000  & Population: 1000 Generations: 5000 & Population: 2000 Generations: 2500 \\ [0.5ex]
-\hline
+\begin{tabular}{c | c | c | c}
+\makecell{Dataset} & \makecell{Population: 200 \\ Generations: 25000} & \makecell{Population: 1000 \\ Generations: 5000} & \makecell{Population: 2000 \\ Generations: 2500} \\ [0.5ex]
+\Xhline{1.5pt}
 	qa194 & 10540.6556793449 & 10543.3664673219 & 10109.16049177478 \\
+\hline
 	zi929 & 138258.542848618 & 124442.958821215 & 222572.64170034693 \\
+\hline
 	mu1979 & 634606.350605636 & 351729.696875395 & 2703446.74385851
 
 \end{tabular}
 \caption{The results in the table are for the pure genetic algorithm, not the hybrid algorithm}
 \end{table}
 
-Before discussing the results above, it is important to note that usually for genetic algorithms, smaller population sizes with larger generation numbers usually do better than larger population sizes. With that being said we can see here that the datasets actually react in the opposite way, the qa194 data set gives incredibly similar results for both, so they can be disregarded in this instance, however for the zi929 and mu1979 datasets we can see that the smaller population does worse on both accounts, and extremely so in the case of the mu1979 data set where is it around 300000 worse. For a population size of 2000 it was once again very similar for the qa194 data set, but interestingly for the zi929 data set it was significantly worse than both whilst the mu1979 was a significant amount better instead. However since a larger population leads to a larger number of parents, it means the execution time of the program is significantly greater, and as such for this reason I have decided to stick with the 1000 population size as to balance out the results for all 3 datasets as well as decrease the running time of the program.
+Before discussing the results above, it is important to note that usually for genetic algorithms, smaller population sizes with larger generation numbers usually do better than larger population sizes. With that being said we can see here that the datasets actually react in the opposite way, the qa194 data set gives incredibly similar results for both, so they can be disregarded in this instance, however for the zi929 and mu1979 datasets we can see that the smaller population does worse on both accounts, and extremely so in the case of the mu1979 data set where is it around 300,000 worse. For a population size of 2000 it was once again very similar for the qa194 data set, but interestingly for the zi929 data set it was significantly worse than both whilst the mu1979 was a significant amount better instead. However since a larger population leads to a larger number of parents, it means the execution time of the program is significantly greater, and as such for this reason I have decided to stick with the 1000 population size as to balance out the results for all 3 datasets as well as decrease the running time of the program.
 
 \subsubsection{Mutation and Crossover}
 
 The other important parameters are the mutation and crossover chance, the mutation operator is applied after the crossover and applies to the children when they are generated, the crossover chance is basically the chance of two of the parents 'mating' to create two new children, if the crossover chance is not met then the two parents are simply carried forward as the children, essentially copying them.
+
+Before going into the values used, I will mention that the RSM (Reverse Sequence Mutation) operator was used for mutation where a sub-tour within the overall tour is reversed, the reasoning behind this is quite simply that from past research papers the results have shown that this mutation operator performs better than the alternative \cite{GAMutations} which is where we swap two cities in the tour around, and example of both is shown below for convenience.
+
+TWOR Mutation (swapping two cities):
+\begin{center}\Large
+[1\textcolor{red}{2}34\textcolor{red}{5}6] mutates to [1\textcolor{red}{5}34\textcolor{red}{2}6]
+\end{center}
+
+RSM Mutation (reversing a sequence):
+
+\begin{center}\Large
+[1\textcolor{green}{2345}6] mutates to [1\textcolor{green}{5432}6]
+\end{center}
+
+In regards to the crossover operator it is true in much the same way, with order crossover having the best results within past research \cite{GACrossoverPerformance} and as such it was clearly the most logical choice to choose this crossover operator for the genetic algorithm. 
+
+In regards to optimising them I used the same method as used for the population and generation sizes, as shown in the table below:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c | c | c | c}
+Dataset & Mutation: 0.1 & Mutation: 0.4 & Mutation: 0.9 \\ [0.5ex]
+\Xhline{1.5pt}
+	qa194 & 10220.556448011208 & 10042.534388187263 & 10307.448956457112 \\
+\hline
+	zi929 & 180637.17314356696 & 154080.72513430865 & 289831.6821760032 \\
+\hline
+	mu1979 & 1273721.9043312161 & 1461183.9174761462 & 2738641.7549757827
+
+\end{tabular}
+\caption{Once again the results in the table are for the pure genetic algorithm, not the hybrid algorithm}
+\end{table}
+
+Here we can see that a mutation of 0.9 is significantly worse on the larger datasets than the other two mutation values, and this is to be expected since mutation rates are never supposed to be as high as this, we can also see that the differences between 0.1 and 0.4 aren't as large as expected, however between the two a mutation of 0.4 does better and even if it does worse on the largest data set, there is a significant amount of variation within the genetic algorithm, so the difference may be due to that. As such I shall choose a mutation of 0.4 for the results of the hybrid.
+
+And then below we see the same for optimisation of the crossover chances. In general the chance for crossover should be quite high whilst the mutation percentages tend to be a lot lower and we can see that these chances definitely reflect this general trend.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c | c | c | c}
+Dataset & Crossover: 0.1 & Crossover: 0.4 & Crossover: 0.9 \\ [0.5ex]
+\Xhline{1.5pt}
+	qa194 & 10536.952603005655 & 10152.56527247845 & 10412.855764138969 \\
+\hline
+	zi929 & 193926.6438033023 & 161403.49362711725 & 153977.29243174416 \\
+\hline
+	mu1979 & 2539262.528786441 & 1874666.6607498457 & 1451559.7225074822
+
+\end{tabular}
+\caption{Results in the table are for the pure genetic algorithm, not the hybrid algorithm}
+\end{table}
+
+For the above data we can see that a crossover of 0.1 does significantly worse on the largest data set and does moderately worse for the medium sized one, the smallest data set once again doesn't really tell us much in all three cases since the variation is always incredibly minor, yet the other two show that a crossover of 0.9 has the best results in both cases compared to a crossover of 0.4, this matches what is expected since in general a higher chance of crossover is usually better. As such can see the best values for mutation and crossover are 0.4 and 0.9 respectively and therefore these are the values I used for my hybrid algorithm.
+
+\subsection{Christofides Algorithm}
+The implementation of Christofides algorithm was thankfully quite straight forward, the Individual steps within the algorithm were fairly easy to program except for a couple.
+
+\subsubsection{Find the minimum spanning tree}
+This was far from a difficult task, and is a very basic and common function that is used on a significant number of graphs. The only decision that had to be made with this function was whether to use Prim's or Kruskal's algorithm for finding the minimum spanning tree. From previous research \cite{PvKTime} it was clear that Prim's was the better of the two to implement so I did exactly that.
+
+\subsubsection{Find a minimum weight perfect matching}
+This would have been a difficult algorithm to implement, and even more so to do in an efficient manner, as such for this stage and one other I used a library that is freely available \cite{KolMinMatch} which contains a function to calculate this exactly, the only awkward part of this was manipulating my graph data structure into a form that the algorithm would accept and be able to use properly, however this was more time consuming than actually difficult to accomplish.
+
+\subsubsection{Calculate the union of the minimum spanning tree and minimum weight perfect matching}
+Very self explanatory, simply adding all of the edges from the minimum weight perfect matching to the list of edges in the minimum spanning tree was enough to complete this step in an efficient manner.
+
+\subsubsection{Find a euler tour of the union graph}
+In the same manner as the minimum weight perfect matching, calculating a euler tour for the union graph would have been difficult to implement quickly and efficiently, and implementing this isnt the main part of this project, and as such another library was used \cite{HeirEulTour} to calculate the tour. The calculated tour then needed to be converted back into my own data structure which was not a complicated process at all, it simply required converting the edges into a list of cities instead.
+
+\subsubsection{Remove repeated vertices}
+This step is incredibly easy to do if you decide to do it easily, simply go through the list checking each city and seeing if it appears again further down the line, then you just remove any that were found afterwards and you have your completed tour of the cities, however part of my project was to test to see if multiple individuals being added to the population would lead to a better or worse result, and it is this stage here in which the crux of that investigation begins, and that shall be discussed in more detail later.
+
 
 \begin{thebibliography}{1}
 
@@ -512,6 +588,12 @@ TSPLIB (no date). Available at: http://comopt.ifi.uni-heidelberg.de/software/TSP
 
 \bibitem{DiffAlgs}
 Baidoo, E. and O., S. (2016) ‘Solving the TSP using Traditional Computing Approach’, International Journal of Computer Applications, 152(8), pp. 13–19. doi: 10.5120/ijca2016911906. Available at: \url{https://www.researchgate.net/profile/Evans_Baidoo2/publication/309224559_Solving_the_TSP_using_Traditional_Computing_Approach/links/58066b6408ae5ad188166189.pdf} (Accessed: 12 November 2020)
+
+\bibitem{KolMinMatch}
+org.jgrapht.alg.matching.blossom.v5 (JGraphT : a free Java graph library) (no date). Available at: https://jgrapht.org/javadoc-1.3.0/org/jgrapht/alg/matching/blossom/v5/package-summary.html (Accessed: 29 April 2021).
+
+\bibitem{HeirEulTour}
+HierholzerEulerianCycle (JGraphT : a free Java graph library) (no date). Available at: https://jgrapht.org/javadoc/org.jgrapht.core/org/jgrapht/alg/cycle/HierholzerEulerianCycle.html (Accessed: 29 April 2021).
 
 
 

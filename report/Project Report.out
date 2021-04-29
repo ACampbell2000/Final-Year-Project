@@ -22,4 +22,10 @@
 \BOOKMARK [2][-]{subsection.4.3}{Parameters}{section.4}% 22
 \BOOKMARK [3][-]{subsubsection.4.3.1}{Generations and Population}{subsection.4.3}% 23
 \BOOKMARK [3][-]{subsubsection.4.3.2}{Mutation and Crossover}{subsection.4.3}% 24
-\BOOKMARK [1][-]{section*.3}{References}{}% 25
+\BOOKMARK [2][-]{subsection.4.4}{Christofides Algorithm}{section.4}% 25
+\BOOKMARK [3][-]{subsubsection.4.4.1}{Find the minimum spanning tree}{subsection.4.4}% 26
+\BOOKMARK [3][-]{subsubsection.4.4.2}{Find a minimum weight perfect matching}{subsection.4.4}% 27
+\BOOKMARK [3][-]{subsubsection.4.4.3}{Calculate the union of the minimum spanning tree and minimum weight perfect matching}{subsection.4.4}% 28
+\BOOKMARK [3][-]{subsubsection.4.4.4}{Find a euler tour of the union graph}{subsection.4.4}% 29
+\BOOKMARK [3][-]{subsubsection.4.4.5}{Remove repeated vertices}{subsection.4.4}% 30
+\BOOKMARK [1][-]{section*.3}{References}{}% 31
