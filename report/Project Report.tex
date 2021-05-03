@@ -1,13 +1,13 @@
 \documentclass[11pt,a4paper,titlepage]{article}
 \PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
 \usepackage[margin=1in]{geometry}
-\usepackage[page]{appendix}
 \usepackage[nottoc]{tocbibind}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage[ruled,vlined, linesnumbered]{algorithm2e}
 \usepackage{makecell}
 \usepackage{xcolor}
+\usepackage[toc,page]{appendix}
 \graphicspath{{./images/}}
 
 \setcounter{tocdepth}{4}
@@ -417,15 +417,7 @@ Dataset & Optimum Length \\ [0.5ex]
 \end{tabular}
 \end{center}
 
-Each of these data sets is stored in a file format known as tsplib which gives some basic details on the data set along with the points of said data set. An example is shown below from the qa194 data set.
-
-\begin{figure}[ht]
-	\includegraphics[scale=0.6]{tsplib_Example}
-	\centering
-	\caption{qa194 tsplib File}
-\end{figure}
-
-The important parts here are the "EDGE\_WEIGHT\_TYPE" and the "NODE\_COORD\_SECTION", the edge weight type shows the unit of measurement being used to show distances, and in this case it is euclidean distance for all three datasets, which therefore means it can be ignored by my code, otherwise different units of distance would have to be programmed in, which wouldn't be a large issue but is something to keep in mind. The "NODE\_COORD\_SECTION" is where the coordinates of each of the cities is described. On any given line the first number is the identifier of the city, or simply put "city 1, city 2 etc", and the following numbers are the x and y coordinates accordingly. This way given each of the points we are able to generate the graph of cities ourselves using the euclidean distance, and this is exactly the first part of my algorithm that needed to be completed.
+Each of these data sets is stored in a file format known as tsplib which gives some basic details on the data set along with the points of said data set.The details of the data structure are not really relevant, but the important aspects are simply that each city is stored with a number identifying it (quite simply a list from 1 to n) and next to said number is its coordinates, and from this it is simple to calculate the distances between the cities by just using the required distance metric (which is also specified within the file, and in the case of these data sets, it is all euclidean distance). As such converting from this file format into a data structure is exceedingly simple.
 
 \subsection{Data Structures}
 
@@ -530,8 +522,82 @@ Very self explanatory, simply adding all of the edges from the minimum weight pe
 In the same manner as the minimum weight perfect matching, calculating a euler tour for the union graph would have been difficult to implement quickly and efficiently, and implementing this isnt the main part of this project, and as such another library was used \cite{HeirEulTour} to calculate the tour. The calculated tour then needed to be converted back into my own data structure which was not a complicated process at all, it simply required converting the edges into a list of cities instead.
 
 \subsubsection{Remove repeated vertices}
-This step is incredibly easy to do if you decide to do it easily, simply go through the list checking each city and seeing if it appears again further down the line, then you just remove any that were found afterwards and you have your completed tour of the cities, however part of my project was to test to see if multiple individuals being added to the population would lead to a better or worse result, and it is this stage here in which the crux of that investigation begins, and that shall be discussed in more detail later.
+This step is incredibly easy to do if you decide to do it simply, just go through the list checking each city and seeing if it appears again further down the line, then you just remove any that were found afterwards and you have your completed tour of the cities, however part of my project was to test to see if multiple individuals being added to the population would lead to a better or worse result, and it is this stage here in which the crux of that investigation begins and how this function can become quite a bit more complex, and that shall be discussed in more detail later.
 
+Overall these steps together will create a singular tour which will be at most 1.5 times worse than the optimum tour around a given graph. This individual can then be plugged directly into the population of the genetic algorithm and we can then allow to generations to run as many times as we deem necessary to achieve fruitful results. Before that however:
+
+\subsection{Multiple Christofides Individuals}
+As stated just a little bit ago we can change the simple step of simply removing repeated vertices to be quite a bit more complex in order to generate multiple individuals from it. Notably each of these multiple individuals will be worse than that of the singular individual, however the entire purpose of a genetic algorithm is to work with worse individuals and create better ones from them, so perhaps having multiple worse individuals that are spread more over the search space will allow the algorithm to find its way to the global optima (or somewhere close) much more quickly.
+
+With this in mind the following code is what was produced to create said individuals, the specifics are not incredibly important and only the more important aspects shall be explained below.
+
+\begin{figure}[ht]
+	\includegraphics[scale=0.5]{MultiChrisAlg}
+	\centering
+	\caption{Code for multiple Christofides individuals.}
+\end{figure}
+
+The first important thing to note is how this algorithm works overall, for any given repeat we encounter we can remove either the first instance or the second, doing this will lead to two separate tours which we can then iterate on again to remove the other repeats. Furthermore, not only can we remove either one, we can also reverse the tour and remove each of them. As such for every repeat we can create 4 different tours, and therefore it is obvious to see that the number of tours we can create will grow exponentially fast, because of this the time taken by the algorithm would be far too long in most tour sizes to be of any use.
+
+With this in mind my code works by adding each of these newly created tours onto a stack of tours which will be iterated on. WE still have to tackle the issue of the exponential growth, and to do this I used a "FREQUENCY\_LIMIT" which decided how many tours would be added to the queue and how many would simply be discarded. e.g. if the frequency limit was 5 then only every 5th tour generated would be added back onto the stack, and as such a lot of the tours could be discarded, and we do not need many of them in the first place, since the idea of this is to add a few individuals to the population, instead of entirely overriding it, and with this in mind there is a condition on the while loop used to empty the stack which also stops once 10 tours have been reached.
+
+When every nth tour is reached, the function will create a copy of the tour and reverse it, then add it to the stack to be worked on each, and the program then continues on its current tour to remove all of its repeats before in order to add to the final list of tours which we can then use. The frequency chosen here was the size of the tour divided by 12, this was to try and make said size dynamic, such that smaller tours would have the chosen tours closer together and the larger tours further away, and this in turn was to create as large a variety of tours as possible, instead of ending up with many tours that were incredibly similar, as this would simply lead to getting caught in a local optimum very quickly.
+
+Once execution of this is finished all 10 of the tours are to be added to the generation, with the other 990 (to give 1000 individuals) being randomly generated which will then be used by the genetic algorithm for 5000 generations on each data set.
+
+\section{Results}
+
+With everything now in place we can look into the results achieved by the algorithms and explain how and why they are the way they are.
+
+\subsection{Algorithm Evolution}
+
+The first results I will show are the evolutionary graphs of the singular hybrid algorithm alongside the pure genetic algorithm, so that we can see how their individuals are improving as the generations go by. The full tables of data for each of the graphs can be found in appendix A.
+
+It is important that the layout of the graphs is first explained. There are two lines on each graph, the blue line represents the results of \textbf{just} the genetic algorithm and the orange line represents the results of the hybrid algorithm, and the x-axis represents the generation number. Most importantly is the scales, the results for genetic algorithm and hybrid algorithm were vastly different, so two different scales have had to be used in order to show both lines on one graph, and this was the best way to represent the data as it most clearly shows how the trends of both differ. The scale on the \textbf{left} of each graph represents the genetic algorithm (blue line) and the scale on the \textbf{right} represents the hybrid algorithm (orange line).
+
+\subsubsection{Qa194 Data Set}
+
+\begin{figure}[ht]
+	\includegraphics[width=\textwidth]{qa194Evolution}
+	\centering
+	\caption{qa194 data set evolution}
+\end{figure}
+
+
+The first thing that immediately jumps out on this graph is how quickly both of these algorithms plateau, and deceptively it appears like both have plateaued very close to one another, however one look at the scale shows that there is a significant difference between the two values they have stuck with. The values specifically are $10543.3664673219$ for the genetic algorithm and $9548.91872392524$ in this case, however the general results of the algorithm will be discussed later. As we can see the hybrid algorithm hits the plateau about the same time as the genetic algorithm, however said plateau is hit at a tour which is 1000 better than the genetic algorithm, which means that even if they have stopped improving at the same time, the local optima that they have both become trapped in are certainly different (and in the hybrids case, better).
+
+As such we can see in this small data sets case, after the same number of generations (approximately 800) we have a much better result with the hybrid compared to the genetic algorithm, and on top of this still we can see that the hybrid algorithm has been able to reach around 200 from the global optimum ($9352$) compared to the genetic algorithm which is around $1200$ off, which is significantly better result.
+\pagebreak
+
+\subsubsection{Zi929 Data Set}
+
+\begin{figure}[ht]
+	\includegraphics[width=\textwidth]{zi929Evolution}
+	\centering
+	\caption{zi929 data set evolution}
+\end{figure}
+
+This evolutionary graph shows much more interesting data compared to the previous one, as we can see  both algorithms take a larger number of generations before they start to plateau, and the genetic algorithm only just starts to plateau at the 5000th generation, whereas the hybrid seems to have plateaued closer to the 3000th generation.
+
+If we look at the general trend of them, we can see that the genetic algorithm starts decreasing very quickly and then trails off, decreasing less and less until it stops, and this is the expected trend, however the hybrid algorithm has a stranger shape to it, despite the algorithm solely the genetic part at this point, the rate at which the individuals improve is not as consistent as the pure genetic algorithm, instead decreasing at strange intervals, before eventually trailing off at around the 3000th generation. That being said, even if this is the case the results of the genetic algorithm are still significantly worse than that of the hybrid algorithm. The genetic algorithm had a final result of $124442.958821215$ whereas the hybrid algorithm had a result of $99467.6109972511$  which is around 30,000 better. In comparison to the global optimum which is known to be $95345$ we can see that once again the hybrid algorithm gets very close respective to the size of the tours, getting within $4000$ whereas the genetic algorithm was around $29,000$ off, which is obviously significantly worse.
+
+With this being said it appears neither of these had quite reached a true plateau, as the table within appendix A2 shows that they were still improving, if only marginally, as such given more time it would be interesting to see at what point they would both plateau fully.
+
+\pagebreak
+
+\subsubsection{Mu1979 Data Set}
+
+\begin{figure}[ht]
+	\includegraphics[width=\textwidth]{mu1979Evolution}
+	\centering
+	\caption{Mu1979 data set evolution}
+\end{figure}
+
+Finally we have the largest data set, and we can notice that the trends for each algorithm are fairly similar to what they were on the previous data set, the genetic algorithm starts decreasing a lot quicker before slowing down, whilst the hybrid algorithm is significantly more unpredictable to find a consistent trend with. What else we can see is that neither have plateaued yet, and as such this data could definitely do with being extended in the future if more time was available, as the genetic algorithm and the hybrid algorithm both have decent capacity for further improvement.
+
+Nevertheless analysing what data is here we can see that the scaled this time are ludicrously different, the starting point for the genetic algorithm is around $3,000,000$ whereas for the hybrid it is around $96,000$ and as such the hybrid algorithm is already at a significant advantage before any generations have been calculated. Despite this we can see that the genetic algorithm does improve a lot, down below $500,000$ and the hybrid algorithm also improves, though not at all to the same degree.
+
+However if we look at the final results in this case we can see there is no contest between the two; the genetic algorithm had a result of $351,729.696875395$ and the hybrid algorithm had a result of $93360.7690694728$. With the optimum being $86,891$ we can clearly see that the hybrid algorithm is insurmountably better, with it being only $7,000$ worse compared to the genetic algorithm being more than 4 times worse than optimum, this isn't a one off occurrence either as we shall see later on.
 
 \begin{thebibliography}{1}
 
@@ -600,6 +666,29 @@ HierholzerEulerianCycle (JGraphT : a free Java graph library) (no date). Avail
 \end{thebibliography}
 
 \begin{appendices}
+\section{Evolutionary Graph Data}
+This section shows the full tables of data used to generate the graphs, the only benefit this data gives over the graphs is being able to see the exact values at each generational landmark.
+
+\subsection{Qa194 Data Table}
+
+\begin{figure}[ht]
+	\includegraphics[width=0.75\textwidth]{qa194Table}
+	\centering
+\end{figure}
+
+\subsection{Zi929 Data Table}
+
+\begin{figure}[ht]
+	\includegraphics[width=0.75\textwidth]{zi929Table}
+	\centering
+\end{figure}
+
+\subsection{Mu1979 Data Table}
+
+\begin{figure}[ht]
+	\includegraphics[width=0.75\textwidth]{mu1979Table}
+	\centering
+\end{figure}
 \end{appendices}
 
 \end{document}
