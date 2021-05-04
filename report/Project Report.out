@@ -23,20 +23,21 @@
 \BOOKMARK [3][-]{subsubsection.4.3.1}{Generations and Population}{subsection.4.3}% 23
 \BOOKMARK [3][-]{subsubsection.4.3.2}{Mutation and Crossover}{subsection.4.3}% 24
 \BOOKMARK [2][-]{subsection.4.4}{Christofides Algorithm}{section.4}% 25
-\BOOKMARK [3][-]{subsubsection.4.4.1}{Find the minimum spanning tree}{subsection.4.4}% 26
-\BOOKMARK [3][-]{subsubsection.4.4.2}{Find a minimum weight perfect matching}{subsection.4.4}% 27
-\BOOKMARK [3][-]{subsubsection.4.4.3}{Calculate the union of the minimum spanning tree and minimum weight perfect matching}{subsection.4.4}% 28
-\BOOKMARK [3][-]{subsubsection.4.4.4}{Find a euler tour of the union graph}{subsection.4.4}% 29
-\BOOKMARK [3][-]{subsubsection.4.4.5}{Remove repeated vertices}{subsection.4.4}% 30
-\BOOKMARK [2][-]{subsection.4.5}{Multiple Christofides Individuals}{section.4}% 31
-\BOOKMARK [1][-]{section.5}{Results}{}% 32
-\BOOKMARK [2][-]{subsection.5.1}{Algorithm Evolution}{section.5}% 33
-\BOOKMARK [3][-]{subsubsection.5.1.1}{Qa194 Data Set}{subsection.5.1}% 34
-\BOOKMARK [3][-]{subsubsection.5.1.2}{Zi929 Data Set}{subsection.5.1}% 35
-\BOOKMARK [3][-]{subsubsection.5.1.3}{Mu1979 Data Set}{subsection.5.1}% 36
-\BOOKMARK [1][-]{section*.3}{References}{}% 37
-\BOOKMARK [1][-]{section*.4}{Appendices}{}% 38
-\BOOKMARK [1][-]{Appendix.1.A}{Evolutionary Graph Data}{}% 39
-\BOOKMARK [2][-]{subsection.1.A.1}{Qa194 Data Table}{Appendix.1.A}% 40
-\BOOKMARK [2][-]{subsection.1.A.2}{Zi929 Data Table}{Appendix.1.A}% 41
-\BOOKMARK [2][-]{subsection.1.A.3}{Mu1979 Data Table}{Appendix.1.A}% 42
+\BOOKMARK [3][-]{subsubsection.4.4.1}{Find a minimum weight perfect matching}{subsection.4.4}% 26
+\BOOKMARK [3][-]{subsubsection.4.4.2}{Find a euler tour of the union graph}{subsection.4.4}% 27
+\BOOKMARK [3][-]{subsubsection.4.4.3}{Remove repeated vertices}{subsection.4.4}% 28
+\BOOKMARK [2][-]{subsection.4.5}{Multiple Christofides Individuals}{section.4}% 29
+\BOOKMARK [1][-]{section.5}{Results}{}% 30
+\BOOKMARK [2][-]{subsection.5.1}{Algorithm Evolution}{section.5}% 31
+\BOOKMARK [3][-]{subsubsection.5.1.1}{Qa194 Data Set}{subsection.5.1}% 32
+\BOOKMARK [3][-]{subsubsection.5.1.2}{Zi929 Data Set}{subsection.5.1}% 33
+\BOOKMARK [3][-]{subsubsection.5.1.3}{Mu1979 Data Set}{subsection.5.1}% 34
+\BOOKMARK [2][-]{subsection.5.2}{Mean Results}{section.5}% 35
+\BOOKMARK [2][-]{subsection.5.3}{Mean Time}{section.5}% 36
+\BOOKMARK [2][-]{subsection.5.4}{Multi-Christofides Results}{section.5}% 37
+\BOOKMARK [1][-]{section*.19}{References}{}% 38
+\BOOKMARK [1][-]{section*.20}{Appendices}{}% 39
+\BOOKMARK [1][-]{Appendix.1.A}{Evolutionary Graph Data}{}% 40
+\BOOKMARK [2][-]{subsection.1.A.1}{Qa194 Data Table}{Appendix.1.A}% 41
+\BOOKMARK [2][-]{subsection.1.A.2}{Zi929 Data Table}{Appendix.1.A}% 42
+\BOOKMARK [2][-]{subsection.1.A.3}{Mu1979 Data Table}{Appendix.1.A}% 43

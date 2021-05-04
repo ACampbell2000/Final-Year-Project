@@ -8,6 +8,7 @@
 \usepackage{makecell}
 \usepackage{xcolor}
 \usepackage[toc,page]{appendix}
+\usepackage{subcaption}
 \graphicspath{{./images/}}
 
 \setcounter{tocdepth}{4}
@@ -32,7 +33,7 @@ temp
 
 \section{Introduction}
 
-The Travelling Salesperson Problem (TSP) is an NP-Hard problem which is commonly found in combinatorial optimisation, theoretical computer science and operations research. It's a simple problem on the surface which simply states that "Given a list of cities and distances between each pair of them, what is the shortest possile route that visits each city exactly once and returns to the origin city?" \cite{TSPWiki}
+The Travelling Salesperson Problem (TSP) is an NP-Hard problem which is commonly found in combinatorial optimisation, theoretical computer science and operations research. It's a simple problem on the surface which simply states that "Given a list of cities and distances between each pair of them, what is the shortest possible route that visits each city exactly once and returns to the origin city?" \cite{TSPWiki}
 
 This question appears deceptively simple, however with large sets of cities the search space becomes incredibly large, and as such computation time can be astronomical, since before you even start trying to compute the shortest tour, there are $n!$ different combinations to compute, assuming a complete graph. Clearly this meant another angle had to be taken for this problem.
 
@@ -427,7 +428,15 @@ The other major data structure would be the "Individual" class, which is what a 
 
 \subsection{Parameters}
 
-Genetic algorithms come with a fair few parameters to tweak with, all of which can make quite the significant difference upon the results obtained. In my case said parameters were: "NUM\_OF\_CALCULATIONS", "POPULATION\_SIZE", "PARENT\_PERCENTAGE", "MUTATION\_CHANCE" and "CROSSOVER\_CHANCE". Going through them individually, "NUM \_OF\_CALCULATIONS" is simply the value of the number of generations * the number of individuals, this was to keep the overall amount of 'calculations' done in a single genetic algorithm about the same, and allowed me to adjust the number of individuals and generations accordingly without changing this overall value. "POPULATION\_SIZE" is simply the number of individuals in the population. "PARENT\_PERCENTAGE" is used to calculate how many parents will be in the population, as an example with a population size of 1000, parents, we would take 0.2 of this (20\%) to get 200 parents. "MUTATION\_CHANCE" represents the chance that a given individual will undergo mutation and similarly "CROSSOVER\_CHANCE" is the chance that a pair of individuals will have the crossover operator applied to them.
+Genetic algorithms come with a fair few parameters to tweak with, all of which can make quite the significant difference upon the results obtained and as such need to be optimised. The important ones are as follows:
+
+\begin{itemize}
+\item Population Size: Number of individuals within the population.
+\item Number of generations: Maximum number of generations to be computed.
+\item Number of calculations: Population * Generations, used to keep the general number of calculations about the same.
+\item Crossover Chance: Chance of crossover happening.
+\item Mutation Chance: Chance of mutation happening.
+\end{itemize}
 
 \subsubsection{Generations and Population}
 In regards to optimising these parameters, the main example will be with the population size and the max number of generations (which is calculated by the number of calculations / population size).
@@ -453,20 +462,7 @@ Before discussing the results above, it is important to note that usually for ge
 
 The other important parameters are the mutation and crossover chance, the mutation operator is applied after the crossover and applies to the children when they are generated, the crossover chance is basically the chance of two of the parents 'mating' to create two new children, if the crossover chance is not met then the two parents are simply carried forward as the children, essentially copying them.
 
-Before going into the values used, I will mention that the RSM (Reverse Sequence Mutation) operator was used for mutation where a sub-tour within the overall tour is reversed, the reasoning behind this is quite simply that from past research papers the results have shown that this mutation operator performs better than the alternative \cite{GAMutations} which is where we swap two cities in the tour around, and example of both is shown below for convenience.
-
-TWOR Mutation (swapping two cities):
-\begin{center}\Large
-[1\textcolor{red}{2}34\textcolor{red}{5}6] mutates to [1\textcolor{red}{5}34\textcolor{red}{2}6]
-\end{center}
-
-RSM Mutation (reversing a sequence):
-
-\begin{center}\Large
-[1\textcolor{green}{2345}6] mutates to [1\textcolor{green}{5432}6]
-\end{center}
-
-In regards to the crossover operator it is true in much the same way, with order crossover having the best results within past research \cite{GACrossoverPerformance} and as such it was clearly the most logical choice to choose this crossover operator for the genetic algorithm. 
+\pagebreak
 
 In regards to optimising them I used the same method as used for the population and generation sizes, as shown in the table below:
 
@@ -507,16 +503,10 @@ Dataset & Crossover: 0.1 & Crossover: 0.4 & Crossover: 0.9 \\ [0.5ex]
 For the above data we can see that a crossover of 0.1 does significantly worse on the largest data set and does moderately worse for the medium sized one, the smallest data set once again doesn't really tell us much in all three cases since the variation is always incredibly minor, yet the other two show that a crossover of 0.9 has the best results in both cases compared to a crossover of 0.4, this matches what is expected since in general a higher chance of crossover is usually better. As such can see the best values for mutation and crossover are 0.4 and 0.9 respectively and therefore these are the values I used for my hybrid algorithm.
 
 \subsection{Christofides Algorithm}
-The implementation of Christofides algorithm was thankfully quite straight forward, the Individual steps within the algorithm were fairly easy to program except for a couple.
-
-\subsubsection{Find the minimum spanning tree}
-This was far from a difficult task, and is a very basic and common function that is used on a significant number of graphs. The only decision that had to be made with this function was whether to use Prim's or Kruskal's algorithm for finding the minimum spanning tree. From previous research \cite{PvKTime} it was clear that Prim's was the better of the two to implement so I did exactly that.
+The implementation of Christofides algorithm was thankfully quite straight forward, so only the important aspects shall be mentioned.
 
 \subsubsection{Find a minimum weight perfect matching}
 This would have been a difficult algorithm to implement, and even more so to do in an efficient manner, as such for this stage and one other I used a library that is freely available \cite{KolMinMatch} which contains a function to calculate this exactly, the only awkward part of this was manipulating my graph data structure into a form that the algorithm would accept and be able to use properly, however this was more time consuming than actually difficult to accomplish.
-
-\subsubsection{Calculate the union of the minimum spanning tree and minimum weight perfect matching}
-Very self explanatory, simply adding all of the edges from the minimum weight perfect matching to the list of edges in the minimum spanning tree was enough to complete this step in an efficient manner.
 
 \subsubsection{Find a euler tour of the union graph}
 In the same manner as the minimum weight perfect matching, calculating a euler tour for the union graph would have been difficult to implement quickly and efficiently, and implementing this isnt the main part of this project, and as such another library was used \cite{HeirEulTour} to calculate the tour. The calculated tour then needed to be converted back into my own data structure which was not a complicated process at all, it simply required converting the edges into a list of cities instead.
@@ -532,7 +522,7 @@ As stated just a little bit ago we can change the simple step of simply removing
 With this in mind the following code is what was produced to create said individuals, the specifics are not incredibly important and only the more important aspects shall be explained below.
 
 \begin{figure}[ht]
-	\includegraphics[scale=0.5]{MultiChrisAlg}
+	\includegraphics[scale=0.45]{MultiChrisAlg}
 	\centering
 	\caption{Code for multiple Christofides individuals.}
 \end{figure}
@@ -597,7 +587,79 @@ Finally we have the largest data set, and we can notice that the trends for each
 
 Nevertheless analysing what data is here we can see that the scaled this time are ludicrously different, the starting point for the genetic algorithm is around $3,000,000$ whereas for the hybrid it is around $96,000$ and as such the hybrid algorithm is already at a significant advantage before any generations have been calculated. Despite this we can see that the genetic algorithm does improve a lot, down below $500,000$ and the hybrid algorithm also improves, though not at all to the same degree.
 
-However if we look at the final results in this case we can see there is no contest between the two; the genetic algorithm had a result of $351,729.696875395$ and the hybrid algorithm had a result of $93360.7690694728$. With the optimum being $86,891$ we can clearly see that the hybrid algorithm is insurmountably better, with it being only $7,000$ worse compared to the genetic algorithm being more than 4 times worse than optimum, this isn't a one off occurrence either as we shall see later on.
+However if we look at the final results in this case we can see there is no contest between the two; the genetic algorithm had a result of $351,729.696875395$ and the hybrid algorithm had a result of $93,360.7690694728$. With the optimum being $86,891$ we can clearly see that the hybrid algorithm is insurmountably better, with it being only $7,000$ worse compared to the genetic algorithm being more than 4 times worse than optimum, this isn't a one off occurrence either as we shall see later on.
+
+\subsection{Mean Results}
+
+Christofides algorithm has a degree of randomness within it, and genetic algorithms are built upon randomness as a premise, as such it would certainly not be a stretch to say the above results were a one off, and that is true to some degree, as the chances of finding these exact results once again when running the program are slim to none. Nevertheless we can analyse how the program handles in the mean case, and see how the results may deviate from one execution to another. With this in mind we have the following results that have been collected to investigate this very issue:
+
+\begin{figure}[ht]
+	\includegraphics[width=\textwidth]{MeanResults}
+	\centering
+	\caption{Mean, standard deviation and percentage over optimum of the algorithms over 30 executions}
+\end{figure}
+
+Starting with the qa194 data set we can see that the genetic algorithm on its own fairs quite well in getting an approximate result, getting a mean of 9.46\% over the optimum whereas Christofides algorithm actually fairs slightly worse with 11.15\% over the optimum. This being said Christofides algorithm is much more consistent with the results compared to the genetic algorithm which can vary around 3x more. Either way the clear winner is the hybrid algorithm which manages to be within 3.02\% of the optimum along with also having the smallest deviation out of the 3 algorithms, therefore meaning it is not only the best in this instance at getting an approximate answer, but also the most consistent, which is an extremely good result over the 30 executions. Therefore for this smaller data set it is clear the hybrid algorithm is significantly better, and the reasoning for this is most likely related to the local/global optimum dilemma mentioned before. The genetic algorithm has to work from pure randomness to try and get close to the global optimum, and so is definitely vulnerable to getting stuck in local optima along the way, whereas the hybrid algorithm is already placed much closer to the global optimum and as such is less likely to get stuck in a local optimum that is as far away as the genetic algorithm.
+
+The second data set (zi929) shows similar results; the genetic algorithm has a mean tour length that is 29.92\% worse than the optimum which is considerably worse than the christofides algorithm which reaches within 11.97\% from the optimum, on top of this the standard deviation for the genetic algorithm is relatively high, meaning it is unreliable in producing consistent results, and even those results are sub-par compared to the other algorithms. Christofides algorithm manages to produce very good results along with a significantly lower standard deviation, making it definitely more preferable to the genetic algorithm. However once again the hybrid algorithm is the best in terms of the results, it produces a mean result that is 5.2\% worse than the optimum along with once again having the lowest standard deviation, which easily makes it the best option if looking for good results (which naturally you will be in this problem).
+
+Finally we have the largest data set, and it is here we can see the genetic algorithm performs catastrophically, having a mean result that is 302.71\% worse than the optimum along with an obscenely high standard deviation. Even though it realistically would never give great results for a data set this large, it is rather strange how it performs *this* badly, and with more time an investigation should be undertook in order to examine why it performs this poorly. To take a wild educated guess, I would assume the reasoning for this is simply because the data set is too large, and as such there are too many possible tours, and as such the random generation of individuals cannot perform very well, and as such the generations simply get stuck in local optima far too quickly, and so it is trapped trying to find better tours when the 'hill' it would have to climb to find better results is simply too large. Regardless Christofides algorithm performs well once again, getting within 10.56\% of the optimum with a significantly lower standard deviation as well as would be expected. Though even in this case the hybrid algorithm continues to perform the best out of the three, getting within 7.2\% of the optimum solution along with the smallest standard deviation. As good as this result clearly is, it makes the fact that the genetic algorithm performed so badly even stranger, as clearly the genetic algorithm can perform exceptionally well given just the singular good result, so how is it that it performs so poorly otherwise?
+
+Regardless we can clearly see that across all three datasets, the hybrid algorithm performs significantly better in all cases even over multiple executions, as well as performing consistently across the board.
+
+\subsection{Mean Time}
+
+The quality of the results is not the only aspect that matters in these scenarios, at the beginning I made is clear that we could always find the optimum if we wanted by simply brute forcing it, however it is time that causes the issue, and as such an investigation into the time taken by these algorithms must also take place, since it may well be the case that the improvement in results is not worth the additional time that the hybrid algorithm will take.
+
+\pagebreak
+
+In the same way as the table previously, the times of the algorithms were collected over 30 executions for analysis: 
+
+\begin{figure}[ht]
+	\includegraphics[width=\textwidth]{MeanTime}
+	\centering
+	\caption{Mean and standard deviations of the time taken by each algorithm over 30 executions}
+\end{figure}
+
+Analysing these results is unfortunately not quite as simple as the results before, since they appear to be very peculiar. Starting with the qa194 data set we can already spot some strange occurrences, the genetic algorithm completes in around 18 seconds and Christofides algorithm completes in 0.05 seconds. It is expected therefore that the time taken by the hybrid algorithm would be the addition of these times, since that is exactly what the hybrid algorithm is designed to do, it may take longer due to some overhead, yet strangely enough for this smallest data set, the hybrid algorithm takes \textit{less} time to complete than the genetic algorithm, not only this but the standard deviations for the times do not overlap in the slightest. A fair bit of investigation into the code and execution of the program was done in order to try and find the cause of this, yet no reason could be found for this strange occurrence. Given more time further investigation would definitely have to be done to find out the cause of this, as well as the cause of the next few observations.
+
+The second data set shows that the genetic algorithm takes around 205 seconds to complete, Christofides algorithm takes around 6.6 seconds to complete, and yet the hybrid takes 255 seconds. The extra 50 seconds taken are definitely unexpected, and once again the reasoning behind this was truly lost upon investigation of the code.
+
+The same situation was present in the largest data set, yet far worse; the genetic algorithm took 896 seconds, Christofides algorithm 174 seconds and the hybrid a much larger time of 1467 seconds, this implies that the hybrid took around 400 seconds longer than it should have, which is a very extreme increase. 
+
+Not only that, yet the standard deviations for the times in the largest data set and the hybrid in zi929 were all identical. Yet i find this to be far less concerning compared to the mean time in general, since the standard deviations are incredibly low regardless.
+
+All in all, there are some definite unsolved mysteries within these times, and further investigation would be a high priority given more time, as to try and understand where this large overhead is appearing from. If we are to take the results at face value, it is clear to see that the larger datasets take much longer for the hybrid algorithm compared to the algorithms separately. With this in mind it would be important to balance the importance of finding the best result possible with the amount of time taken. mu1979 can achieve a result that is around 7\% off the optimum, compared to Christofides algorithm which would find one that is 10\% worse, for a computation time that is around 10x worse, I would certainly admit that it would not be worth it if time is a significant concern. For the smaller datasets however it may be more useful to wait the additional time, since for the zi929 data set, the hybrid achieved a result that was 6\% better for a time that, whilst still significantly worse than Christofides alone, is still not an incredible length of time. In regards to the smallest data set the hybrid does much better than either alone, and the time is still incredibly small, yet with such a small data set it is uncertain how necessary such a solution is compared to simply using a brute force approach of the held-karp algorithm.
+
+To summarise quite bluntly, I am incredibly dissatisfied with the timings of these algorithms, and think there must be a fundamental flaw lurking somewhere which is causing such a situation, as such finding this and recollecting these results would be my top-most priority in the future, since as it stands the findings within this table are not favourable, and even if they were, such a situation in which there is no clear trend or pattern throws the validity of these timings into question.
+
+\subsection{Multi-Christofides Results}
+
+Unfortunately the results for the multi-Christofides algorithm left much to be desired:
+
+\begin{figure}[ht]
+	\begin{subfigure}{.32\textwidth}
+		\centering
+		\includegraphics[width=.75\textwidth]{MultQa194}
+		\caption{Qa194}
+	\end{subfigure}
+	\begin{subfigure}{.32\textwidth}
+		\centering		
+		\includegraphics[width=.75\textwidth]{MultZi929}
+		\caption{Zi929}
+	\end{subfigure}	
+	\begin{subfigure}{.32\textwidth}
+		\centering
+		\includegraphics[width=.75\textwidth]{MultMu1979}
+		\caption{Mu1979}
+	\end{subfigure}
+	\centering
+	\caption{Evolutionary tables for all three datasets}
+\end{figure}
+
+A quick look shows that none of the algorithms had any form of improvement over the 5000 generations, and as such this attempt at bettering our algorithm has failed. The most obvious and likely reason for this is the algorithm previously mentioned that I was not particularly pleased with, it was incredibly difficult to find a way of producing multiple Christofides individuals that were different from one another yet also did not take too long to execute. That function requires a lot more work to be put into it which I was unable to do within this time frame, the function requires some more intelligent implementation of producing individuals that are different from one another, such that we have a much larger spread over the search space. This is because currently it seems all of the produced individuals are very similar, and in fact could be easily produced by the genetic algorithm itself via the mutation and crossover operators. As such, since these individuals are very good in their own right, the genetic algorithm is unable to improve on them, and simply passes all of these individuals to the next generations endlessly, or in other words, we are stuck in a local optima from the second execution began.
+
+As such with additional time it could be beneficial to recreate this algorithm focusing more on producing vastly different individuals, perhaps by checking how many cities are within the same positions in two tours, and picking ones which have as few similarities as possible. Regardless as mentioned a lot in this time is a large issue within these algorithms, and so creating said similarity function would take up even more execution time, and a balance needs to be found between running time and the quality of results. Either way the results of this aspect of the project are very disappointing, and working on this given more time would have been preferable, since I still believe this approach to refining the hybrid algorithm has promise.
 
 \begin{thebibliography}{1}
 
