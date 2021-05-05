@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.2.26)  4 MAY 2021 15:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.2.26)  5 MAY 2021 13:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -462,120 +462,126 @@ Package caption Info: End \AtBeginDocument code.
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./Project Report.toc
-[2])
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]pdfTeX warning (ext4): dest
+ination with the same identifier (name{page.1}) has been already used, duplicat
+e ignored
+<to be read again> 
+                   \relax 
+l.56 \tableofcontents
+                      [1] (./Project Report.toc [2])
 \tf@toc=\write4
 \openout4 = `"Project Report.toc"'.
 
  [3] [4] [5] [6
 
-] [7] [8] [9] [10] [11]
-<./images/LocalGlobalOptima.png, id=331, 1027.84pt x 602.25pt>
+] [7]
+[8] [9] [10] [11]
+<./images/LocalGlobalOptima.png, id=339, 1027.84pt x 602.25pt>
 File: ./images/LocalGlobalOptima.png Graphic file (type png)
 <use ./images/LocalGlobalOptima.png>
-Package pdftex.def Info: ./images/LocalGlobalOptima.png  used on input line 293
+Package pdftex.def Info: ./images/LocalGlobalOptima.png  used on input line 318
 .
 (pdftex.def)             Requested size: 308.35437pt x 180.67639pt.
  [12 <./images/LocalGlobalOptima.png>] [13]
-<./images/WikiCompleteGraph.png, id=361, 200.75pt x 174.6525pt>
+<./images/WikiCompleteGraph.png, id=369, 200.75pt x 174.6525pt>
 File: ./images/WikiCompleteGraph.png Graphic file (type png)
 <use ./images/WikiCompleteGraph.png>
-Package pdftex.def Info: ./images/WikiCompleteGraph.png  used on input line 350
+Package pdftex.def Info: ./images/WikiCompleteGraph.png  used on input line 375
 .
 (pdftex.def)             Requested size: 150.56212pt x 130.98904pt.
  [14 <./images/WikiCompleteGraph.png>]
-<./images/WikiMinSpanTree.png, id=377, 200.75pt x 184.69pt>
+<./images/WikiMinSpanTree.png, id=385, 200.75pt x 184.69pt>
 File: ./images/WikiMinSpanTree.png Graphic file (type png)
 <use ./images/WikiMinSpanTree.png>
-Package pdftex.def Info: ./images/WikiMinSpanTree.png  used on input line 359.
+Package pdftex.def Info: ./images/WikiMinSpanTree.png  used on input line 384.
 (pdftex.def)             Requested size: 120.45091pt x 110.81483pt.
-<./images/WikiMinMatch.png, id=379, 200.75pt x 200.75pt>
+<./images/WikiMinMatch.png, id=387, 200.75pt x 200.75pt>
 File: ./images/WikiMinMatch.png Graphic file (type png)
 <use ./images/WikiMinMatch.png>
-Package pdftex.def Info: ./images/WikiMinMatch.png  used on input line 367.
+Package pdftex.def Info: ./images/WikiMinMatch.png  used on input line 392.
 (pdftex.def)             Requested size: 120.45091pt x 120.45091pt.
-<./images/WikiComb.png, id=380, 200.75pt x 200.75pt>
+<./images/WikiComb.png, id=388, 200.75pt x 200.75pt>
 File: ./images/WikiComb.png Graphic file (type png)
 <use ./images/WikiComb.png>
-Package pdftex.def Info: ./images/WikiComb.png  used on input line 378.
+Package pdftex.def Info: ./images/WikiComb.png  used on input line 403.
 (pdftex.def)             Requested size: 100.37474pt x 100.37474pt.
-<./images/WikiEulerTour.png, id=381, 200.75pt x 218.8175pt>
+<./images/WikiEulerTour.png, id=389, 200.75pt x 218.8175pt>
 File: ./images/WikiEulerTour.png Graphic file (type png)
 <use ./images/WikiEulerTour.png>
-Package pdftex.def Info: ./images/WikiEulerTour.png  used on input line 383.
+Package pdftex.def Info: ./images/WikiEulerTour.png  used on input line 408.
 (pdftex.def)             Requested size: 100.37474pt x 109.40848pt.
-<./images/WikiRemove.png, id=382, 200.75pt x 215.80624pt>
+<./images/WikiRemove.png, id=390, 200.75pt x 215.80624pt>
 File: ./images/WikiRemove.png Graphic file (type png)
 <use ./images/WikiRemove.png>
-Package pdftex.def Info: ./images/WikiRemove.png  used on input line 391.
+Package pdftex.def Info: ./images/WikiRemove.png  used on input line 416.
 (pdftex.def)             Requested size: 120.45091pt x 129.48474pt.
  [15
 
  <./images/WikiMinSpanTree.png> <./images/WikiMinMatch.png> <./images/WikiComb.
 png> <./images/WikiEulerTour.png>] [16 <./images/WikiRemove.png>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 434.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 459.
 
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 434.
- [17] [18] [19]
-<./images/MultiChrisAlg.png, id=424, 942.52126pt x 692.5875pt>
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 459.
+ [17]
+[18] [19]
+<./images/MultiChrisAlg.png, id=432, 942.52126pt x 692.5875pt>
 File: ./images/MultiChrisAlg.png Graphic file (type png)
 <use ./images/MultiChrisAlg.png>
-Package pdftex.def Info: ./images/MultiChrisAlg.png  used on input line 525.
+Package pdftex.def Info: ./images/MultiChrisAlg.png  used on input line 550.
 (pdftex.def)             Requested size: 424.13065pt x 311.66148pt.
-
-[20] [21 <./images/MultiChrisAlg.png>]
-<./images/qa194Evolution.png, id=436, 816.04875pt x 485.56406pt>
+ [20] [21 <./images/MultiChrisAlg.png>]
+<./images/qa194Evolution.png, id=445, 816.04875pt x 485.56406pt>
 File: ./images/qa194Evolution.png Graphic file (type png)
 <use ./images/qa194Evolution.png>
-Package pdftex.def Info: ./images/qa194Evolution.png  used on input line 551.
+Package pdftex.def Info: ./images/qa194Evolution.png  used on input line 576.
 (pdftex.def)             Requested size: 452.9679pt x 269.52827pt.
  [22 <./images/qa194Evolution.png (PNG copy)>] [23]
-<./images/zi929Evolution.png, id=447, 846.91406pt x 529.98pt>
+<./images/zi929Evolution.png, id=455, 846.91406pt x 529.98pt>
 File: ./images/zi929Evolution.png Graphic file (type png)
 <use ./images/zi929Evolution.png>
-Package pdftex.def Info: ./images/zi929Evolution.png  used on input line 565.
+Package pdftex.def Info: ./images/zi929Evolution.png  used on input line 590.
 (pdftex.def)             Requested size: 452.9679pt x 283.45157pt.
  [24 <./images/zi929Evolution.png (PNG copy)>]
-<./images/mu1979Evolution.png, id=453, 840.13875pt x 580.41844pt>
+<./images/mu1979Evolution.png, id=462, 840.13875pt x 580.41844pt>
 File: ./images/mu1979Evolution.png Graphic file (type png)
 <use ./images/mu1979Evolution.png>
-Package pdftex.def Info: ./images/mu1979Evolution.png  used on input line 581.
+Package pdftex.def Info: ./images/mu1979Evolution.png  used on input line 606.
 (pdftex.def)             Requested size: 452.9679pt x 312.93419pt.
  [25 <./images/mu1979Evolution.png (PNG copy)>]
-<./images/MeanResults.png, id=460, 659.46375pt x 457.71pt>
+<./images/MeanResults.png, id=468, 659.46375pt x 457.71pt>
 File: ./images/MeanResults.png Graphic file (type png)
 <use ./images/MeanResults.png>
-Package pdftex.def Info: ./images/MeanResults.png  used on input line 597.
+Package pdftex.def Info: ./images/MeanResults.png  used on input line 622.
 (pdftex.def)             Requested size: 452.9679pt x 314.3955pt.
  [26 <./images/MeanResults.png>] [27]
-<./images/MeanTime.png, id=471, 658.46pt x 292.09125pt>
+<./images/MeanTime.png, id=479, 658.46pt x 292.09125pt>
 File: ./images/MeanTime.png Graphic file (type png)
 <use ./images/MeanTime.png>
-Package pdftex.def Info: ./images/MeanTime.png  used on input line 619.
+Package pdftex.def Info: ./images/MeanTime.png  used on input line 644.
 (pdftex.def)             Requested size: 452.9679pt x 200.94147pt.
- [28 <./images/MeanTime.png>]
-<./images/MultQa194.png, id=478, 194.7275pt x 444.66125pt>
+
+[28 <./images/MeanTime.png>]
+<./images/MultQa194.png, id=486, 194.7275pt x 444.66125pt>
 File: ./images/MultQa194.png Graphic file (type png)
 <use ./images/MultQa194.png>
-Package pdftex.def Info: ./images/MultQa194.png  used on input line 643.
+Package pdftex.def Info: ./images/MultQa194.png  used on input line 668.
 (pdftex.def)             Requested size: 108.71477pt x 248.24867pt.
-<./images/MultZi929.png, id=479, 194.7275pt x 444.66125pt>
+<./images/MultZi929.png, id=487, 194.7275pt x 444.66125pt>
 File: ./images/MultZi929.png Graphic file (type png)
 <use ./images/MultZi929.png>
-Package pdftex.def Info: ./images/MultZi929.png  used on input line 648.
+Package pdftex.def Info: ./images/MultZi929.png  used on input line 673.
 (pdftex.def)             Requested size: 108.71477pt x 248.24867pt.
-<./images/MultMu1979.png, id=480, 194.7275pt x 444.66125pt>
+<./images/MultMu1979.png, id=488, 194.7275pt x 444.66125pt>
 File: ./images/MultMu1979.png Graphic file (type png)
 <use ./images/MultMu1979.png>
-Package pdftex.def Info: ./images/MultMu1979.png  used on input line 653.
+Package pdftex.def Info: ./images/MultMu1979.png  used on input line 678.
 (pdftex.def)             Requested size: 108.71477pt x 248.24867pt.
  [29 <./images/MultQa194.png> <./images/MultZi929.png> <./images/MultMu1979.png
->]
+>] [30]
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ˜ in font cmr10!
@@ -583,7 +589,7 @@ Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
 
-Underfull \hbox (badness 1281) in paragraph at lines 671--672
+Underfull \hbox (badness 1281) in paragraph at lines 710--711
 []\OT1/cmr/m/n/10.95 Hutchinson, C. et al. (no date) CMU Trav-el-ing Sales-man 
 Prob-lem, p. 25. Avail-
  []
@@ -595,13 +601,13 @@ Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
 
-Underfull \hbox (badness 3568) in paragraph at lines 677--678
+Underfull \hbox (badness 3568) in paragraph at lines 716--717
 \OT1/cmr/m/n/10.95 Mag-a-zine. Avail-able at: []$\OT1/cmtt/m/n/10.95 https : / 
 / www . quantamagazine . org / computer -[] scientists -[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 683--684
+Underfull \hbox (badness 10000) in paragraph at lines 722--723
 []$\OT1/cmtt/m/n/10.95 https : / / personal . vu . nl / r . a . sitters / Advan
 cedAlgorithms / 2016 / SlidesChapter2 -[]
  []
@@ -625,24 +631,24 @@ Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no “ in font cmr10!
 
-Underfull \hbox (badness 1215) in paragraph at lines 692--694
+Underfull \hbox (badness 1215) in paragraph at lines 731--733
 \OT1/cmr/m/n/10.95 fect match-ing al-go-rithm, Math-e-mat-i-cal Pro-gram-ming C
 om-pu-ta-tion, 1(1), pp. 4367.
  []
 
 
-Underfull \hbox (badness 3260) in paragraph at lines 692--694
+Underfull \hbox (badness 3260) in paragraph at lines 731--733
 \OT1/cmr/m/n/10.95 doi: 10.1007/s12532-009-0002-8. Avail-able at: []$\OT1/cmtt/
 m/n/10.95 http : / / mpc . zib . de / archive / 2009 /
  []
 
-[30]
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ˜ in font cmr10!
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
+[31]
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ˜ in font cmr10!
@@ -665,7 +671,7 @@ Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
 
-Overfull \hbox (7.38774pt too wide) in paragraph at lines 712--713
+Overfull \hbox (7.38774pt too wide) in paragraph at lines 751--752
 []\OT1/cmr/m/n/10.95 TSP Test Data (no date). Avail-able at: http://www.math.uw
 aterloo.ca/tsp/data/index.html
  []
@@ -680,13 +686,13 @@ Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no “ in font cmr10!
 
-Underfull \hbox (badness 3884) in paragraph at lines 718--719
+Underfull \hbox (badness 3884) in paragraph at lines 757--758
 \OT1/cmr/m/n/10.95 proach, In-ter-na-tional Jour-nal of Com-puter Ap-pli-ca-tio
 ns, 152(8), pp. 1319. doi:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 718--719
+Underfull \hbox (badness 10000) in paragraph at lines 757--758
 \OT1/cmtt/m/n/10.95 Baidoo2 / publication / 309224559 _ Solving _ the _ TSP _ u
 sing _ Traditional _ Computing _
  []
@@ -698,43 +704,43 @@ Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ¯ in font cmr10!
 
-Overfull \hbox (33.9123pt too wide) in paragraph at lines 724--725
+Overfull \hbox (33.9123pt too wide) in paragraph at lines 763--764
 \OT1/cmr/m/n/10.95 https://jgrapht.org/javadoc/org.jgrapht.core/org/jgrapht/alg
 /cycle/HierholzerEulerianCycle.html
  []
 
-[31]
-<./images/qa194Table.png, id=526, 635.37375pt x 442.65375pt>
+<./images/qa194Table.png, id=527, 635.37375pt x 442.65375pt>
 File: ./images/qa194Table.png Graphic file (type png)
 <use ./images/qa194Table.png>
-Package pdftex.def Info: ./images/qa194Table.png  used on input line 737.
+Package pdftex.def Info: ./images/qa194Table.png  used on input line 776.
 (pdftex.def)             Requested size: 339.72592pt x 236.6857pt.
-<./images/zi929Table.png, id=527, 635.37375pt x 442.65375pt>
+<./images/zi929Table.png, id=528, 635.37375pt x 442.65375pt>
 File: ./images/zi929Table.png Graphic file (type png)
 <use ./images/zi929Table.png>
-Package pdftex.def Info: ./images/zi929Table.png  used on input line 744.
+Package pdftex.def Info: ./images/zi929Table.png  used on input line 783.
 (pdftex.def)             Requested size: 339.72592pt x 236.6857pt.
-<./images/mu1979Table.png, id=528, 638.385pt x 444.66125pt>
+[32]
+<./images/mu1979Table.png, id=540, 638.385pt x 444.66125pt>
 File: ./images/mu1979Table.png Graphic file (type png)
 <use ./images/mu1979Table.png>
-Package pdftex.def Info: ./images/mu1979Table.png  used on input line 751.
+Package pdftex.def Info: ./images/mu1979Table.png  used on input line 790.
 (pdftex.def)             Requested size: 339.72592pt x 236.6328pt.
- [32 <./images/qa194Table.png> <./images/zi929Table.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 756.
- [33 <./images/mu1979Table.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 756.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 795.
+ [33 <./images/qa194Table.png> <./images/zi929Table.png>] [34 <./images/mu1979T
+able.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 795.
  (./Project Report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 756.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 756.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 795.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 795.
 Package rerunfilecheck Info: File `"Project Report".out' has not changed.
-(rerunfilecheck)             Checksum: 2CF2AA9AD3E92DA22C500B53154ECA50;3031.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 756.
+(rerunfilecheck)             Checksum: 0C91921C00B2DE48F65A70A659A2E0BF;3077.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 795.
  ) 
 Here is how much of TeX's memory you used:
- 9281 strings out of 492982
- 139093 string characters out of 6134896
- 247323 words of memory out of 5000000
- 12586 multiletter control sequences out of 15000+600000
+ 9284 strings out of 492982
+ 139120 string characters out of 6134896
+ 248323 words of memory out of 5000000
+ 12587 multiletter control sequences out of 15000+600000
  14061 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,17n,40p,1557b,528s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -756,10 +762,10 @@ exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmtt10.pfb>
-Output written on "Project Report.pdf" (33 pages, 761587 bytes).
+Output written on "Project Report.pdf" (35 pages, 766210 bytes).
 PDF statistics:
- 638 PDF objects out of 1000 (max. 8388607)
- 543 compressed objects within 6 object streams
- 148 named destinations out of 1000 (max. 500000)
- 440 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 650 PDF objects out of 1000 (max. 8388607)
+ 553 compressed objects within 6 object streams
+ 150 named destinations out of 1000 (max. 500000)
+ 448 words of extra memory for PDF output out of 10000 (max. 10000000)
 

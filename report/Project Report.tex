@@ -20,12 +20,37 @@
 
 \begin{document}
 
+\begin{titlepage}
+	\begin{center}
+	\vspace*{1cm}
+	
+	\textbf{An Investigation into a Combined Approach to Solving the Travelling Salesman Problem}
+	
+	\vspace{1.5cm}
+
+	Name: Alex Campbell
+	
+	Student ID: 1884111
+	
+	Programme Name: BSc Computer Science
+	
+	\vspace{1cm}	
+	
+	Supervisor: Dr Miqing Li
+	
+	\vspace{1cm}	
+	
+	Word Count: 
+	
+	\end{center}
+\end{titlepage}
 \setlength{\parindent}{0em}
 \setlength{\parskip}{1em}
 
+
 \section*{Abstract}
 
-temp
+The travelling salesman problem is an incredibly popular and common problem, solving it is easy, yet solving it quickly is not. Many algorithms exist to find the exact answer, yet take a lot of time. If time is short, then maybe a method where we find a 'good enough' answer is suited instead. This thesis investigates a new kind of approximation algorithm, one where we combine a genetic algorithm with Christofides algorithm in order to see how it performs in comparison to its parts. The results were very interesting, showing this hybrid algorithm to perform best on all test data sets used. The results for the time taken however were underwhelming, and have significant potential to be improved and re-examined, due to inconsistencies and unexplainable occurrences within them. This thesis also experiments with editing Christofides algorithm to produce multiple outputs instead of just one, and seeing how these multiple outputs perform when all plugged into the genetic algorithm, with unsuccessful results using the shown approach.
 
 \pagebreak
 \tableofcontents
@@ -403,7 +428,7 @@ This point is either a positive or negative depending on which angle you look at
 
 \subsection{Data Sets}
 
-For an investigative project such as this, it makes sense to use a variety of different data sets which will appropriately represent the different possible situations this algorithm could be used in, as such I have used three data sets of varying sizes to analyse my algorithm with. These data sets have all been taken from the same source \cite{TSPRep1} which also contain the optimum lengths of the tours for each data set available on the site, however there are no units for said distances yet this point is negligible for the purposes of this project. I have chosen three data sets of varying sizes to see how the algorithm will fair in each of them, these data sets are the cities of Qatar, Zimbabwe and Oman which have 194, 929 and 1979 cities respectively. Each of these data sets are encoded as qa194 (Qatar), zi929 (Zimbabwe) and mu1979 (Oman) and shall be referred to as such from now on for simplicities sake.
+For an investigative project such as this, it makes sense to use a variety of different data sets which will appropriately represent the different possible situations this algorithm could be used in, as such I have used three data sets of varying sizes to analyse my algorithm with. These data sets have all been taken from the same source \cite{TSPRep1} which also contain the optimum lengths of the tours for each data set available on the site, however there are no units for said distances yet this point is negligible for the purposes of this project. I have chosen three data sets of varying sizes to see how the algorithm will fare in each of them, these data sets are the cities of Qatar, Zimbabwe and Oman which have 194, 929 and 1979 cities respectively. Each of these data sets are encoded as qa194 (Qatar), zi929 (Zimbabwe) and mu1979 (Oman) and shall be referred to as such from now on for simplicities sake.
 \pagebreak
 
 The optimum lengths for the datasets are as follows:
@@ -599,7 +624,7 @@ Christofides algorithm has a degree of randomness within it, and genetic algorit
 	\caption{Mean, standard deviation and percentage over optimum of the algorithms over 30 executions}
 \end{figure}
 
-Starting with the qa194 data set we can see that the genetic algorithm on its own fairs quite well in getting an approximate result, getting a mean of 9.46\% over the optimum whereas Christofides algorithm actually fairs slightly worse with 11.15\% over the optimum. This being said Christofides algorithm is much more consistent with the results compared to the genetic algorithm which can vary around 3x more. Either way the clear winner is the hybrid algorithm which manages to be within 3.02\% of the optimum along with also having the smallest deviation out of the 3 algorithms, therefore meaning it is not only the best in this instance at getting an approximate answer, but also the most consistent, which is an extremely good result over the 30 executions. Therefore for this smaller data set it is clear the hybrid algorithm is significantly better, and the reasoning for this is most likely related to the local/global optimum dilemma mentioned before. The genetic algorithm has to work from pure randomness to try and get close to the global optimum, and so is definitely vulnerable to getting stuck in local optima along the way, whereas the hybrid algorithm is already placed much closer to the global optimum and as such is less likely to get stuck in a local optimum that is as far away as the genetic algorithm.
+Starting with the qa194 data set we can see that the genetic algorithm on its own fares quite well in getting an approximate result, getting a mean of 9.46\% over the optimum whereas Christofides algorithm actually fares slightly worse with 11.15\% over the optimum. This being said Christofides algorithm is much more consistent with the results compared to the genetic algorithm which can vary around 3x more. Either way the clear winner is the hybrid algorithm which manages to be within 3.02\% of the optimum along with also having the smallest deviation out of the 3 algorithms, therefore meaning it is not only the best in this instance at getting an approximate answer, but also the most consistent, which is an extremely good result over the 30 executions. Therefore for this smaller data set it is clear the hybrid algorithm is significantly better, and the reasoning for this is most likely related to the local/global optimum dilemma mentioned before. The genetic algorithm has to work from pure randomness to try and get close to the global optimum, and so is definitely vulnerable to getting stuck in local optima along the way, whereas the hybrid algorithm is already placed much closer to the global optimum and as such is less likely to get stuck in a local optimum that is as far away as the genetic algorithm.
 
 The second data set (zi929) shows similar results; the genetic algorithm has a mean tour length that is 29.92\% worse than the optimum which is considerably worse than the christofides algorithm which reaches within 11.97\% from the optimum, on top of this the standard deviation for the genetic algorithm is relatively high, meaning it is unreliable in producing consistent results, and even those results are sub-par compared to the other algorithms. Christofides algorithm manages to produce very good results along with a significantly lower standard deviation, making it definitely more preferable to the genetic algorithm. However once again the hybrid algorithm is the best in terms of the results, it produces a mean result that is 5.2\% worse than the optimum along with once again having the lowest standard deviation, which easily makes it the best option if looking for good results (which naturally you will be in this problem).
 
@@ -660,6 +685,20 @@ Unfortunately the results for the multi-Christofides algorithm left much to be d
 A quick look shows that none of the algorithms had any form of improvement over the 5000 generations, and as such this attempt at bettering our algorithm has failed. The most obvious and likely reason for this is the algorithm previously mentioned that I was not particularly pleased with, it was incredibly difficult to find a way of producing multiple Christofides individuals that were different from one another yet also did not take too long to execute. That function requires a lot more work to be put into it which I was unable to do within this time frame, the function requires some more intelligent implementation of producing individuals that are different from one another, such that we have a much larger spread over the search space. This is because currently it seems all of the produced individuals are very similar, and in fact could be easily produced by the genetic algorithm itself via the mutation and crossover operators. As such, since these individuals are very good in their own right, the genetic algorithm is unable to improve on them, and simply passes all of these individuals to the next generations endlessly, or in other words, we are stuck in a local optima from the second execution began.
 
 As such with additional time it could be beneficial to recreate this algorithm focusing more on producing vastly different individuals, perhaps by checking how many cities are within the same positions in two tours, and picking ones which have as few similarities as possible. Regardless as mentioned a lot in this time is a large issue within these algorithms, and so creating said similarity function would take up even more execution time, and a balance needs to be found between running time and the quality of results. Either way the results of this aspect of the project are very disappointing, and working on this given more time would have been preferable, since I still believe this approach to refining the hybrid algorithm has promise.
+
+\section{Conclusion}
+
+I set out on this project in order to investigate the Travelling Salesman Problem, specifically I wished to see how combining existing algorithms would fare in producing results, it was quite clear from the start that the two most obvious algorithms to combine were Christofides algorithm and a genetic algorithm, as no other algorithms seems to have such a logical fit together like these two had. Once this hybrid was produced I wanted to see how it compared to the algorithms it was made of on their own, in both time and quality of results, since for approximation algorithms these two factors are paramount to deciding if an algorithm good or bad.
+
+We can see that in all of the data sets used, the hybrid algorithm was able to produce superior results to the genetic algorithm and Christofides algorithm separately, and this is indeed the preferable result I had hoped for. Not only did it find the best results, but it found those results the most consistently, since the standard deviation for the hybrid algorithm was the lowest across the board, which I didn't expect to be the case at the beginning of this.
+
+The issue and therefore downfall of this project is the time taken, we can see that the hybrid algorithm is (unusually) long, and this is quite a fatal flaw within the project, since the reasoning behind using an approximation algorithm such as this would be to find a good enough result in an appropriate amount of time. The hybrid algorithm ticks the box for 'good enough' yet falls flat on the 'appropriate amount of time' aspect. That being said, as I mentioned within the results analysis I am dissatisfied with the time results, and I believe them to not truly reflect how this algorithm should run, since there is no consistency within the times to claim them as fully valid in my opinion.
+
+What this all means is if you are looking for a good approximate solution to the travelling salesman problem, this hybrid algorithm is certainly a valid choice, since it is able to get consistently close to the global optimum, as long as time is not a large issue. However if time is an issue then as it stands it would be more beneficial to use Christofides algorithm on its own, yet even this may not be entirely true, since further investigation into the time taken by this algorithm must take place.
+
+It is also interesting to note that this genetic algorithm is a very simple generic one, so a more bespoke or efficient genetic algorithm could fair incredibly well when combined with Christofides algorithm, which is definitely something that could be looked into in the future.
+
+More time would have been very valuable in this project, as mentioned previously there are several things I would have liked to spend more time on, mainly the multiple Christofides function which is considerably flawed, along with further investigation into why the genetic algorithm performed badly on the mu1979 data set and finally a deeper and more accurate investigation into the time taken by the algorithms, as to try and see if the results received now are indeed valid, or if they are entirely incorrect; such an investigation could show that this hybrid algorithm performs much better than what is documented here.
 
 \begin{thebibliography}{1}
 
