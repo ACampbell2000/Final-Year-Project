@@ -1,0 +1,41 @@
+Java Version info:
+
+openjdk version "11.0.11" 2021-04-20
+OpenJDK Runtime Environment (build 11.0.11+9-Ubuntu-0ubuntu2.18.04)
+OpenJDK 64-Bit Server VM (build 11.0.11+9-Ubuntu-0ubuntu2.18.04, mixed mode, sharing)
+
+Whilst in the Project root folder in the command line, you should be able to just use the following to run any of the classes that are in the test folder. The main ones are the ones that end in "Choose" that I created so you can see how they act on a dataset of your choosing. It's important to be in the root folder since the code is set up in such a way so that the files containing the cities can be found (dataset folder).
+
+The only command line arguments you should have to use are the class path below, and if running a "Choose" test, the data set you want to run it on (that is to say either qa194, zi929 or mu1979)
+
+The class path you have to add for every class is the following:
+
+"bin/production/Project:lib/*"
+
+where bin/production/Project is where the classes are stored and where lib/* just gets the two essential libraries used.
+
+For example if you want to see how the hybrid algorithm works on the zi929 data set then you would use:
+
+
+java -classpath "bin/production/Project:lib/*" test.java.ChristofidesAndGeneticTestChoose zi929
+
+
+Genetic Algorithm on a dataset:
+
+
+java -classpath "bin/production/Project:lib/*" test.java.GeneticAlgorithmTestChoose <dataset>
+
+
+Christofides algorithm on a dataset:
+
+
+java -classpath "bin/production/Project:lib/*" test.java.ChristofidesTestChoose <dataset>
+
+
+If you want to see how the trajectory of the algorithms are over the generations on a dataset then it would be:
+*Note that running these will make new .csv files within the Project root folder which you can then open to see the data in a table*
+
+java -classpath "bin/production/Project:lib/*" test.java.trajectory.GeneticAlgorithmTrajectoryTestChoose <dataset>
+java -classpath "bin/production/Project:lib/*" test.java.trajectory.ChristofidesAndGeneticTrajectoryTestChoose <dataset>
+
+Any other classes in the test folder are executable but these are the most important ones, bar the mean calculating classes since they would take a lot of time, but you are free to run them as you wish.
