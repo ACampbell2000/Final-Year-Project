@@ -19,7 +19,7 @@
 \contentsline {section}{\numberline {4}Implementation}{14}{section.4}
 \contentsline {subsection}{\numberline {4.1}Data Sets}{14}{subsection.4.1}
 \contentsline {subsection}{\numberline {4.2}Data Structures}{15}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Parameters}{15}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.3}Parameters}{16}{subsection.4.3}
 \contentsline {subsubsection}{\numberline {4.3.1}Generations and Population}{16}{subsubsection.4.3.1}
 \contentsline {subsubsection}{\numberline {4.3.2}Mutation and Crossover}{16}{subsubsection.4.3.2}
 \contentsline {subsection}{\numberline {4.4}Christofides Algorithm}{17}{subsection.4.4}

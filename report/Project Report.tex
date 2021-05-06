@@ -419,6 +419,8 @@ The travelling salesman problem involves dealing with multiple graphs of cities 
 
 The other major data structure would be the "Individual" class, which is what a given solution to the TSP would be stored as. The individual contains a list of the nodes in the order of which they would be visited, along with the 'fitness' of the individual (aka the length of the tour) which is calculated upon an instance of an individual being created. The data structure does not store the edges of the individual as these can be found out very quickly from the tour itself, simply searching the 2D array with the indexes being two consecutive nodes in the tour, this was to prevent any more space being used than necessary.
 
+\pagebreak
+
 \subsection{Parameters}
 
 Genetic algorithms come with a fair few parameters to tweak, all of which can make quite the significant difference upon the results obtained and as such need to be optimised. The important ones are as follows:
