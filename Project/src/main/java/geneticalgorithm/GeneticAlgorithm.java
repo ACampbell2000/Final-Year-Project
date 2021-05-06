@@ -148,6 +148,7 @@ public class GeneticAlgorithm {
             }
         }
         individuals.sort(Comparator.comparingDouble(Individual::getFitness));
+        System.out.println(individuals.get(0));
     }
 
     public List<Individual> orderCrossover(Individual parent1, Individual parent2) {
