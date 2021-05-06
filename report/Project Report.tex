@@ -9,11 +9,12 @@
 \usepackage{xcolor}
 \usepackage[toc,page]{appendix}
 \usepackage{subcaption}
+\usepackage{tocloft}
 \graphicspath{{./images/}}
 
 \setcounter{tocdepth}{4}
 \setcounter{secnumdepth}{4}
-
+\setlength{\cftbeforesecskip}{6pt}
 
 \author{Alex Campbell}
 \date{}
@@ -40,7 +41,7 @@
 	
 	\vspace{1cm}	
 	
-	Word Count: 
+	Word Count: At most 9793 (according to Overleaf)
 	
 	\end{center}
 \end{titlepage}
@@ -53,6 +54,7 @@
 The travelling salesman problem is an incredibly popular and common problem, solving it is easy, yet solving it quickly is not. Many algorithms exist to find the exact answer, yet take a lot of time. If time is short, then maybe a method where we find a 'good enough' answer is suited instead. This thesis investigates a new kind of approximation algorithm, one where we combine a genetic algorithm with Christofides algorithm in order to see how it performs in comparison to its parts. The results were very interesting, showing this hybrid algorithm to perform best on all test data sets used. The results for the time taken however were underwhelming, and have significant potential to be improved and re-examined, due to inconsistencies and unexplainable occurrences within them. This thesis also experiments with editing Christofides algorithm to produce multiple outputs instead of just one, and seeing how these multiple outputs perform when all plugged into the genetic algorithm, with unsuccessful results using the shown approach.
 
 \pagebreak
+
 \tableofcontents
 \pagebreak
 
@@ -98,10 +100,10 @@ Sort the population in descending order of fitness (assuming higher fitness is b
 	Replace the worst individuals in the population with the offspring assuming said offspring have a higher fitness than them \footnote{If all of the population are used to create new individuals then it will be the case that the entire population is replaced.}\;
 	generationNum += 1\;
 }
-\caption{Pseudocode for a basic Genetic Algorithm}
+\caption{Pseudo code for a basic Genetic Algorithm}
 \end{algorithm}
 
-From the pseudocode it is very clear that genetic algorithms are very well suited for optimisation problems, either maximising or minimising the fitness of the individuals in the population. This means it is definitely a viable option to solve the TSP. However the pseudo code also shows there are a few operators and functions that need to be defined and explained before anything fruitful can be done.
+From the pseudo code it is very clear that genetic algorithms are very well suited for optimisation problems, either maximising or minimising the fitness of the individuals in the population. This means it is definitely a viable option to solve the TSP. However the pseudo code also shows there are a few operators and functions that need to be defined and explained before anything fruitful can be done.
 
 \subsubsection{Individuals}
 
@@ -216,14 +218,14 @@ And therefore we get two output children to test the fitness with and add to the
 
 \subsubsection{Order Crossover}
 
-Another crossover operator is the order crossover proposed by Davis \cite{GACrossover}, and it builds offspring by choosing a subtour from the parents and preserving the relative order of cities in the other parent. As an example:
+Another crossover operator is the order crossover proposed by Davis \cite{GACrossover}, and it builds offspring by choosing a sub tour from the parents and preserving the relative order of cities in the other parent. As an example:
 
 \begin{center}\Large
 Solution 1: (147$|$258$|$36)\\
 Solution 2: (482$|$653$|$71)
 \end{center}
 
-The offspring are created first by the subtour of their respective parents:
+The offspring are created first by the sub tour of their respective parents:
 
 \begin{center}\Large
 Child 1: (XXX$|$258$|$XX)\\
@@ -388,7 +390,7 @@ Then need to remove any repeated vertices within our tour and replace them with 
 
 (Figures 1-6 taken from: Wikipedia: Travelling Saleman Problem \cite{TSPWiki})
 
-With this algorithm output we now have a solution to the TSP for our specific graph, and this solution is guaranteed to be within 50\% of the optimum \cite{ChrAlg}, which is significantly better than trying to calculate the true optimum for a very large graph in an infeasible amount of time. However there is clear room for improvement, since for these very large graphs, a solution that is 50\% worse is still drastically longer than the optimum. MAking improvements on this is therefore exactly what I plan to do, as it gives us a good basis to work other algorithms off of, as is the point of this project.
+With this algorithm output we now have a solution to the TSP for our specific graph, and this solution is guaranteed to be within 50\% of the optimum \cite{ChrAlg}, which is significantly better than trying to calculate the true optimum for a very large graph in an infeasible amount of time. However there is clear room for improvement, since for these very large graphs, a solution that is 50\% worse is still drastically longer than the optimum. Making improvements on this is therefore exactly what I plan to do, as it gives us a good basis to work other algorithms off of, as is the point of this project.
 
 \section{Implementation}
 
@@ -401,7 +403,7 @@ The optimum lengths for the datasets are as follows:
 
 \begin{center}
 \begin{tabular}{c | c}
-Dataset & Optimum Length \\ [0.5ex]
+Data set & Optimum Length \\ [0.5ex]
 \hline
 	qa194 & 9352 \\
 	zi929 & 95345 \\
@@ -434,7 +436,7 @@ Genetic algorithms come with a fair few parameters to tweak, all of which can ma
 \begin{table}[h]
 \centering
 \begin{tabular}{c | c | c | c}
-\makecell{Dataset} & \makecell{Population: 200 \\ Generations: 25000} & \makecell{Population: 1000 \\ Generations: 5000} & \makecell{Population: 2000 \\ Generations: 2500} \\ [0.5ex]
+\makecell{Data set} & \makecell{Population: 200 \\ Generations: 25000} & \makecell{Population: 1000 \\ Generations: 5000} & \makecell{Population: 2000 \\ Generations: 2500} \\ [0.5ex]
 \Xhline{1.5pt}
 	qa194 & 10540.6556793449 & 10543.3664673219 & 10109.16049177478 \\
 \hline
@@ -459,7 +461,7 @@ In regards to optimising them I used the same method as used for the population 
 \begin{table}[h]
 \centering
 \begin{tabular}{c | c | c | c}
-Dataset & Mutation: 0.1 & Mutation: 0.4 & Mutation: 0.9 \\ [0.5ex]
+Data set & Mutation: 0.1 & Mutation: 0.4 & Mutation: 0.9 \\ [0.5ex]
 \Xhline{1.5pt}
 	qa194 & 10220.556448011208 & 10042.534388187263 & 10307.448956457112 \\
 \hline
@@ -478,7 +480,7 @@ And then below we see the same for optimisation of the crossover chances. In gen
 \begin{table}[h]
 \centering
 \begin{tabular}{c | c | c | c}
-Dataset & Crossover: 0.1 & Crossover: 0.4 & Crossover: 0.9 \\ [0.5ex]
+Data set & Crossover: 0.1 & Crossover: 0.4 & Crossover: 0.9 \\ [0.5ex]
 \Xhline{1.5pt}
 	qa194 & 10536.952603005655 & 10152.56527247845 & 10412.855764138969 \\
 \hline
@@ -724,13 +726,13 @@ org.jgrapht.alg.matching.blossom.v5 (JGraphT : a free Java graph library) (no 
 \bibitem{HeirEulTour}
 HierholzerEulerianCycle (JGraphT : a free Java graph library) (no date). Available at: https://jgrapht.org/javadoc/org.jgrapht.core/org/jgrapht/alg/cycle/HierholzerEulerianCycle.html (Accessed: 29 April 2021).
 
-
-
 \end{thebibliography}
 
 \begin{appendices}
+
 \section{Evolutionary Graph Data}
 This section shows the full tables of data used to generate the graphs, the only benefit this data gives over the graphs is being able to see the exact values at each generational landmark.
+\pagebreak
 
 \subsection{Qa194 Data Table}
 
@@ -739,12 +741,17 @@ This section shows the full tables of data used to generate the graphs, the only
 	\centering
 \end{figure}
 
+\pagebreak
+
 \subsection{Zi929 Data Table}
+
 
 \begin{figure}[ht]
 	\includegraphics[width=0.75\textwidth]{zi929Table}
 	\centering
 \end{figure}
+
+\pagebreak
 
 \subsection{Mu1979 Data Table}
 
